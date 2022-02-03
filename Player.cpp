@@ -48,3 +48,10 @@ Player::~Player()
     m_visibleBoard.~Board();
     m_invisibleBoard.~Board();
 }
+
+//Print the player's view of their turn
+void Player::view()
+{
+    
+}
+
