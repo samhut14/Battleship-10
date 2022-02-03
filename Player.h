@@ -49,17 +49,6 @@ class Player
 	* @return None
 	*/
     Player();
-
-    /**
-	* @pre Player is not constructed
- 	* @post Constructs Player by taking in
-    *       the number of ships the player will have
- 	* @param size, the number of ships that player has. Must
-    *            be between 1 and 5.
-    * @error Returns an runtime error if the number of ships
-    *        being passed in is not between 1 and 5
-	* @return None
-	*/
     Player(int size);
 
     //Deconstructor
