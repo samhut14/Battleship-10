@@ -6,7 +6,7 @@
  * @brief This file contains the methods and variables of the Player class
  *        The Player plays Battleship by setting up their board, attacking the
  *        other's player board, getting attacked, and either winning or losing
- * @date 1/31/21
+ * @date 2/3/22
  *	
  ---------------------------------------------------------------------------- **/
 #ifndef PLAYER_H
@@ -15,6 +15,7 @@
 #include "Ship.h"
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 class Player
 {
@@ -201,12 +202,35 @@ class Player
 
     /**
 	* @pre Player is constructed. Happens when a ship is attacked
- 	* @post Constructs Player without any parameter
- 	* @param None
+ 	* @post Attacks one of the player's ships and check if the ship is sunked or not. 
+ 	* @param int hitShip, the ship that is hit
+	* @error Thorws an runtime error if hitShip is greater than m_numberOfShips, less than 0, 
+	*	     or the ship is already sunked. 
 	* @return None
 	*/
     void sinkShip(int hitShip);
+
+	/**
+	* @pre Player is constructed. Can only be used if the player is getting attacked
+ 	* @post Marks the player friendly's board, or the player
+	*		visible board
+ 	* @param char strike, the character that will mark the board, int row
+	*		 the row of the the strike, and int col, the column of the strike
+	* @error Throws an runtime error if the row and col are not valid or if strike
+	*		 is not a valid character
+	* @return None
+	*/
     void markFriendly(char strike, int row, int col);
+
+	/**
+	* @pre Player is constructed. Can only be used if the player is attacking
+ 	* @post Marks the player invisible board 
+ 	* @param char strike, the character that will mark the board, int row
+	*		 the row of the the strike, and int col, the column of the strike
+	* @error Throws an runtime error if the row and col are not valid or if strike
+	*		 is not a valid character
+	* @return None
+	*/
     void markHostile(char strike, int row, int col);
 };
 #endif
