@@ -4,7 +4,7 @@
  * @authors Amith Panuganti 
  * Assignment:   EECS-448 Project #1 
  * @brief This file impliment the methods of Player
- * @date 2/3/22
+ * @date 2/4/22
  *	
  ---------------------------------------------------------------------------- **/
  #include "Player.h"
@@ -56,6 +56,7 @@ void sinkShip(int hitship)
     //hitship is valid if it is less than or equal to the number of ships
     //and it is greater than 0
     //histship is also valid if we are not sunking a ship that is already sunk
+    //We also need to check if the ship is not alive before sinking it
     if(hitship <= 0 || hitship > m_numberOfShips)
     {
         //Throw an error, telling the user that the ship does not exist
@@ -79,10 +80,42 @@ void sinkShip(int hitship)
         //If the length of position is two
         if(position.length() == 2)
         {
-            //Set row to the first character - 48
-            row = position[0] - 48;
+            //Set row to the first character - 49
+            row = (int)position[0] - 49;
+
+            //Next,set the columen to be the second character - 65
+            col = (int)position[1] - 65;
         }
+        //Otherwise, if the length of position is three
+        else if(position.length() == 3)
+        {
+            //Set row to be 9 because if the length of position is three
+            //Then the row number must be 10
+            //Example: 10A
+            row = 9;
+
+            //Next, set the column of position be the third character - 65
+            col = (int)position[2] - 65;
+        }
+
+        //Next, check the position of the ship on the visible board 
+        //Using row and col. We are doing this to make sure that 
+        //the ship is not sunked. 
+        //If the ship is already sunked
+        if(m_visibleBoard.at(row, col) == "X")
+        {
+            //End the function
+            //Immediately tell the user that the ship is already sunked
+            throw(std::runtime_error("The ship is already sunked."));
+        }
+
+        //Otherwise, set the ship at position row, col to be X to represent
+        //The ship being sunked
+        m_visibleBoard.set(row, col, "X");
     }
+
+    //Leave for now
+    //Come back to print message about ship getting sinked
 }
 
 
