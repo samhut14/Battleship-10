@@ -86,3 +86,47 @@ bool Game::validAttack(Player attackingPlayer, int row, char col)
         return(false);
     }
 }
+
+bool Game::gameover()
+{
+    int temp = 0;
+
+    if(currentPlayer == 1)
+    {
+        for(int i=0; i<10; i++)
+        {
+            for(int j=0; j<10; j++)
+            {
+                if(player1.getInvisibleBoard()[i][j] == "X")
+                {
+                    temp++;
+                }
+            }
+        }
+
+        if(temp == totalXs)
+        {
+            return(true);
+        }
+    }
+    else
+    {
+        for(int i=0; i<10; i++)
+        {
+            for(int j=0; j<10; j++)
+            {
+                if(player2.getInvisibleBoard()[i][j] == "X")
+                {
+                    temp++;
+                }
+            }
+        }
+
+        if(temp == totalXs)
+        {
+            return(true);
+        }
+    }
+
+    return(false);
+}
