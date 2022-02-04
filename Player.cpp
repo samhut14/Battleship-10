@@ -63,15 +63,25 @@ void sinkShip(int hitship)
     }
     
     //Otherwise, continue the program
-    //We are goning to check if a ship is already sunked later
+    //We are goinng to check if a ship is already sunked later
 
     //Next, we loop hitship times starting at 0
     for(int i = 0; i < hitship; i++)
     {
         //Next, we get the one of the position of the ship
-        String position;
+        string position;
 
-        //Aftwards, get the row and column of each 
+        //Next, create two integers that will store the row and column of the position
+        int row;
+        int col;
+
+        //Next, check the length of position
+        //If the length of position is two
+        if(position.length() == 2)
+        {
+            //Set row to the first character - 48
+            row = position[0] - 48;
+        }
     }
 }
 
