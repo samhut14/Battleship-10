@@ -69,7 +69,7 @@ void sinkShip(int hitship)
     for(int i = 0; i < hitship; i++)
     {
         //Next, we get the one of the position of the ship
-        string position;
+        std::string position;
 
         //Next, create two integers that will store the row and column of the position
         int row;
