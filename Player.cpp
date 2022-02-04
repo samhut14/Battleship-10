@@ -49,9 +49,30 @@ Player::~Player()
     m_invisibleBoard.~Board();
 }
 
-//Print the player's view of their turn
-void Player::view()
+//Sinks a player's ship
+void sinkShip(int hitship)
 {
+    //First, we check if hitship
+    //hitship is valid if it is less than or equal to the number of ships
+    //and it is greater than 0
+    //histship is also valid if we are not sunking a ship that is already sunk
+    if(hitship <= 0 || hitship > m_numberOfShips)
+    {
+        //Throw an error, telling the user that the ship does not exist
+        throw(std::runtime_error("Ship does not exist. You can only attack ship from 1 to 5."));
+    }
     
+    //Otherwise, continue the program
+    //We are goning to check if a ship is already sunked later
+
+    //Next, we loop hitship times starting at 0
+    for(int i = 0; i < hitship; i++)
+    {
+        //Next, we get the one of the position of the ship
+        String position;
+
+        //Aftwards, get the row and column of each 
+    }
 }
+
 

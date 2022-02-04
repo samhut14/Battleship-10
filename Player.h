@@ -194,7 +194,7 @@ class Player
  	* @post Attacks one of the player's ships and check if the ship is sunked or not. 
  	* @param int hitShip, the ship that is hit
 	* @error Thorws an runtime error if hitShip is greater than m_numberOfShips, less than 0, 
-	*	     or the ship is already sunked. 
+	*	     or the ship is already sunked.
 	* @return None
 	*/
     void sinkShip(int hitShip);
