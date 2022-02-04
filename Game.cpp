@@ -27,7 +27,8 @@ void Game::play()
 void Game::turn(int currentPlayer)
 {
     int row = 0;
-    char col = '\0';
+    int col = 0;
+    char temp = '\0';
     char strike;
 
     if(currentPlayer == 1)
@@ -36,16 +37,18 @@ void Game::turn(int currentPlayer)
 
         do
         {
-            while(row > 0 && row < 11)
+            while(row >= 0 && row < 10)
             {
                 std::cout<<"Please select which row you would like to attack:";
                 std::cin>>row;
+                row -= 1;
             }
 
-            while(int(col) > 64 && int(col) < 91)
+            while(col >= 0 && col < 10)
             {
                 std::cout<<"Please select which column you would like to attack:";
-                std::cin>>col;
+                std::cin>>temp;
+                col = (int(temp) - 65);
             }
         } while(!validAttack(player1, row, col));
 
@@ -57,16 +60,18 @@ void Game::turn(int currentPlayer)
 
         do
         {
-            while(row > 0 && row < 11)
+            while(row >= 0 && row < 10)
             {
                 std::cout<<"Please select which row you would like to attack:";
                 std::cin>>row;
+                row--;
             }
 
-            while(int(col) > 64 && int(col) < 91)
+             while(col >= 0 && col < 10)
             {
                 std::cout<<"Please select which column you would like to attack:";
-                std::cin>>col;
+                std::cin>>temp;
+                col = (int(temp) - 65);
             }
         } while(!validAttack(player2, row, col));
 
@@ -75,9 +80,9 @@ void Game::turn(int currentPlayer)
 }
 
 
-bool Game::validAttack(Player attackingPlayer, int row, char col)
+bool Game::validAttack(Player attackingPlayer, int row, int col)
 {
-    if(attackingPlayer.getInvisibleBoard()[row-1][(int(col))-65] == "*") 
+    if(attackingPlayer.getInvisibleBoard().at(row, col) == "*") 
     {
         return(true);
     }  
@@ -97,7 +102,7 @@ bool Game::gameover()
         {
             for(int j=0; j<10; j++)
             {
-                if(player1.getInvisibleBoard()[i][j] == "X")
+                if(player1.getInvisibleBoard().at(i,j) == "X")
                 {
                     temp++;
                 }
@@ -115,7 +120,7 @@ bool Game::gameover()
         {
             for(int j=0; j<10; j++)
             {
-                if(player2.getInvisibleBoard()[i][j] == "X")
+                if(player2.getInvisibleBoard().at(i,j) == "X")
                 {
                     temp++;
                 }
@@ -130,3 +135,4 @@ bool Game::gameover()
 
     return(false);
 }
+
