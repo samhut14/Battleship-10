@@ -1,5 +1,6 @@
 #ifndef GAME.H
 #define GAME.H
+#include <iostream>
 #include "Player.h"
 
 class Game
