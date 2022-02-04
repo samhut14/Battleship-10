@@ -7,6 +7,7 @@ class Game
 {
     private:
     int currentPlayer;
+    int totalXs;
     int numShips;
     Player player1;
     Player player2;
@@ -14,8 +15,8 @@ class Game
     public:
     void setup();
     void turn(int currentPlayer);
-    char attack(Player attackingPlayer, Player defendingPlayer, int row, int col);
-    bool validAttack(Player attackingPlayer, Player defendingPlayer, int row, int col);
+    char attack(Player attackingPlayer, Player defendingPlayer, int row, char col);
+    bool validAttack(Player attackingPlayer, int row, char col);
     bool gameover();
     void play();
 
