@@ -118,4 +118,39 @@ void sinkShip(int hitship)
     //Come back to print message about ship getting sinked
 }
 
+//Marks the player's invisible board
+void Player:markFriendly(std::string strike, int row, int col)
+{
+    //Firstly, we need to check if row and col are valid and strike
+    //is a valid character
+    //If row is less than 0 or greater than 9
+    if(row < 0 || row > 9)
+    {
+        //Throw an runtime error telling the user that row is invalid
+        throw(std::runtime_error("Row is invalid. Must be between 0 and 9"));
+    }
+    //Otherwise, if col is less than 0 or less than 9
+    else if(col < 0 || col > 9)
+    {
+        //Throw an runtime error tellling the user that col is invalid
+        throw(std::runtime_error("Col is invalid. Must be between 0 and 9"));
+    }
+    //Otherwise, if strike is not H or M
+    else if(strike != "H" && strike != "M")
+    {
+        //Throw an runtime error telling the user that strike in invalid
+        throw(std::runtime_error("Strike is invalid. Must be either H or M"));
+    }
+    //Otherwise, if there isn't an asterik at the position (row, col)
+    else if(m_invisibleBoard.at(row, col) != "*")
+    {
+        //Tell the user that that strike already happend at the position
+        throw(std::runtime_error("You already mark the board at position row,col. You can only mark position with *"));
+    }
+
+    //Otherwise, continue the program
+    //Set the string at row,col in the player's invisble board to be strike
+    m_invisibleBoard.set(row, col, strike);
+}
+
 
