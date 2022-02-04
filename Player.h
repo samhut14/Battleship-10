@@ -213,7 +213,7 @@ class Player
 	/**
 	* @pre Player is constructed. Can only be used if the player is getting attacked
  	* @post Marks the player friendly's board, or the player
-	*		visible board
+	*		invisible board
  	* @param char strike, the character that will mark the board, int row
 	*		 the row of the the strike, and int col, the column of the strike
 	* @error Throws an runtime error if the row and col are not valid or if strike
@@ -224,7 +224,7 @@ class Player
 
 	/**
 	* @pre Player is constructed. Can only be used if the player is attacking
- 	* @post Marks the player invisible board 
+ 	* @post Marks the player visible board 
  	* @param char strike, the character that will mark the board, int row
 	*		 the row of the the strike, and int col, the column of the strike
 	* @error Throws an runtime error if the row and col are not valid or if strike
