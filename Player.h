@@ -49,17 +49,6 @@ class Player
 	* @return None
 	*/
     Player();
-
-    /**
-	* @pre Player is not constructed
- 	* @post Constructs Player by taking in
-    *       the number of ships the player will have
- 	* @param size, the number of ships that player has. Must
-    *            be between 1 and 5.
-    * @error Returns an runtime error if the number of ships
-    *        being passed in is not between 1 and 5
-	* @return None
-	*/
     Player(int size);
 
     //Deconstructor
@@ -205,7 +194,7 @@ class Player
  	* @post Attacks one of the player's ships and check if the ship is sunked or not. 
  	* @param int hitShip, the ship that is hit
 	* @error Thorws an runtime error if hitShip is greater than m_numberOfShips, less than 0, 
-	*	     or the ship is already sunked. 
+	*	     or the ship is already sunked.
 	* @return None
 	*/
     void sinkShip(int hitShip);
