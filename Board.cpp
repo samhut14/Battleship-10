@@ -19,26 +19,17 @@ Board::Board()
     }
     
 }
-
-void Board::setRow(int rw)
-{
-    rw= row;
-}
-void Board::setColumn(int cl)
-{
-    cl = col;
-}
-int Board::getRow()
-{
-    return row;
-}
-int Board::getColumn()
-{
-    return col;
-}
-string* Board::getArr()
+string** Board::getArr()
 {
     return Boardarr;
+}
+
+string Board::at(int row, int col) {
+    return Boardarr[row][col];
+}
+
+void Board::setBoard(string mark, int row, int col) {
+    Boardarr[row][col] = mark;
 }
 
 
