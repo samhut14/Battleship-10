@@ -120,7 +120,7 @@ traverseRow:
     m_ships[m_shipCounter] = Ship(size, arr);
     placeShip(m_ships[m_shipCounter]);
     return true;
-=======
+}
 //Sinks a player's ship
 void Player::sinkShip(int hitship)
 {
