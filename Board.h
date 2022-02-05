@@ -9,7 +9,7 @@ class Board
     int col;
     string** Boardarr;
     public:
-   Board(int r, int c, string** B_arr);
+   Board();
    ~Board();
    void setRow(int rw);
    void setColumn(int cl);
