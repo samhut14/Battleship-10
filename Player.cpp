@@ -8,6 +8,7 @@
  *	
  ---------------------------------------------------------------------------- **/
  #include "Player.h"
+ #include <string>
  
  //Constructs Player without any parameters
  Player::Player()
@@ -25,8 +26,8 @@
 //Deconstructs Player
 Player::~Player()
 {
-    //Checks if the array of ships has a size
-    //If m_ships is not set to nullptr
+    // Checks if the array of ships has a size
+    // If m_ships is not set to nullptr
     if(m_ships != nullptr)
     {
         //Goes throug each ship of m_ships
@@ -67,11 +68,11 @@ void Player::sinkShip(int hitship)
 
 void Player::markHostile(char strike, int row, int col, int hitship, bool isHit) {
     // converts character into string
-    String mark(string(1, strike));
+    std::string mark(std::string(1, strike));
     m_visibleBoard.setBoard(mark, row, col);
     if (isHit) {    
         // checks if ship is sunk
-        if (m_ships[hitship-1].loselife()) {
+        if (m_ships[hitship-1].loseLife()) {
             sinkShip(hitship);
         } else {
             std::cout << "Ship " << hitship << " was hit \n";
@@ -85,6 +86,6 @@ void Player::markHostile(char strike, int row, int col, int hitship, bool isHit)
 
 
 void Player::markFriendly(char strike, int row, int col) {
-    String mark(string(1, strike));
+    std::string mark(std::string(1, strike));
     m_invisibleBoard.setBoard(mark, row, col);
 }
