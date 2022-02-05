@@ -15,7 +15,7 @@ class Game
     public:
     void setup();
     void turn(int currentPlayer);
-    char attack(Player attackingPlayer, Player defendingPlayer, int row, int col);
+    bool attack(Player attackingPlayer, Player defendingPlayer, int row, int col);
     bool validAttack(Player attackingPlayer, int row, int col);
     bool gameover();
     void play();
