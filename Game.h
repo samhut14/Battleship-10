@@ -1,5 +1,5 @@
-#ifndef GAME.H
-#define GAME .H
+#ifndef GAME_H
+#define GAME_H
 #include <iostream>
 #include "Player.h"
 
