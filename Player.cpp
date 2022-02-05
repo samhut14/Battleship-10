@@ -7,17 +7,44 @@
  * @date 2/3/22
  *
  ---------------------------------------------------------------------------- **/
+
 #include "Player.h"
 #include <iostream>
 #include <string>
 #include <cmath>
 using namespace std;
+ 
+ //Constructs Player without any parameters
+ Player::Player()
+ {
+     //Set m_numberOfShips to be 0 to show that Ships will not be set up
+     m_numberOfShips = 0;
 
-// Constructs Player without any parameters
-Player::Player()
+     //Set m_shipCounter to be 0
+     m_shipCounter = 0;
+
+     //Set m_ships to be nullptr
+     m_ships = nullptr; 
+ }
+
+//Deconstructs Player
+Player::~Player()
 {
-    // Set m_numberOfShips to be 0 to show that Ships will not be set up
-    m_numberOfShips = 0;
+    // Checks if the array of ships has a size
+    // If m_ships is not set to nullptr
+    if(m_ships != nullptr)
+    {
+        //Goes throug each ship of m_ships
+        for(int i = 0; i < m_numberOfShips; i++)
+        {
+            //If a Ship at index i in m_ships is not nullptr
+            if(m_ships[i] != nullptr)
+            {
+                //Deconstruct the ship
+               delete m_ships[i];
+            }
+        }
+
 
     // Set m_shipCounter to be 0
     m_shipCounter = 0;
@@ -41,32 +68,7 @@ Player::~Player()
     if (m_ships != nullptr)
         delete[] m_ships;
 }
-
-// Sinks a player's ship
-void sinkShip(int hitship)
-{
-    // First, we check if hitship
-    // hitship is valid if it is less than or equal to the number of ships
-    // and it is greater than 0
-    // histship is also valid if we are not sunking a ship that is already sunk
-    if (hitship <= 0 || hitship > m_numberOfShips)
-    {
-        // Throw an error, telling the user that the ship does not exist
-        throw(std::runtime_error("Ship does not exist. You can only attack ship from 1 to 5."));
-    }
-
-    // Otherwise, continue the program
-    // We are goning to check if a ship is already sunked later
-
-    // Next, we loop hitship times starting at 0
-    for (int i = 0; i < hitship; i++)
-    {
-        // Next, we get the one of the position of the ship
-        String position;
-
-        // Aftwards, get the row and column of each
-    }
-}
+// I dont think u call destructors - Ahmni
 
 // Setup functions:
 
@@ -144,6 +146,38 @@ traverseRow:
     m_ships[m_shipCounter] = Ship(size, arr);
     placeShip(m_ships[m_shipCounter]);
     return true;
+=======
+//Sinks a player's ship
+void Player::sinkShip(int hitship)
+{
+    //access the position array of the ship that got hit
+    int* arr = m_ships[hitship-1].getPositionArr();
+    // mark each palce ship is positioned with an X
+    for (int i = 0; i < m_ships[hitship-1].getPosLength() - 1; i += 2) {
+        m_visibleBoard.setBoard('X', arr[i], arr[i+1]);
+    }
+    std::cout << "Ship " << hitship << " was sunk! \n";
+}
+// only marks visible board, possible solution: make mark hostile a bool as well, pass into markfriendly
+// how his position array handled?? will matter in implementation (tuple, or 1 by 1)
+
+
+void Player::markHostile(char strike, int row, int col, int hitship, bool isHit) {
+    // converts character into string
+    std::string mark(std::string(1, strike));
+    m_visibleBoard.setBoard(mark, row, col);
+    if (isHit) {    
+        // checks if ship is sunk
+        if (m_ships[hitship-1].loseLife()) {
+            sinkShip(hitship);
+        } else {
+            std::cout << "Ship " << hitship << " was hit \n";
+        }
+    } else {
+        m_visibleBoard.setBoard(mark, row, col);
+        std::cout << "Your attack missed! \n";
+    }
+    
 }
 
 void Player::placeShip(Ship someShip)
@@ -174,4 +208,9 @@ void Player::printSetup()
 
         cout << endl;
     }
+
+void Player::markFriendly(char strike, int row, int col) {
+    std::string mark(std::string(1, strike));
+    m_invisibleBoard.setBoard(mark, row, col);
+
 }

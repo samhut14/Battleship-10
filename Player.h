@@ -73,12 +73,12 @@ public:
 
 	// Getters
 	/**
-	 * @pre Player is constructed
-	 * @post Return the player's visible board
-	 * @param None
-	 * @return Board m_visibleBoard, the player's visible board
-	 */
-	Board getVisibleBaord();
+	* @pre Player is constructed
+ 	* @post Return the player's visible board
+ 	* @param None
+	* @return Board m_visibleBoard, the player's visible board
+	*/
+	Board getVisibleBoard();
 
 	/**
 	 * @pre Player is constructed
@@ -224,14 +224,14 @@ public:
 	void markFriendly(char strike, int row, int col);
 
 	/**
-	 * @pre Player is constructed. Can only be used if the player is attacking
-	 * @post Marks the player invisible board
-	 * @param char strike, the character that will mark the board, int row
-	 *		 the row of the the strike, and int col, the column of the strike
-	 * @error Throws an runtime error if the row and col are not valid or if strike
-	 *		 is not a valid character
-	 * @return None
-	 */
-	void markHostile(char strike, int row, int col);
+	* @pre Player is constructed. Can only be used if the player is attacking
+ 	* @post Marks the player invisible board 
+ 	* @param char strike, the character that will mark the board, int row
+	*		 the row of the the strike, and int col, the column of the strike
+	* @error Throws an runtime error if the row and col are not valid or if strike
+	*		 is not a valid character
+	* @return None
+	*/
+	void markHostile(char strike, int row, int col, int hitship, bool isHit);
 };
 #endif
