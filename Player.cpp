@@ -42,7 +42,6 @@ Player::~Player()
     if (m_ships != nullptr)
         delete[] m_ships;
 }
-// I dont think u call destructors - Ahmni
 
 // Setup functions:
 
@@ -156,7 +155,6 @@ void Player::markHostile(char strike, int row, int col, int hitship, bool isHit)
 
 void Player::placeShip(Ship someShip)
 {
-    // Add ship to array through operator overloading??
     int row, col;
     string symbol = "S" + to_string(someShip.getSize());
 
