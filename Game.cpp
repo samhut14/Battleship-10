@@ -281,16 +281,16 @@ void Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int c
     bool isHit = false;
   
         //checks if attack location is a ship
-    if (((defendingPlayer.getVisibleBoard()).at(row,col))[0] == "S") {
+    if (((defendingPlayer.getVisibleBoard()).at(row,col))[0] == 'S') {
         isHit = true;
         //stores the id of ship to be passed into mark functions
         int hitship = defendingPlayer.getVisibleBoard().at(row,col)[1];
-        attackingPlayer.markFriendly('h', row, col);
-        defendingPlayer.markHostile('h', row, col, hitship, isHit);
+        attackingPlayer.markFriendly("h", row, col);
+        defendingPlayer.markHostile("h", row, col, hitship, isHit);
     }
     else {
-        attackingPlayer.markFriendly('m', row, col);
-        defendingPlayer.markHostile('m', row, col, 0, isHit);
+        attackingPlayer.markFriendly("m", row, col);
+        defendingPlayer.markHostile("m", row, col, 0, isHit);
     }
 }
 
