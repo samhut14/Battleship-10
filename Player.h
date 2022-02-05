@@ -232,6 +232,6 @@ public:
 	*		 is not a valid character
 	* @return None
 	*/
-	void markHostile(char strike, int row, int col);
+	void markHostile(char strike, int row, int col, int hitship);
 };
 #endif

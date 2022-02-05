@@ -48,31 +48,33 @@ Player::~Player()
     m_visibleBoard.~Board();
     m_invisibleBoard.~Board();
 }
+// I dont think u call destructors - Ahmni
 
 //Sinks a player's ship
-void sinkShip(int hitship)
+void Player::sinkShip(int hitship)
 {
-    //First, we check if hitship
-    //hitship is valid if it is less than or equal to the number of ships
-    //and it is greater than 0
-    //histship is also valid if we are not sunking a ship that is already sunk
-    if(hitship <= 0 || hitship > m_numberOfShips)
-    {
-        //Throw an error, telling the user that the ship does not exist
-        throw(std::runtime_error("Ship does not exist. You can only attack ship from 1 to 5."));
+    int* arr = m_ships[hitship-1].getPositionArr();
+    for (int i = 0; i < m_ships[hitship-1].getPosLength() - 1; i += 2) {
+        m_visibleBoard.setBoard('X', arr[i], arr[i+1]);
     }
-    
-    //Otherwise, continue the program
-    //We are goning to check if a ship is already sunked later
+    std::cout << "Ship " << hitship << " was sunk! \n";
+}
+// only marks visible board, possible solution: make mark hostile a bool as well, pass into markfriendly
+// how his position array handled?? will matter in implementation (tuple, or 1 by 1)
 
-    //Next, we loop hitship times starting at 0
-    for(int i = 0; i < hitship; i++)
-    {
-        //Next, we get the one of the position of the ship
-        String position;
 
-        //Aftwards, get the row and column of each 
+void Player::markHostile(char strike, int row, int col, int hitship) {
+    String mark(string(1, strike));
+    m_visibleBoard.setBoard(mark, row, col);
+    if (m_ships[hitship-1].loselife()) {
+        sinkShip(hitship);
+    } else {
+        std::cout << "Ship " << hitship << " was hit \n";
     }
 }
 
 
+void Player::markFriendly(char strike, int row, int col) {
+    String mark(string(1, strike));
+    m_invisibleBoard.setBoard(mark, row, col);
+}
