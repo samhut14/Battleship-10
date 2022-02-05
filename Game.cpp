@@ -149,7 +149,7 @@ void Game::turn(int currentPlayer)
             while (row >= 0 && row < 10)
             {
                 std::cout << "Please select which row you would like to attack:";
-                std::cin >> row;
+                row = getInt();
                 row -= 1;
             }
 
