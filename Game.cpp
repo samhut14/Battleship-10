@@ -29,7 +29,6 @@ void Game::turn(int currentPlayer)
     int row = 0;
     int col = 0;
     char temp = '\0';
-    char strike;
 
     if(currentPlayer == 1)
     {
@@ -52,7 +51,7 @@ void Game::turn(int currentPlayer)
             }
         } while(!validAttack(player1, row, col));
 
-        strike = attack(player1, player2, row, col);
+        attack(player1, player2, row, col);
     }
     else
     {
@@ -75,7 +74,7 @@ void Game::turn(int currentPlayer)
             }
         } while(!validAttack(player2, row, col));
 
-        strike = attack(player2, player1, row, col);
+        attack(player2, player1, row, col);
     }
 }
 
@@ -136,7 +135,7 @@ bool Game::gameover()
     return(false);
 }
 
-char Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
+bool Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
     // if there is a hit, set to true
     bool isHit = false;
     if (validAttack(attackingPlayer, row, col)) {
