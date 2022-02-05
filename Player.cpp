@@ -338,3 +338,37 @@ void Player::view()
     //TODO: Change Board Functions if needed
 }
 
+//Get the visible board
+Board Player::getVisibleBoard()
+{
+    //Return m_visibleBoard
+    return m_visibleBoard;
+}
+
+//Get the invisible board
+Board Player::getInvisibleBoard()
+{
+    //Return m_invisibleBoard
+    return m_invisibleBoard;
+}
+
+//Get the ship counter
+int Player::getShipCounter()
+{
+    //Return m_shipCounter
+    return m_shipCounter;
+}
+
+//Get the number of ships
+int Player::getNumberOfShips()
+{
+    //Return m_numberOfShips
+    return m_numberOfShips;
+}
+
+//Get the Player's Ships
+Ship** Player::getShips()
+{
+    //Return m_ships
+    return m_ships;
+}

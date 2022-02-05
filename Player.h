@@ -78,7 +78,7 @@ public:
  	* @param None
 	* @return Board m_visibleBoard, the player's visible board
 	*/
-	Board getVisibleBaord();
+	Board getVisibleBoard();
 
 	/**
 	* @pre Player is constructed
