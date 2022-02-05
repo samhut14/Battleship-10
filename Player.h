@@ -214,8 +214,8 @@ public:
 	/**
 	* @pre Player is constructed. Can only be used if the player is getting attacked
  	* @post Marks the player friendly's board, or the player
-	*		visible board
- 	* @param char strike, the character that will mark the board, int row
+	*		invisible board
+ 	* @param std::string strike, the character that will mark the board, int row
 	*		 the row of the the strike, and int col, the column of the strike
 	* @error Throws an runtime error if the row and col are not valid or if strike
 	*		 is not a valid character
@@ -225,13 +225,15 @@ public:
 
 	/**
 	* @pre Player is constructed. Can only be used if the player is attacking
- 	* @post Marks the player invisible board 
- 	* @param char strike, the character that will mark the board, int row
+ 	* @post Marks the player visible board 
+ 	* @param std::string strike, the character that will mark the board, int row
 	*		 the row of the the strike, and int col, the column of the strike
 	* @error Throws an runtime error if the row and col are not valid or if strike
 	*		 is not a valid character
 	* @return None
 	*/
+  
 	void markHostile(char strike, int row, int col, int hitship, bool isHit);
+
 };
 #endif
