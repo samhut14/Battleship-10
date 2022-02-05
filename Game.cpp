@@ -137,10 +137,13 @@ bool Game::gameover()
 }
 
 char Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
+    // if there is a hit, set to true
+    bool isHit = false;
     if (validAttack(attackingPlayer, row, col)) {
-        bool isHit = false;
+        //checks if attack location is a ship
         if ((defendingPlayer.getVisibleBoard().at(row,col))[0] == "S") {
             isHit = true;
+            //stores the id of ship to be passed into mark functions
             int hitship = defendingPlayer.getVisibleBoard().at(row,col)[1];
             attackingPlayer.markFriendly('h', row, col);
             defendingPlayer.markHostile('h', row, col, hitship, isHit);
