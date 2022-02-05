@@ -63,14 +63,20 @@ void Player::sinkShip(int hitship)
 // how his position array handled?? will matter in implementation (tuple, or 1 by 1)
 
 
-void Player::markHostile(char strike, int row, int col, int hitship) {
+void Player::markHostile(char strike, int row, int col, int hitship, bool isHit) {
     String mark(string(1, strike));
     m_visibleBoard.setBoard(mark, row, col);
-    if (m_ships[hitship-1].loselife()) {
-        sinkShip(hitship);
+    if (isHit) {    
+        if (m_ships[hitship-1].loselife()) {
+            sinkShip(hitship);
+        } else {
+            std::cout << "Ship " << hitship << " was hit \n";
+        }
     } else {
-        std::cout << "Ship " << hitship << " was hit \n";
+        m_visibleBoard.setBoard(mark, row, col);
+    std::cout << "Your attack missed! \n";
     }
+    
 }
 
 

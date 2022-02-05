@@ -138,10 +138,15 @@ bool Game::gameover()
 
 char Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
     if (validAttack(attackingPlayer, row, col)) {
+        bool isHit = false;
         if ((defendingPlayer.getVisibleBoard().at(row,col))[0] == "S") {
+            isHit = true;
             int hitship = defendingPlayer.getVisibleBoard().at(row,col)[1];
             attackingPlayer.markFriendly('h', row, col);
-            defendingPlayer.markHostile('h', row, col, hitship);
+            defendingPlayer.markHostile('h', row, col, hitship, isHit);
         }
+    } else {
+        attackingPlayer.markFriendly('m', row, col);
+        defendingPlayer.markHostile('m', row, col, 0, isHit);
     }
 }
