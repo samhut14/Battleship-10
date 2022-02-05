@@ -27,32 +27,6 @@ using namespace std;
      m_ships = nullptr; 
  }
 
-//Deconstructs Player
-Player::~Player()
-{
-    // Checks if the array of ships has a size
-    // If m_ships is not set to nullptr
-    if(m_ships != nullptr)
-    {
-        //Goes throug each ship of m_ships
-        for(int i = 0; i < m_numberOfShips; i++)
-        {
-            //If a Ship at index i in m_ships is not nullptr
-            if(m_ships[i] != nullptr)
-            {
-                //Deconstruct the ship
-               delete m_ships[i];
-            }
-        }
-
-
-    // Set m_shipCounter to be 0
-    m_shipCounter = 0;
-
-    // Set m_ships to be nullptr
-    m_ships = nullptr;
-}
-
 Player::Player(int size)
 {
     m_numberOfShips = size;
@@ -370,7 +344,7 @@ int Player::getNumberOfShips()
 }
 
 //Get the Player's Ships
-Ship** Player::getShips()
+Ship* Player::getShips()
 {
     //Return m_ships
     return m_ships;

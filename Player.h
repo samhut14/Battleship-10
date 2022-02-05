@@ -114,7 +114,7 @@ public:
 	 * @post Returns the player's ships
 	 * @param None
 	 * @error Throws an runtime error if m_Ships is not set up
-	 * @return Ship** m_Ships, the pointer to the array of ships
+	 * @return Ship* m_Ships, the pointer to the array of ships
 	 */
 	Ship *getShips();
 
