@@ -204,9 +204,10 @@ void Player::shipHealthBar()
         //Next, check if the ship is stil alive
         //TODO: Get functions for returing life and alive status
         //If the ship is still alive
-        if(true)
+        if(m_ships[i].getAlive() == true)
         {
             //Print the ships life
+            std::cout << m_ships[i].getLife() + "     ";
         }
         //Otherwise, if the ship is not alived
         else
