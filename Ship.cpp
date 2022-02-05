@@ -16,9 +16,9 @@ Ship::~Ship()
 {   
    delete[] posArr;    
 }
-void Ship::setAlive(bool a)
+void Ship::setAlive(bool alive)
 {
-    a = alive;
+    m_alive = alive;
 }
 int Ship::getLife()
 {
