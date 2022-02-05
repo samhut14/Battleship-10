@@ -162,7 +162,7 @@ void Player::sinkShip(int hitship)
 // how his position array handled?? will matter in implementation (tuple, or 1 by 1)
 
 
-void Player::markHostile(char strike, int row, int col, int hitship, bool isHit) {
+void Player::markHostile(string strike, int row, int col, int hitship, bool isHit) {
     // converts character into string
     std::string mark(std::string(1, strike));
     m_visibleBoard.setBoard(mark, row, col);
@@ -209,7 +209,7 @@ void Player::printSetup()
         cout << endl;
     }
 
-void Player::markFriendly(char strike, int row, int col) {
+void Player::markFriendly(string strike, int row, int col) {
     std::string mark(std::string(1, strike));
     m_invisibleBoard.setBoard(mark, row, col);
 

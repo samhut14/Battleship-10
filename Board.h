@@ -11,11 +11,9 @@ class Board
     public:
    Board();
    ~Board();
-   void setRow(int rw);
-   void setColumn(int cl);
-   int getRow();
-   int getColumn();
-   string* getArr();
+   string** getArr();
+   string at(int row, int col);
+   void setBoard(string mark, int row, int col);
    //int Boardat(int row,int col); 
    //int Boardset(int row, int col, char element);
 };

@@ -221,7 +221,7 @@ public:
 	 *		 is not a valid character
 	 * @return None
 	 */
-	void markFriendly(char strike, int row, int col);
+	void markFriendly(string strike, int row, int col);
 
 	/**
 	* @pre Player is constructed. Can only be used if the player is attacking
@@ -232,6 +232,6 @@ public:
 	*		 is not a valid character
 	* @return None
 	*/
-	void markHostile(char strike, int row, int col, int hitship, bool isHit);
+	void markHostile(string strike, int row, int col, int hitship, bool isHit);
 };
 #endif
