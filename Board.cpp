@@ -3,22 +3,18 @@
 #include <string>
 #include <iostream>
 using namespace std;
-Board::Board(int r, int c, string** B_arr)
+Board::Board()
 {
-    Boardarr = B_arr;
-    r = row;
-    c = col;
-    string** Boardarr = nullptr;
-    Boardarr = new string*[row];
-    for(int i = 0; i < row; i++)
+    Boardarr = new string*[10];
+    for(int i = 0; i < 10; i++)
     {
-        Boardarr[i] = new string[col];
+        Boardarr[i] = new string[10];
     }
-    for(int i = 0; i < row; i++)
+    for(int i = 0; i < 10; i++)
     {
-        for(int j = 0; j < col; j++)
+        for(int j = 0; j < 10; j++)
         {
-            Boardarr[i][j] = "?";
+            Boardarr[i][j] = "*";
         }
     }
     
