@@ -16,8 +16,9 @@ public:
     void setup();
     void setupPlayer(Player somePlayer);
     int getInt();
+    void clear();
     void turn(int currentPlayer);
-    bool attack(Player attackingPlayer, Player defendingPlayer, int row, int col);
+    void attack(Player attackingPlayer, Player defendingPlayer, int row, int col);
     bool validAttack(Player attackingPlayer, int row, int col);
     bool gameover();
     void play();
