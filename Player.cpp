@@ -216,7 +216,7 @@ void Player::shipHealthBar()
 {
     //Example dislay
     //1x1: 5     1x2: Sunked     1x3: 4  
-    
+
     //Firstly, we are goning to put everything in one line for now
     //Loop for each ship the player hass
     for(int i = 0; i < m_numberOfShips; i++)
@@ -241,5 +241,15 @@ void Player::shipHealthBar()
 
     //Add the end of the loop, print a new line
     std::cout << "\n";
+
+    //TODO: Add all functions that will get status the 
+    //The amount health a ship has
+    //Add any more style changes if needed
 }
+
+//Print the player's view for their turn
+/*
+    
+     
+*/
 
