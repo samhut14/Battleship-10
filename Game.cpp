@@ -135,7 +135,7 @@ bool Game::gameover()
     return(false);
 }
 
-bool Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
+void Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
     // if there is a hit, set to true
     bool isHit = false;
     if (validAttack(attackingPlayer, row, col)) {
