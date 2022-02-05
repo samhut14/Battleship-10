@@ -53,7 +53,9 @@ Player::~Player()
 //Sinks a player's ship
 void Player::sinkShip(int hitship)
 {
+    //access the position array of the ship that got hit
     int* arr = m_ships[hitship-1].getPositionArr();
+    // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship-1].getPosLength() - 1; i += 2) {
         m_visibleBoard.setBoard('X', arr[i], arr[i+1]);
     }
@@ -64,9 +66,11 @@ void Player::sinkShip(int hitship)
 
 
 void Player::markHostile(char strike, int row, int col, int hitship, bool isHit) {
+    // converts character into string
     String mark(string(1, strike));
     m_visibleBoard.setBoard(mark, row, col);
     if (isHit) {    
+        // checks if ship is sunk
         if (m_ships[hitship-1].loselife()) {
             sinkShip(hitship);
         } else {
@@ -74,7 +78,7 @@ void Player::markHostile(char strike, int row, int col, int hitship, bool isHit)
         }
     } else {
         m_visibleBoard.setBoard(mark, row, col);
-    std::cout << "Your attack missed! \n";
+        std::cout << "Your attack missed! \n";
     }
     
 }
