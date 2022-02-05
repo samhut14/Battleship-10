@@ -1,19 +1,30 @@
 #ifndef SHIP_H
 #define SHIP_H
-
-class Ship 
+#include <string>
+using namespace std;
+class Ship
 {
-    private: 
-    int lives;
-    int* position;
-    int poslength;
+    private:
+    int column;
+    int row;
     int size;
+    int life;
+    bool alive;
+    string* posArr;
     public:
+    Ship(int Size, string* locationArr);
     Ship();
-    // makes live counter go down for ship, and check if needs to be sunk
-    bool loseLife();
-    int* getPositionArr();
-    int getPosLength();
+    ~Ship();
+    void setLife(int l);
+    void setSize(int s);
+    void setAlive(bool a);
+    int getSize();
+    int getLife();
+    bool getAlive();
+    bool loselife(int row, int col);
+    void setColumn(int c);
+    void setRow(int r);
+    int getColumn(int index);
+    int getRow(int index);  
 };
-
 #endif
