@@ -136,3 +136,12 @@ bool Game::gameover()
     return(false);
 }
 
+char Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
+    if (validAttack(attackingPlayer, row, col)) {
+        if ((defendingPlayer.getVisibleBoard().at(row,col))[0] == "S") {
+            int hitship = defendingPlayer.getVisibleBoard().at(row,col)[1];
+            attackingPlayer.markFriendly('h', row, col);
+            defendingPlayer.markHostile('h', row, col, hitship);
+        }
+    }
+}
