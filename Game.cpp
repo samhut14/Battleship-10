@@ -38,8 +38,12 @@ void Game::setup()
     cout << "Player 1's turn to set up:\n";
     setupPlayer(player1);
 
+    clear();
+
     cout << "Player 2's turn to set up:\n";
     setupPlayer(player2);
+
+    clear();
 }
 
 void Game::setupPlayer(Player somePlayer)
@@ -109,6 +113,30 @@ void Game::setupPlayer(Player somePlayer)
     }
 }
 
+void Game::clear()
+{   
+    bool turnOver = true;
+    char temp = '\0';
+
+    while (turnOver)
+    {
+       std::cout<<"Your turn has now concluded. Please pass the computer to your opponent. Once that is done, type c for complete.";
+       std::cin>> temp;
+
+       if(temp == 'c')
+       {
+           turnOver = false;
+       }
+    }
+
+    for(int i=0; i<30; i++)
+    {
+        std::cout<<'\n';
+    }
+    
+    
+}
+
 void Game::play()
 {
     currentPlayer = 2;
@@ -130,6 +158,10 @@ void Game::play()
         }
 
         turn(currentPlayer);
+        if(!gameover())
+        {
+            clear();
+        }
     }
     std::cout << "Player " << currentPlayer << " won!";
 }
@@ -247,16 +279,16 @@ bool Game::gameover()
 void Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int col) {
     // if there is a hit, set to true
     bool isHit = false;
-    if (validAttack(attackingPlayer, row, col)) {
+  
         //checks if attack location is a ship
-        if (((defendingPlayer.getVisibleBoard()).at(row,col))[0] == "S") {
-            isHit = true;
-            //stores the id of ship to be passed into mark functions
-            int hitship = defendingPlayer.getVisibleBoard().at(row,col)[1];
-            attackingPlayer.markFriendly('h', row, col);
-            defendingPlayer.markHostile('h', row, col, hitship, isHit);
-        }
-    } else {
+    if (((defendingPlayer.getVisibleBoard()).at(row,col))[0] == "S") {
+        isHit = true;
+        //stores the id of ship to be passed into mark functions
+        int hitship = defendingPlayer.getVisibleBoard().at(row,col)[1];
+        attackingPlayer.markFriendly('h', row, col);
+        defendingPlayer.markHostile('h', row, col, hitship, isHit);
+    }
+    else {
         attackingPlayer.markFriendly('m', row, col);
         defendingPlayer.markHostile('m', row, col, 0, isHit);
     }
