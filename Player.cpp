@@ -121,7 +121,7 @@ traverseCol:
         else
         {
             arr[i] = to_string(startRow);
-            arr[i].push_back(startCol - 65);
+            arr[i].push_back(startCol + 65);
 
             startCol += temp;
         }
@@ -138,7 +138,7 @@ traverseRow:
         else
         {
             arr[i] = to_string(startRow);
-            arr[i].push_back(startCol - 65);
+            arr[i].push_back(startCol + 65);
 
             startRow += temp;
         }
