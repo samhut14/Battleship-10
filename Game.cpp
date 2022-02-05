@@ -141,7 +141,7 @@ char Game::attack(Player attackingPlayer, Player defendingPlayer, int row, int c
     bool isHit = false;
     if (validAttack(attackingPlayer, row, col)) {
         //checks if attack location is a ship
-        if ((defendingPlayer.getVisibleBoard().at(row,col))[0] == "S") {
+        if (((defendingPlayer.getVisibleBoard()).at(row,col))[0] == "S") {
             isHit = true;
             //stores the id of ship to be passed into mark functions
             int hitship = defendingPlayer.getVisibleBoard().at(row,col)[1];
