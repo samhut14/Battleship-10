@@ -209,15 +209,20 @@ void Player::markHostile(std::string strike, int row, int col)
     //TODO: Add any messages if needed
     //Add an error message for the specific strike if needed
     //Add correct functions
+    //Change everyting in markHostitle if needed
 }
 
 //Print the healthbar for each ship
 void Player::shipHealthBar()
 {
     //Example dislay
-    //1x1: 5     1x2: Sunked     1x3: 4  
+    // Ships Health:
+    // 1x1: 5     1x2: Sunked     1x3: 4  
 
-    //Firstly, we are goning to put everything in one line for now
+    //Firstly, tell the user that we are printing their ships helath
+    std::cout << " Ships Health:\n ";
+
+    //Next, we are goning to put everything in one line for now
     //Loop for each ship the player hass
     for(int i = 0; i < m_numberOfShips; i++)
     {
@@ -247,9 +252,89 @@ void Player::shipHealthBar()
     //Add any more style changes if needed
 }
 
-//Print the player's view for their turn
-/*
+//Print the player's view during gameplay
+void Player::view()
+{
+    //Example view 
+    //     A   B   C   D
+    // 1  S1  S2   X   X
+    // 2   *   *   *   *
+    // 3   *   *   *   *
+    // 4   *   *   *   *
+
+    //Firstly, we need to print the player's view of their oponent's Board
+    //Then, tell the user what board we are printing out
+    std::cout << " Opponent's Board:\n\n";
+
+    //Next, print the columns of the board into one line
+    std::cout << "     A   B   C   D   E   F   G   H   I   J\n";
     
-     
-*/
+    //Next, for loop 10 times for each row of the board
+    for(int i = 0; i < 10; i++)
+    {
+        //Print the row number of the board 
+        std::cout << " " + (i+1) + "   ";
+
+        //Goes throug each string of the row
+        for(int j = 0; j < 10; j++)
+        {
+            //Print the string at row i and column j
+            std::cout << m_invisibleBoard.at(i, j) + "   ";
+        }
+
+        //Print a new line to end the row
+        std::cout << "\n";
+    }
+
+    //Print a new line
+    std::cout << "\n";
+
+    //Next, we print the player's view of their board
+    //Tell the user that we are printing out their board
+    std::cout << " Your Board:\n\n";
+
+    //Next, print the cloumns of the board into one line
+     std::cout << "     A   B   C   D   E   F   G   H   I   J\n";
+     //Next, for loop 10 times for each row of the board
+    for(int i = 0; i < 10; i++)
+    {
+        //Print the row number of the board 
+        std::cout << " " + (i+1) + "  ";
+
+        //Goes through each string of the row
+        for(int j = 0; j < 10; j++)
+        {
+            //Get the string at row i and column j
+            std::string position = m_visibleBoard.at(i, j);
+
+            //Next, check the length of position
+            //If the length of the position is two
+            if(position.length() == 2)
+            {
+                //Print the position
+                std::cout << position + "  ";
+            }
+            //Otherwiie, if the the length of the position is 1
+            else
+            {
+                //Add a space before printing the position
+                std::cout << " " + position + "  ";
+            }
+        }
+
+        //Print a new line to end the row
+        std::cout << "\n";
+    }
+
+    //Print a new line
+    std::cout << "\n";
+
+    //Next, print the ship's healthbar
+    shipHealthBar();
+
+    //Print a new line
+    std::cout << "\n";
+
+    //TODO: Change Board Functions if needed
+}
 
