@@ -114,7 +114,7 @@ public:
 	 * @post Returns the player's ships
 	 * @param None
 	 * @error Throws an runtime error if m_Ships is not set up
-	 * @return Ship** m_Ships, the pointer to the array of ships
+	 * @return Ship* m_Ships, the pointer to the array of ships
 	 */
 	Ship *getShips();
 
@@ -212,6 +212,7 @@ public:
 	void sinkShip(int hitShip);
 
 	/**
+
 	 * @pre Player is constructed. Can only be used if the player is getting attacked
 	 * @post Marks the player friendly's board, or the player
 	 *		visible board
@@ -225,8 +226,8 @@ public:
 
 	/**
 	* @pre Player is constructed. Can only be used if the player is attacking
- 	* @post Marks the player invisible board 
- 	* @param char strike, the character that will mark the board, int row
+ 	* @post Marks the player visible board 
+ 	* @param std::string strike, the character that will mark the board, int row
 	*		 the row of the the strike, and int col, the column of the strike
 	* @error Throws an runtime error if the row and col are not valid or if strike
 	*		 is not a valid character
