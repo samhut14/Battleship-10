@@ -146,15 +146,15 @@ traverseRow:
     m_ships[m_shipCounter] = Ship(size, arr);
     placeShip(m_ships[m_shipCounter]);
     return true;
-=======
+
 //Sinks a player's ship
 void Player::sinkShip(int hitship)
 {
     //access the position array of the ship that got hit
     int* arr = m_ships[hitship-1].getPositionArr();
     // mark each palce ship is positioned with an X
-    for (int i = 0; i < m_ships[hitship-1].getPosLength() - 1; i += 2) {
-        m_visibleBoard.setBoard('X', arr[i], arr[i+1]);
+    for (int i = 0; i < m_ships[hitship-1].getPosLength(); i++) {
+        m_visibleBoard.setBoard('X', arr[i][0], arr[i][1]-65);
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
