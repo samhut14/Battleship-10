@@ -191,7 +191,7 @@ void Player::placeShip(Ship someShip)
         row = someShip.getRow(i);
         col = someShip.getCol(i);
 
-        m_invisibleBoard.set(row, col, symbol);
+        m_invisibleBoard.setBoard(symbol, row, col);
     }
 
     m_shipCounter++;
