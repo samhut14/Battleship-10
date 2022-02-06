@@ -30,7 +30,8 @@ using namespace std;
 Player::Player(int size)
 {
     m_numberOfShips = size;
-    m_ships = new Ship[m_numberOfShips];
+    string* arr[5];
+    m_ships = new Ship();
 
     m_shipCounter = 0;
 }
@@ -125,10 +126,10 @@ traverseRow:
 void Player::sinkShip(int hitship)
 {
     //access the position array of the ship that got hit
-    int* arr = m_ships[hitship-1].getPositionArr();
+    string* arr = m_ships[hitship-1].getPositionArr();
     // mark each palce ship is positioned with an X
-    for (int i = 0; i < m_ships[hitship-1].getPosLength(); i++) {
-        m_visibleBoard.setBoard('X', arr[i][0], arr[i][1]-65);
+    for (int i = 0; i < m_ships[hitship-1].getSize(); i++) {
+        m_visibleBoard.setBoard("X", arr[i][0], arr[i][1]-65);
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
@@ -138,8 +139,7 @@ void Player::sinkShip(int hitship)
 
 void Player::markHostile(string strike, int row, int col, int hitship, bool isHit) {
     // converts character into string
-    std::string mark(std::string(1, strike));
-    m_visibleBoard.setBoard(mark, row, col);
+    m_visibleBoard.setBoard(strike, row, col);
     if (isHit) {    
         // checks if ship is sunk
         if (m_ships[hitship-1].loseLife()) {
@@ -148,7 +148,7 @@ void Player::markHostile(string strike, int row, int col, int hitship, bool isHi
             std::cout << "Ship " << hitship << " was hit \n";
         }
     } else {
-        m_visibleBoard.setBoard(mark, row, col);
+        m_visibleBoard.setBoard(strike, row, col);
         std::cout << "Your attack missed! \n";
     }
     
@@ -162,7 +162,7 @@ void Player::placeShip(Ship someShip)
     for (int i = 0; i < someShip.getSize(); i++)
     {
         row = someShip.getRow(i);
-        col = someShip.getCol(i);
+        col = someShip.getColumn(i);
 
         m_invisibleBoard.setBoard(symbol, row, col);
     }
@@ -198,7 +198,7 @@ void Player::shipHealthBar()
     for(int i = 0; i < m_numberOfShips; i++)
     {
         //Print out the Ship with size 1x(i+1
-        std::cout << "1x" + (i+1) + ": ";
+        std::cout << "1x" << (i+1) << ": ";
 
         //Next, check if the ship is stil alive
         //TODO: Get functions for returing life and alive status
@@ -206,7 +206,7 @@ void Player::shipHealthBar()
         if(m_ships[i].getAlive() == true)
         {
             //Print the ships life
-            std::cout << m_ships[i].getLife() + "     ";
+            std::cout << m_ships[i].getLife() << "     ";
         }
         //Otherwise, if the ship is not alived
         else
@@ -245,13 +245,13 @@ void Player::view()
     for(int i = 0; i < 10; i++)
     {
         //Print the row number of the board 
-        std::cout << " " + (i+1) + "   ";
+        std::cout << " " << (i+1) << "   ";
 
         //Goes throug each string of the row
         for(int j = 0; j < 10; j++)
         {
             //Print the string at row i and column j
-            std::cout << m_invisibleBoard.at(i, j) + "   ";
+            std::cout << m_invisibleBoard.at(i, j) << "   ";
         }
 
         //Print a new line to end the row
@@ -271,7 +271,7 @@ void Player::view()
     for(int i = 0; i < 10; i++)
     {
         //Print the row number of the board 
-        std::cout << " " + (i+1) + "  ";
+        std::cout << " " << (i+1) << "  ";
 
         //Goes through each string of the row
         for(int j = 0; j < 10; j++)
@@ -284,13 +284,13 @@ void Player::view()
             if(position.length() == 2)
             {
                 //Print the position
-                std::cout << position + "  ";
+                std::cout << position << "  ";
             }
             //Otherwiie, if the the length of the position is 1
             else
             {
                 //Add a space before printing the position
-                std::cout << " " + position + "  ";
+                std::cout << " " << position << "  ";
             }
         }
 
@@ -325,8 +325,7 @@ Board Player::getInvisibleBoard()
 }
 
 void Player::markFriendly(string strike, int row, int col) {
-    std::string mark(std::string(1, strike));
-    m_invisibleBoard.setBoard(mark, row, col);
+    m_invisibleBoard.setBoard(strike, row, col);
 }
   
 //Get the ship counter
