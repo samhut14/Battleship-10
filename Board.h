@@ -5,8 +5,6 @@ using namespace std;
 class Board
 {
     private:
-    int row;
-    int col;
     string** Boardarr;
     public:
    Board();
