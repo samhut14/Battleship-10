@@ -20,7 +20,8 @@ Board::Board()
 
 Board::~Board()
 {
-    for (int i = 0; i < 10; i++)
+
+    for(int i = 0; i < 10; i++)
     {
         delete[] Boardarr[i];
     }
@@ -28,7 +29,7 @@ Board::~Board()
     delete[] Boardarr;
 }
 
-string **Board::getArr()
+string** Board::getArr()
 {
     return Boardarr;
 }

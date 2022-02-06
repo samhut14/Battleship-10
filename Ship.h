@@ -4,6 +4,7 @@
 using namespace std;
 class Ship
 {
+
 private:
     int m_size;
     int m_life;
@@ -23,7 +24,7 @@ public:
     bool getAlive();
     bool loseLife();
     int getColumn(int index);
-    int getRow(int index);
-    string *getPositionArr();
+    int getRow(int index);  
+    string* getPositionArr();
 };
 #endif

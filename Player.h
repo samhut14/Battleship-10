@@ -165,7 +165,8 @@ public:
 	 *        set up the Player's visible board
 	 * @return None
 	 */
-	// void setVisibleBoard(Board visibleBoard&);
+
+	//void setVisibleBoard(Board visibleBoard&);
 
 	/**
 	 * @pre Player is  constructed
@@ -174,7 +175,8 @@ public:
 	 *        set up the Player's invisble board
 	 * @return None
 	 */
-	// void setInvsibleBoard(Board invisibleBoard&);
+
+	//void setInvsibleBoard(Board invisibleBoard&);
 
 	// Main Functions
 	// Set Up
@@ -225,14 +227,14 @@ public:
 	void markFriendly(string strike, int row, int col);
 
 	/**
-	 * @pre Player is constructed. Can only be used if the player is attacking
-	 * @post Marks the player visible board
-	 * @param std::string strike, the character that will mark the board, int row
-	 *		 the row of the the strike, and int col, the column of the strike
-	 * @error Throws an runtime error if the row and col are not valid or if strike
-	 *		 is not a valid character
-	 * @return None
-	 */
+	* @pre Player is constructed. Can only be used if the player is attacking
+ 	* @post Marks the player visible board 
+ 	* @param std::string strike, the character that will mark the board, int row
+	*		 the row of the the strike, and int col, the column of the strike
+	* @error Throws an runtime error if the row and col are not valid or if strike
+	*		 is not a valid character
+	* @return None
+	*/
 	void markHostile(string strike, int row, int col, int hitship, bool isHit);
 };
 #endif
