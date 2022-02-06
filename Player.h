@@ -22,12 +22,12 @@ class Player
 private:
 	// Represents the player's visible board
 	// This the board the player used to place their ships
-	Board m_visibleBoard;
+	Board *m_visibleBoard;
 
 	// Represent the player's invisible board
 	// This board represent the player's view of their opponent board
 	// The players uses this board to attach the opponent
-	Board m_invisibleBoard;
+	Board *m_invisibleBoard;
 
 	// Represent the number of ships that the player has
 	int m_numberOfShips;
@@ -78,7 +78,7 @@ public:
 	 * @param None
 	 * @return Board m_visibleBoard, the player's visible board
 	 */
-	Board getVisibleBoard();
+	Board *getVisibleBoard();
 
 	/**
 	 * @pre Player is constructed
@@ -86,7 +86,7 @@ public:
 	 * @param None
 	 * @return Board m_invisibleBoard, the player's invisiblbe board
 	 */
-	Board getInvisibleBoard();
+	Board *getInvisibleBoard();
 
 	/**
 	 * @pre Player is constructed. number of ships is set up
@@ -165,8 +165,7 @@ public:
 	 *        set up the Player's visible board
 	 * @return None
 	 */
-
-	//void setVisibleBoard(Board visibleBoard&);
+	// void setVisibleBoard(Board visibleBoard&);
 
 	/**
 	 * @pre Player is  constructed
@@ -175,8 +174,7 @@ public:
 	 *        set up the Player's invisble board
 	 * @return None
 	 */
-
-	//void setInvsibleBoard(Board invisibleBoard&);
+	// void setInvsibleBoard(Board invisibleBoard&);
 
 	// Main Functions
 	// Set Up
@@ -227,14 +225,14 @@ public:
 	void markFriendly(string strike, int row, int col);
 
 	/**
-	* @pre Player is constructed. Can only be used if the player is attacking
- 	* @post Marks the player visible board 
- 	* @param std::string strike, the character that will mark the board, int row
-	*		 the row of the the strike, and int col, the column of the strike
-	* @error Throws an runtime error if the row and col are not valid or if strike
-	*		 is not a valid character
-	* @return None
-	*/
+	 * @pre Player is constructed. Can only be used if the player is attacking
+	 * @post Marks the player visible board
+	 * @param std::string strike, the character that will mark the board, int row
+	 *		 the row of the the strike, and int col, the column of the strike
+	 * @error Throws an runtime error if the row and col are not valid or if strike
+	 *		 is not a valid character
+	 * @return None
+	 */
 	void markHostile(string strike, int row, int col, int hitship, bool isHit);
 };
 #endif

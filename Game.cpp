@@ -229,7 +229,7 @@ void Game::turn(int currentPlayer)
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
 {
-    if (attackingPlayer->getInvisibleBoard().at(row, col) == "*")
+    if (attackingPlayer->getInvisibleBoard()->at(row, col) == "*")
     {
         return (true);
     }
@@ -249,7 +249,7 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player1->getInvisibleBoard().at(i, j) == "X")
+                if (player1->getInvisibleBoard()->at(i, j) == "X")
                 {
                     temp++;
                 }
@@ -267,7 +267,7 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player2->getInvisibleBoard().at(i, j) == "X")
+                if (player2->getInvisibleBoard()->at(i, j) == "X")
                 {
                     temp++;
                 }
@@ -289,11 +289,11 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
     bool isHit = false;
 
     // checks if attack location is a ship
-    if (((defendingPlayer->getVisibleBoard()).at(row, col))[0] == 'S')
+    if (defendingPlayer->getVisibleBoard()->at(row, col)[0] == 'S')
     {
         isHit = true;
         // stores the id of ship to be passed into mark functions
-        int hitship = defendingPlayer->getVisibleBoard().at(row, col)[1];
+        int hitship = defendingPlayer->getVisibleBoard()->at(row, col)[1];
         attackingPlayer->markFriendly("h", row, col);
         defendingPlayer->markHostile("h", row, col, hitship, isHit);
     }
