@@ -5,22 +5,26 @@ using namespace std;
 class Ship
 {
     private:
-    int _size;
-    int life;
-    bool alive;
+    int m_size;
+    int m_life;
+    bool m_alive;
     string* posArr;
+    
     public:
     Ship(int Size, string* locationArr);
-    Ship();
+    Ship()
+    {
+        //blank
+    }
     ~Ship();
     void setAlive(bool a);
     int getSize();
     int getLife();
     bool getAlive();
-    bool loselife(int row, int col);
+    bool loseLife();
     int getColumn(int index);
     int getRow(int index);  
-    string* getPositonArr();
+    string* getPositionArr();
 
 };
 #endif
