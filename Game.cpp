@@ -158,10 +158,10 @@ void Game::play()
     {
         switch (currentPlayer)
         {
-        case 1:
-            currentPlayer = 2;
-        case 2:
-            currentPlayer = 1;
+            case 1: {currentPlayer = 2;
+                    break; }     
+            case 2: {currentPlayer = 1;
+                    break;}
         }
 
         turn(currentPlayer);
@@ -175,24 +175,25 @@ void Game::play()
 
 void Game::turn(int currentPlayer)
 {
-    int row = 0;
-    int col = 0;
+    int row = -1;
+    int col = -1;
     char temp = '\0';
 
     if (currentPlayer == 1)
     {
+        std::cout <<"Player 1's turn\n";
         player1->view();
 
         do
         {
-            while (row >= 0 && row < 10)
+            while (!(row >= 0 && row < 10))
             {
                 std::cout << "Please select which row you would like to attack:";
                 row = getInt();
                 row -= 1;
             }
 
-            while (col >= 0 && col < 10)
+            while (!(col >= 0 && col < 10))
             {
                 std::cout << "Please select which column you would like to attack:";
                 std::cin >> temp;
@@ -201,21 +202,23 @@ void Game::turn(int currentPlayer)
         } while (!validAttack(player1, row, col));
 
         attack(player1, player2, row, col);
+        player1->view();
     }
     else
     {
+        std::cout <<"Player 2's turn\n";
         player2->view();
 
         do
         {
-            while (row >= 0 && row < 10)
+            while (!(row >= 0 && row < 10))
             {
                 std::cout << "Please select which row you would like to attack:";
                 std::cin >> row;
                 row--;
             }
 
-            while (col >= 0 && col < 10)
+            while (!(col >= 0 && col < 10))
             {
                 std::cout << "Please select which column you would like to attack:";
                 std::cin >> temp;
@@ -224,12 +227,13 @@ void Game::turn(int currentPlayer)
         } while (!validAttack(player2, row, col));
 
         attack(player2, player1, row, col);
+        player2->view();
     }
 }
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
 {
-    if (attackingPlayer->getInvisibleBoard()->at(row, col) == "*")
+    if (attackingPlayer->getPrivateBoard()->at(row, col) == "*")
     {
         return (true);
     }
@@ -249,7 +253,7 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player1->getInvisibleBoard()->at(i, j) == "X")
+                if (player1->getPrivateBoard()->at(i, j) == "X")
                 {
                     temp++;
                 }
@@ -267,7 +271,7 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player2->getInvisibleBoard()->at(i, j) == "X")
+                if (player2->getPrivateBoard()->at(i, j) == "X")
                 {
                     temp++;
                 }
@@ -289,17 +293,17 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
     bool isHit = false;
 
     // checks if attack location is a ship
-    if (defendingPlayer->getVisibleBoard()->at(row, col)[0] == 'S')
+    if (defendingPlayer->getPrivateBoard()->at(row, col)[0] == 'S')
     {
         isHit = true;
         // stores the id of ship to be passed into mark functions
-        int hitship = defendingPlayer->getVisibleBoard()->at(row, col)[1];
-        attackingPlayer->markFriendly("h", row, col);
-        defendingPlayer->markHostile("h", row, col, hitship, isHit);
+        int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1]-48;
+        attackingPlayer->markHostile("H", row, col, hitship, isHit);
+        defendingPlayer->markFriendly("H", row, col);
     }
     else
     {
-        attackingPlayer->markFriendly("m", row, col);
-        defendingPlayer->markHostile("m", row, col, 0, isHit);
+        attackingPlayer->markHostile("M", row, col, 0, isHit);
+        defendingPlayer->markFriendly("M", row, col);
     }
 }

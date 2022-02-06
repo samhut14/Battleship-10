@@ -22,12 +22,12 @@ class Player
 private:
 	// Represents the player's visible board
 	// This the board the player used to place their ships
-	Board *m_visibleBoard;
+	Board *m_publicBoard;
 
 	// Represent the player's invisible board
 	// This board represent the player's view of their opponent board
 	// The players uses this board to attach the opponent
-	Board *m_invisibleBoard;
+	Board *m_privateBoard;
 
 	// Represent the number of ships that the player has
 	int m_numberOfShips;
@@ -76,17 +76,17 @@ public:
 	 * @pre Player is constructed
 	 * @post Return the player's visible board
 	 * @param None
-	 * @return Board m_visibleBoard, the player's visible board
+	 * @return Board m_publicBoard, the player's visible board
 	 */
-	Board *getVisibleBoard();
+	Board *getPublicBoard();
 
 	/**
 	 * @pre Player is constructed
 	 * @post Return the player's invisible board
 	 * @param None
-	 * @return Board m_invisibleBoard, the player's invisiblbe board
+	 * @return Board m_privateBoard, the player's invisiblbe board
 	 */
-	Board *getInvisibleBoard();
+	Board *getPrivateBoard();
 
 	/**
 	 * @pre Player is constructed. number of ships is set up
@@ -160,21 +160,21 @@ public:
 
 	/**
 	 * @pre Player is constructed.
-	 * @post Sets m_visibleBoard by passing in another Board
-	 * @param Board visibleBoard, the Board being passed to
+	 * @post Sets m_publicBoard by passing in another Board
+	 * @param Board publicBoard, the Board being passed to
 	 *        set up the Player's visible board
 	 * @return None
 	 */
-	// void setVisibleBoard(Board visibleBoard&);
+	// void setpublicBoard(Board publicBoard&);
 
 	/**
 	 * @pre Player is  constructed
-	 * @post Sets m_invisibleBoard by passing in another Board
-	 * @param Board invisibleBoard, the Board being passed to
+	 * @post Sets m_privateBoard by passing in another Board
+	 * @param Board privateBoard, the Board being passed to
 	 *        set up the Player's invisble board
 	 * @return None
 	 */
-	// void setInvsibleBoard(Board invisibleBoard&);
+	// void setInvsibleBoard(Board privateBoard&);
 
 	// Main Functions
 	// Set Up
