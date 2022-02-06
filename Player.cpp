@@ -30,7 +30,7 @@ Player::Player()
 Player::Player(int size)
 {
     m_numberOfShips = size;
-    m_ships = new Ship();
+    m_ships = new Ship[m_numberOfShips];
 
     m_publicBoard = new Board();
     m_privateBoard = new Board();
