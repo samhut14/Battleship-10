@@ -32,8 +32,8 @@ Player::Player(int size)
     m_numberOfShips = size;
     m_ships = new Ship();
 
-    m_visibleBoard = new Board();
-    m_invisibleBoard = new Board();
+    m_publicBoard = new Board();
+    m_privateBoard = new Board();
 
     m_shipCounter = 0;
 }
@@ -53,7 +53,7 @@ bool Player::startValid(int row, int col)
     if (row < 0 || row > 9 || col < 0 || col > 9)
         return false;
 
-    return (m_invisibleBoard->at(row, col) == "*");
+    return (m_privateBoard->at(row, col) == "*");
 }
 
 bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int size)
@@ -107,7 +107,7 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
 traverseCol:
     for (int i = 0; i <= size - 1; i++)
     {
-        if (m_invisibleBoard->at(startRow, startCol) != "*")
+        if (m_privateBoard->at(startRow, startCol) != "*")
             return false;
         else
         {
@@ -124,7 +124,7 @@ traverseCol:
 traverseRow:
     for (int i = 0; i <= size - 1; i++)
     {
-        if (m_invisibleBoard->at(startRow, startCol) != "*")
+        if (m_privateBoard->at(startRow, startCol) != "*")
             return false;
         else
         {
@@ -147,7 +147,7 @@ void Player::sinkShip(int hitship)
     // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
     {
-        m_visibleBoard->setBoard("X", arr[i][0], arr[i][1] - 65);
+        m_publicBoard->setBoard("X", arr[i][0], arr[i][1] - 65);
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
@@ -157,7 +157,7 @@ void Player::sinkShip(int hitship)
 void Player::markHostile(string strike, int row, int col, int hitship, bool isHit)
 {
     // converts character into string
-    m_visibleBoard->setBoard(strike, row, col);
+    m_publicBoard->setBoard(strike, row, col);
     if (isHit)
     {
         // checks if ship is sunk
@@ -172,7 +172,7 @@ void Player::markHostile(string strike, int row, int col, int hitship, bool isHi
     }
     else
     {
-        m_visibleBoard->setBoard(strike, row, col);
+        m_publicBoard->setBoard(strike, row, col);
         std::cout << "Your attack missed! \n";
     }
 }
@@ -186,7 +186,7 @@ void Player::placeShip(Ship &someShip)
         row = someShip.getRow(i);
         col = someShip.getColumn(i);
 
-        m_invisibleBoard->setBoard(symbol, row, col);
+        m_privateBoard->setBoard(symbol, row, col);
     }
 
     m_shipCounter++;
@@ -200,7 +200,7 @@ void Player::printSetup()
     {
         cout << i + 1 << "\t";
         for (int j = 0; j < 10; j++)
-            cout << m_invisibleBoard->at(i, j) << "\t";
+            cout << m_privateBoard->at(i, j) << "\t";
 
         cout << endl;
     }
@@ -274,7 +274,7 @@ void Player::view()
         for (int j = 0; j < 10; j++)
         {
             // Print the string at row i and column j
-            std::cout << m_invisibleBoard->at(i, j) << "   ";
+            std::cout << m_publicBoard->at(i, j) << "   ";
         }
 
         // Print a new line to end the row
@@ -297,24 +297,10 @@ void Player::view()
         std::cout << " " << (i + 1) << "  ";
 
         // Goes through each string of the row
-        for (int j = 0; j < 10; j++)
+         for (int j = 0; j < 10; j++)
         {
-            // Get the string at row i and column j
-            std::string position = m_visibleBoard->at(i, j);
-
-            // Next, check the length of position
-            // If the length of the position is two
-            if (position.length() == 2)
-            {
-                // Print the position
-                std::cout << position << "  ";
-            }
-            // Otherwiie, if the the length of the position is 1
-            else
-            {
-                // Add a space before printing the position
-                std::cout << " " << position << "  ";
-            }
+            // Print the string at row i and column j
+            std::cout << m_privateBoard->at(i, j) << "   ";
         }
 
         // Print a new line to end the row
@@ -334,22 +320,22 @@ void Player::view()
 }
 
 // Get the visible board
-Board *Player::getVisibleBoard()
+Board *Player::getPublicBoard()
 {
-    // Return m_visibleBoard
-    return m_visibleBoard;
+    // Return m_publicBoard
+    return m_publicBoard;
 }
 
 // Get the invisible board
-Board *Player::getInvisibleBoard()
+Board *Player::getPrivateBoard()
 {
-    // Return m_invisibleBoard
-    return m_invisibleBoard;
+    // Return m_privateBoard
+    return m_privateBoard;
 }
 
 void Player::markFriendly(string strike, int row, int col)
 {
-    m_invisibleBoard->setBoard(strike, row, col);
+    m_privateBoard->setBoard(strike, row, col);
 }
 
 // Get the ship counter
