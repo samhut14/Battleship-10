@@ -73,11 +73,11 @@ public:
 
 	// Getters
 	/**
-	* @pre Player is constructed
- 	* @post Return the player's visible board
- 	* @param None
-	* @return Board m_visibleBoard, the player's visible board
-	*/
+	 * @pre Player is constructed
+	 * @post Return the player's visible board
+	 * @param None
+	 * @return Board m_visibleBoard, the player's visible board
+	 */
 	Board getVisibleBoard();
 
 	/**
@@ -114,7 +114,7 @@ public:
 	 * @post Returns the player's ships
 	 * @param None
 	 * @error Throws an runtime error if m_Ships is not set up
-	 * @return Ship** m_Ships, the pointer to the array of ships
+	 * @return Ship* m_Ships, the pointer to the array of ships
 	 */
 	Ship *getShips();
 
@@ -165,7 +165,7 @@ public:
 	 *        set up the Player's visible board
 	 * @return None
 	 */
-	void setVisibleBoard(Board visibleBoard &);
+	// void setVisibleBoard(Board visibleBoard&);
 
 	/**
 	 * @pre Player is  constructed
@@ -174,13 +174,13 @@ public:
 	 *        set up the Player's invisble board
 	 * @return None
 	 */
-	void setInvsibleBoard(Board invisibleBoard &);
+	// void setInvsibleBoard(Board invisibleBoard&);
 
 	// Main Functions
 	// Set Up
 	bool startValid(int row, int col);
 	bool pathValid(int startRow, int startCol, int endRow, int endCol, int size);
-	void placeShip(Ship someShip);
+	void placeShip(Ship &someShip);
 	void printSetup();
 
 	// Game Play
@@ -212,6 +212,7 @@ public:
 	void sinkShip(int hitShip);
 
 	/**
+
 	 * @pre Player is constructed. Can only be used if the player is getting attacked
 	 * @post Marks the player friendly's board, or the player
 	 *		visible board
@@ -224,14 +225,14 @@ public:
 	void markFriendly(string strike, int row, int col);
 
 	/**
-	* @pre Player is constructed. Can only be used if the player is attacking
- 	* @post Marks the player invisible board 
- 	* @param char strike, the character that will mark the board, int row
-	*		 the row of the the strike, and int col, the column of the strike
-	* @error Throws an runtime error if the row and col are not valid or if strike
-	*		 is not a valid character
-	* @return None
-	*/
+	 * @pre Player is constructed. Can only be used if the player is attacking
+	 * @post Marks the player visible board
+	 * @param std::string strike, the character that will mark the board, int row
+	 *		 the row of the the strike, and int col, the column of the strike
+	 * @error Throws an runtime error if the row and col are not valid or if strike
+	 *		 is not a valid character
+	 * @return None
+	 */
 	void markHostile(string strike, int row, int col, int hitship, bool isHit);
 };
 #endif
