@@ -151,19 +151,25 @@ void Player::sinkShip(int hitship)
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
-// only marks visible board, possible solution: make mark hostile a bool as well, pass into markfriendly
-// how his position array handled?? will matter in implementation (tuple, or 1 by 1)
 
-void Player::markHostile(string strike, int row, int col, int hitship, bool isHit)
+void Player::markPrivateSunk(string* arr, int size) {
+    for (int i = 0; i < size; i++)
+    {
+        m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
+    }
+}
+
+string* Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
 {
     // converts character into string
-    m_publicBoard->setBoard(strike, row, col);
+    m_privateBoard->setBoard(strike, row, col);
     if (isHit)
     {
         // checks if ship is sunk
         if (m_ships[hitship - 1].loseLife())
         {
             sinkShip(hitship);
+            return m_ships[hitship - 1].getPositionArr();
         }
         else
         {
@@ -172,9 +178,10 @@ void Player::markHostile(string strike, int row, int col, int hitship, bool isHi
     }
     else
     {
-        m_publicBoard->setBoard(strike, row, col);
+        m_privateBoard->setBoard(strike, row, col);
         std::cout << "Your attack missed! \n";
     }
+    return {};
 }
 
 void Player::placeShip(Ship &someShip)
@@ -333,9 +340,9 @@ Board *Player::getPrivateBoard()
     return m_privateBoard;
 }
 
-void Player::markFriendly(string strike, int row, int col)
+void Player::markPublic(string strike, int row, int col)
 {
-    m_privateBoard->setBoard(strike, row, col);
+    m_publicBoard->setBoard(strike, row, col);
 }
 
 // Get the ship counter
@@ -358,3 +365,4 @@ Ship *Player::getShips()
     // Return m_ships
     return m_ships;
 }
+

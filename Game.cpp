@@ -298,12 +298,16 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
         isHit = true;
         // stores the id of ship to be passed into mark functions
         int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1]-48;
-        attackingPlayer->markHostile("H", row, col, hitship, isHit);
-        defendingPlayer->markFriendly("H", row, col);
+        string* posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
+        if (posArr) {
+            attackingPlayer->markPrivateSunk(posArr, hitship);
+        } else {
+            attackingPlayer->markPublic("H", row, col);
+        }
     }
     else
     {
-        attackingPlayer->markHostile("M", row, col, 0, isHit);
-        defendingPlayer->markFriendly("M", row, col);
+        defendingPlayer->markPrivate("M", row, col, 0, isHit);
+        attackingPlayer->markPublic("M", row, col);
     }
 }
