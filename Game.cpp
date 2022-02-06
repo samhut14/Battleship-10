@@ -202,6 +202,7 @@ void Game::turn(int currentPlayer)
         } while (!validAttack(player1, row, col));
 
         attack(player1, player2, row, col);
+        player1->view();
     }
     else
     {
@@ -226,6 +227,7 @@ void Game::turn(int currentPlayer)
         } while (!validAttack(player2, row, col));
 
         attack(player2, player1, row, col);
+        player2->view();
     }
 }
 

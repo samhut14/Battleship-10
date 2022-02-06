@@ -147,7 +147,7 @@ void Player::sinkShip(int hitship)
     // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
     {
-        m_publicBoard->setBoard("X", arr[i][0], arr[i][1] - 65);
+        m_publicBoard->setBoard("X", arr[i].at(0)-48, arr[i].at(1) - 65);
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
