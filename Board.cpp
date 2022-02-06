@@ -19,6 +19,17 @@ Board::Board()
     }
     
 }
+
+Board::~Board()
+{
+    for(int i = 0; i < 10; i++)
+    {
+        delete[] Boardarr[i];
+    }
+
+    delete[] Boardarr;
+}
+
 string** Board::getArr()
 {
     return Boardarr;
