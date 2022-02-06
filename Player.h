@@ -165,7 +165,7 @@ public:
 	 *        set up the Player's visible board
 	 * @return None
 	 */
-	void setVisibleBoard(Board visibleBoard &);
+	//void setVisibleBoard(Board visibleBoard&);
 
 	/**
 	 * @pre Player is  constructed
@@ -174,7 +174,7 @@ public:
 	 *        set up the Player's invisble board
 	 * @return None
 	 */
-	void setInvsibleBoard(Board invisibleBoard &);
+	//void setInvsibleBoard(Board invisibleBoard&);
 
 	// Main Functions
 	// Set Up
