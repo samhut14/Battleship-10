@@ -2,16 +2,15 @@
 using namespace std;
 Ship::Ship(int size, string* locationArr)
 {
-    _size = size;
+    m_size = size;
     posArr = locationArr;
-    posArr = new string[_size];
-    for (int i = 0; i < _size; i++) {
+    posArr = new string[m_size];
+    for (int i = 0; i < m_size; i++) {
         posArr[i] = locationArr[i];
     }
 }
-Ship::Ship()
-{
-}
+//Ship::Ship() {}
+
 Ship::~Ship()
 {   
    delete[] posArr;    
@@ -20,13 +19,19 @@ void Ship::setAlive(bool alive)
 {
     m_alive = alive;
 }
+
+int Ship::getSize()
+{
+    return(m_size);
+}
+
 int Ship::getLife()
 {
-    return life;
+    return m_life;
 }
 bool Ship::getAlive()
 {
-    return alive;
+    return m_alive;
 }
 int Ship::getColumn(int index)
 {
@@ -36,7 +41,11 @@ int Ship::getRow(int index)
 {
     return (posArr[index].at(0)-48);
 }
-string* Ship::getPositonArr()
+string* Ship::getPositionArr()
 {
    return posArr; 
+}
+
+bool Ship::loseLife() {
+    return (--m_life == 0);
 }
