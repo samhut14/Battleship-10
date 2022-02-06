@@ -9,17 +9,18 @@ private:
     int currentPlayer;
     int totalXs;
     int numShips;
-    Player player1;
-    Player player2;
+    Player *player1;
+    Player *player2;
 
 public:
+    ~Game();
     void setup();
-    void setupPlayer(Player somePlayer);
+    void setupPlayer(Player *somePlayer);
     int getInt();
     void clear();
     void turn(int currentPlayer);
-    void attack(Player attackingPlayer, Player defendingPlayer, int row, int col);
-    bool validAttack(Player attackingPlayer, int row, int col);
+    void attack(Player *attackingPlayer, Player *defendingPlayer, int row, int col);
+    bool validAttack(Player *attackingPlayer, int row, int col);
     bool gameover();
     void play();
 };

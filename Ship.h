@@ -4,17 +4,18 @@
 using namespace std;
 class Ship
 {
-    private:
+
+private:
     int m_size;
     int m_life;
     bool m_alive;
-    string* posArr;
-    
-    public:
-    Ship(int Size, string* locationArr);
+    string *posArr;
+
+public:
+    Ship(int Size, string *locationArr);
     Ship()
     {
-        //blank
+        // Intentionally left blank
     }
     ~Ship();
     void setAlive(bool a);
@@ -25,6 +26,5 @@ class Ship
     int getColumn(int index);
     int getRow(int index);  
     string* getPositionArr();
-
 };
 #endif

@@ -5,7 +5,7 @@
  * Assignment:   EECS-448 Project #1
  * @brief This file impliment the methods of Player
  * @date 2/4/22
- *	
+ *
  ---------------------------------------------------------------------------- **/
 
 #include "Player.h"
@@ -13,24 +13,27 @@
 #include <string>
 #include <cmath>
 using namespace std;
- 
- //Constructs Player without any parameters
- Player::Player()
- {
-     //Set m_numberOfShips to be 0 to show that Ships will not be set up
-     m_numberOfShips = 0;
 
-     //Set m_shipCounter to be 0
-     m_shipCounter = 0;
 
-     //Set m_ships to be nullptr
-     m_ships = nullptr; 
- }
+// Constructs Player without any parameters
+Player::Player()
+{
+    // Set m_numberOfShips to be 0 to show that Ships will not be set up
+    m_numberOfShips = 0;
+
+    // Set m_shipCounter to be 0
+    m_shipCounter = 0;
+
+    // Set m_ships to be nullptr
+    m_ships = nullptr;
+}
 
 Player::Player(int size)
 {
     m_numberOfShips = size;
+
     string* arr[5];
+
     m_ships = new Ship();
 
     m_shipCounter = 0;
@@ -48,6 +51,9 @@ Player::~Player()
 
 bool Player::startValid(int row, int col)
 {
+    if (row < 0 || row > 9 || col < 0 || col > 9)
+        return false;
+
     return (m_invisibleBoard.at(row, col) == "*");
 }
 
@@ -56,9 +62,11 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
     int temp;
     string arr[5];
 
+    // FIX SIZES ??
+
     if ((startRow == endRow) && (startCol != endCol))
     {
-        if (abs(endCol - startCol) == size)
+        if (abs(endCol - startCol) == size - 1)
         {
             if (startCol > endCol)
                 temp = -1;
@@ -73,7 +81,7 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
 
     else if ((startRow != endRow) && (startCol == endCol))
     {
-        if (abs(endRow - startRow) == size)
+        if (abs(endRow - startRow) == size - 1)
         {
             if (startRow > endRow)
                 temp = -1;
@@ -85,10 +93,22 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
         else
             return false;
     }
+    // FOLLOWING IS TEMP:
+    else if ((startRow == endRow) && (startCol == endCol) && (size == 1))
+    {
+        arr[0] = to_string(startRow);
+        arr[0].push_back(startCol + 65);
+
+        m_ships[m_shipCounter] = Ship(size, arr);
+        placeShip(m_ships[m_shipCounter]);
+        return true;
+    }
+    // END OF TEMP
 
     return false;
+
 traverseCol:
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i <= size - 1; i++)
     {
         if (m_invisibleBoard.at(startRow, startCol) != "*")
             return false;
@@ -105,7 +125,7 @@ traverseCol:
     return true;
 
 traverseRow:
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i <= size - 1; i++)
     {
         if (m_invisibleBoard.at(startRow, startCol) != "*")
             return false;
@@ -122,43 +142,47 @@ traverseRow:
     return true;
 }
 
-//Sinks a player's ship
+// Sinks a player's ship
 void Player::sinkShip(int hitship)
 {
+
     //access the position array of the ship that got hit
     string* arr = m_ships[hitship-1].getPositionArr();
     // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship-1].getSize(); i++) {
         m_visibleBoard.setBoard("X", arr[i][0], arr[i][1]-65);
+      
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
 // only marks visible board, possible solution: make mark hostile a bool as well, pass into markfriendly
 // how his position array handled?? will matter in implementation (tuple, or 1 by 1)
 
-
-void Player::markHostile(string strike, int row, int col, int hitship, bool isHit) {
+void Player::markHostile(string strike, int row, int col, int hitship, bool isHit)
+{
     // converts character into string
     m_visibleBoard.setBoard(strike, row, col);
+
     if (isHit) {    
         // checks if ship is sunk
-        if (m_ships[hitship-1].loseLife()) {
+        if (m_ships[hitship - 1].loseLife())
+        {
             sinkShip(hitship);
-        } else {
+        }
+        else
+        {
             std::cout << "Ship " << hitship << " was hit \n";
         }
     } else {
         m_visibleBoard.setBoard(strike, row, col);
         std::cout << "Your attack missed! \n";
     }
-    
 }
 
-void Player::placeShip(Ship someShip)
+void Player::placeShip(Ship &someShip)
 {
     int row, col;
     string symbol = "S" + to_string(someShip.getSize());
-
     for (int i = 0; i < someShip.getSize(); i++)
     {
         row = someShip.getRow(i);
@@ -172,12 +196,13 @@ void Player::placeShip(Ship someShip)
 
 void Player::printSetup()
 {
-    cout << "  A B C D E E F G I J\n\n";
+    cout << "Here is your current board:\n\n";
+    cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n\n";
     for (int i = 0; i < 10; i++)
     {
-        cout << i + 1 << "  ";
+        cout << i + 1 << "\t";
         for (int j = 0; j < 10; j++)
-            cout << m_invisibleBoard.at(i, j) << " ";
+            cout << m_invisibleBoard.at(i, j) << "\t";
 
         cout << endl;
     }
@@ -212,7 +237,7 @@ void Player::shipHealthBar()
         else
         {
             //Display that the ship is not alive anymore
-            std::cout << "Sunked     ";
+            std::cout << "Sunk    ";
         }
     }
 

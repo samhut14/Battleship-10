@@ -73,11 +73,11 @@ public:
 
 	// Getters
 	/**
-	* @pre Player is constructed
- 	* @post Return the player's visible board
- 	* @param None
-	* @return Board m_visibleBoard, the player's visible board
-	*/
+	 * @pre Player is constructed
+	 * @post Return the player's visible board
+	 * @param None
+	 * @return Board m_visibleBoard, the player's visible board
+	 */
 	Board getVisibleBoard();
 
 	/**
@@ -165,6 +165,7 @@ public:
 	 *        set up the Player's visible board
 	 * @return None
 	 */
+
 	//void setVisibleBoard(Board visibleBoard&);
 
 	/**
@@ -174,13 +175,14 @@ public:
 	 *        set up the Player's invisble board
 	 * @return None
 	 */
+
 	//void setInvsibleBoard(Board invisibleBoard&);
 
 	// Main Functions
 	// Set Up
 	bool startValid(int row, int col);
 	bool pathValid(int startRow, int startCol, int endRow, int endCol, int size);
-	void placeShip(Ship someShip);
+	void placeShip(Ship &someShip);
 	void printSetup();
 
 	// Game Play
