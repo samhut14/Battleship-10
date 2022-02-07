@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
+//Hi
 Board::Board()
 {
     Boardarr = new string *[10];
