@@ -147,7 +147,8 @@ void Player::sinkShip(int hitship)
     // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
     {
-        m_publicBoard->setBoard("X", arr[i].at(0)-48, arr[i].at(1) - 65);
+        cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
+        m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
@@ -155,14 +156,13 @@ void Player::sinkShip(int hitship)
 void Player::markPrivateSunk(string* arr, int size) {
     for (int i = 0; i < size; i++)
     {
-        m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
+        m_publicBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
 }
 
 string* Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
 {
     // converts character into string
-    m_privateBoard->setBoard(strike, row, col);
     if (isHit)
     {
         // checks if ship is sunk
@@ -173,6 +173,7 @@ string* Player::markPrivate(string strike, int row, int col, int hitship, bool i
         }
         else
         {
+            m_privateBoard->setBoard(strike, row, col);
             std::cout << "Ship " << hitship << " was hit \n";
         }
     }
