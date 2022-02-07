@@ -4,6 +4,7 @@
 
 int main()
 {
+    //Just use helper for now
     //Game battleship;
     //battleship.play();
     helper help; 

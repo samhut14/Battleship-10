@@ -30,10 +30,15 @@ Player::Player()
 Player::Player(int size)
 {
     m_numberOfShips = size;
+
+    //Set m_ships to be an array of Ship pointers of m_numberOfShips
     m_ships = new Ship*[m_numberOfShips];
 
+    //For each ship the player will have
+    //From 0 to size-1
     for(int i = 0; i < size; i++)
     {
+        //Set each ship to be a nullptr
         m_ships[i] = nullptr;
     }
 
@@ -64,6 +69,7 @@ bool Player::startValid(int row, int col)
 bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int size)
 {
     int temp;
+    //Turn arr takes in a size
     string* arr = new string[size];
 
     if ((startRow == endRow) && (startCol != endCol))
@@ -100,7 +106,11 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
     {
         arr[0] = to_string(startRow);
         arr[0].push_back(startCol + 65);
+
+        //Set m_ships[m_shipCounter] to be a new ship of size and arr
         m_ships[m_shipCounter] = new Ship(size, arr);
+
+        //Anthing that involve m_ships starting here needs to be fixed
         //placeShip(m_ships[m_shipCounter]);
         return true;
     }

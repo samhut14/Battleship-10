@@ -5,6 +5,8 @@
 using namespace std;
 #include "Player.h"
 
+//Use this class to test each function of all classes seperately
+//Only Ship and Board are fully functional
 class helper
 {
     public:
