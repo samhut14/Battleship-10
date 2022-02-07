@@ -11,4 +11,4 @@ Game.o: Game.h Game.cpp
 Ship.o: Ship.h Ship.cpp
 	g++ -std=c++11 -g -Wall -c Ship.cpp
 clean:
-	del *.o Project
+	rm *.o Project
