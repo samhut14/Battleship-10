@@ -34,7 +34,7 @@ private:
 
 	// An array of Ship of size m_numberOfShips
 	// Represents the Ships that the Player has
-	Ship *m_ships;
+	Ship** m_ships;
 
 	// Represents the number of ships that the player
 	// currently has starting at m_numberOfShips
@@ -116,7 +116,7 @@ public:
 	 * @error Throws an runtime error if m_Ships is not set up
 	 * @return Ship* m_Ships, the pointer to the array of ships
 	 */
-	Ship *getShips();
+	Ship** getShips();
 
 	// Setters
 	// Notes: Use these functions if we construct

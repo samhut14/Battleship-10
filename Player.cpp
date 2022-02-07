@@ -30,7 +30,12 @@ Player::Player()
 Player::Player(int size)
 {
     m_numberOfShips = size;
-    m_ships = new Ship[m_numberOfShips];
+    m_ships = new Ship*[m_numberOfShips];
+
+    for(int i = 0; i < size; i++)
+    {
+        m_ships[i] = nullptr;
+    }
 
     m_publicBoard = new Board();
     m_privateBoard = new Board();
@@ -59,7 +64,7 @@ bool Player::startValid(int row, int col)
 bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int size)
 {
     int temp;
-    string arr[5];
+    string* arr = new string[size];
 
     if ((startRow == endRow) && (startCol != endCol))
     {
@@ -95,9 +100,8 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
     {
         arr[0] = to_string(startRow);
         arr[0].push_back(startCol + 65);
-
-        m_ships[m_shipCounter] = Ship(size, arr);
-        placeShip(m_ships[m_shipCounter]);
+        m_ships[m_shipCounter] = new Ship(size, arr);
+        //placeShip(m_ships[m_shipCounter]);
         return true;
     }
     // END OF TEMP
@@ -117,8 +121,8 @@ traverseCol:
             startCol += temp;
         }
     }
-    m_ships[m_shipCounter] = Ship(size, arr);
-    placeShip(m_ships[m_shipCounter]);
+    //m_ships[m_shipCounter] = Ship(size, arr);
+    //placeShip(m_ships[m_shipCounter]);
     return true;
 
 traverseRow:
@@ -134,8 +138,8 @@ traverseRow:
             startRow += temp;
         }
     }
-    m_ships[m_shipCounter] = Ship(size, arr);
-    placeShip(m_ships[m_shipCounter]);
+    //m_ships[m_shipCounter] = Ship(size, arr);
+    //placeShip(m_ships[m_shipCounter]);
     return true;
 }
 
@@ -143,6 +147,9 @@ traverseRow:
 void Player::sinkShip(int hitship)
 {
     // access the position array of the ship that got hit
+
+    /*
+
     string *arr = m_ships[hitship - 1].getPositionArr();
     // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
@@ -152,6 +159,8 @@ void Player::sinkShip(int hitship)
 
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
+
+    */
 }
 
 void Player::markPrivateSunk(string* arr, int size) {
@@ -163,6 +172,8 @@ void Player::markPrivateSunk(string* arr, int size) {
 
 string* Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
 {
+
+    /*
 
     if (isHit)
     {
@@ -184,6 +195,8 @@ string* Player::markPrivate(string strike, int row, int col, int hitship, bool i
         std::cout << "Your attack missed! \n";
     }
     return {};
+
+    */
 }
 
 void Player::placeShip(Ship &someShip)
@@ -218,6 +231,8 @@ void Player::printSetup()
 // Print the healthbar for each ship
 void Player::shipHealthBar()
 {
+    /* 
+
     // Example dislay
     //  Ships Health:
     //  1x1: 5     1x2: Sunked     1x3: 4
@@ -254,6 +269,8 @@ void Player::shipHealthBar()
     // TODO: Add all functions that will get status the
     // The amount health a ship has
     // Add any more style changes if needed
+
+    */
 }
 
 // Print the player's view during gameplay
@@ -362,7 +379,7 @@ int Player::getNumberOfShips()
 }
 
 // Get the Player's Ships
-Ship *Player::getShips()
+Ship** Player::getShips()
 {
     // Return m_ships
     return m_ships;
