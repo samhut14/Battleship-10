@@ -29,9 +29,13 @@ void helper::test()
     std::cout << "\n";
 
     //Use pathValid to create a 1x1 ship
-    player->pathValid(0 , 1, 0, 1, 1);
+    player->pathValid(1 , 2, 0, 2, 2);
+    
     std::cout << player->getShips()[0]->getLife() << "\n";
     std::cout << player->getShips()[0]->getPositionArr()[0] << "\n";
     std::cout << player->getShips()[0]->getRow(0) << "\n";
     std::cout << player->getShips()[0]->getColumn(0) << "\n";
+
+    //Print setup
+    player->printSetup();
 }
