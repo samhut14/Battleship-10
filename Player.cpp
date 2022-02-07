@@ -147,7 +147,13 @@ void Player::sinkShip(int hitship)
     // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
     {
-        cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
+        cout << arr[i] << endl;
+        cout << m_ships[i].getSize() << "";
+    }
+    // CODE ONLY WORKS WHEN I PRENT THIS OUT????? probably has to do with pointers maybe idk
+    for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
+    {
+        // cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
         m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
@@ -156,6 +162,7 @@ void Player::sinkShip(int hitship)
 void Player::markPrivateSunk(string* arr, int size) {
     for (int i = 0; i < size; i++)
     {
+        // cout << arr[i].at(0) - 48 << arr[i].at(1) - 65 << endl;
         m_publicBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
 }
