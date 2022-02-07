@@ -147,8 +147,9 @@ void Player::sinkShip(int hitship)
     // mark each palce ship is positioned with an X
     for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
     {
-        cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
+
         m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
+
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
@@ -162,7 +163,7 @@ void Player::markPrivateSunk(string* arr, int size) {
 
 string* Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
 {
-    // converts character into string
+
     if (isHit)
     {
         // checks if ship is sunk
