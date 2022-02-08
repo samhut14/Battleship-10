@@ -4,6 +4,12 @@
 #include <string>
 using namespace std;
 
+Game::Game()
+{
+    player1 = nullptr;
+    player2 = nullptr;
+}
+
 Game::~Game()
 {
     delete player1;
@@ -158,10 +164,16 @@ void Game::play()
     {
         switch (currentPlayer)
         {
-            case 1: {currentPlayer = 2;
-                    break; }     
-            case 2: {currentPlayer = 1;
-                    break;}
+        case 1:
+        {
+            currentPlayer = 2;
+            break;
+        }
+        case 2:
+        {
+            currentPlayer = 1;
+            break;
+        }
         }
 
         turn(currentPlayer);
@@ -181,7 +193,7 @@ void Game::turn(int currentPlayer)
 
     if (currentPlayer == 1)
     {
-        std::cout <<"Player 1's turn\n";
+        std::cout << "Player 1's turn\n";
         player1->view();
 
         do
@@ -206,7 +218,7 @@ void Game::turn(int currentPlayer)
     }
     else
     {
-        std::cout <<"Player 2's turn\n";
+        std::cout << "Player 2's turn\n";
         player2->view();
 
         do
@@ -297,11 +309,14 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
     {
         isHit = true;
         // stores the id of ship to be passed into mark functions
-        int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1]-48;
-        string* posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
-        if (posArr) {
+        int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1] - 48;
+        string *posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
+        if (posArr)
+        {
             attackingPlayer->markPrivateSunk(posArr, hitship);
-        } else {
+        }
+        else
+        {
             attackingPlayer->markPublic("H", row, col);
         }
     }

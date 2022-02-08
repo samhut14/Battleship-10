@@ -159,7 +159,8 @@ void Player::sinkShip(int hitship)
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
 
-void Player::markPrivateSunk(string* arr, int size) {
+void Player::markPrivateSunk(string *arr, int size)
+{
     for (int i = 0; i < size; i++)
     {
         // cout << arr[i].at(0) - 48 << arr[i].at(1) - 65 << endl;
@@ -167,7 +168,7 @@ void Player::markPrivateSunk(string* arr, int size) {
     }
 }
 
-string* Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
+string *Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
 {
     // converts character into string
     if (isHit)
@@ -312,7 +313,7 @@ void Player::view()
         std::cout << " " << (i + 1) << "  ";
 
         // Goes through each string of the row
-         for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 10; j++)
         {
             // Print the string at row i and column j
             std::cout << m_privateBoard->at(i, j) << "   ";
@@ -373,4 +374,3 @@ Ship *Player::getShips()
     // Return m_ships
     return m_ships;
 }
-

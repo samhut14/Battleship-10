@@ -233,8 +233,8 @@ public:
 	 *		 is not a valid character
 	 * @return None
 	 */
-	string* markPrivate(string strike, int row, int col, int hitship, bool isHit);
+	string *markPrivate(string strike, int row, int col, int hitship, bool isHit);
 
-	void markPrivateSunk(string* posArr, int size);
+	void markPrivateSunk(string *posArr, int size);
 };
 #endif
