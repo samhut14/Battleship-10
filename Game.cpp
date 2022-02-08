@@ -4,6 +4,12 @@
 #include <string>
 using namespace std;
 
+Game::Game()
+{
+    player1 = nullptr;
+    player2 = nullptr;
+}
+
 Game::~Game()
 {
     delete player1;
