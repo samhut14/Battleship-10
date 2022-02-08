@@ -93,7 +93,7 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
         else
             return false;
     }
-    // FOLLOWING IS TEMP:
+
     else if ((startRow == endRow) && (startCol == endCol) && (size == 1))
     {
         arr[0] = to_string(startRow);
@@ -103,7 +103,6 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
         placeShip(m_ships[m_shipCounter]);
         return true;
     }
-    // END OF TEMP
 
     return false;
 
@@ -207,7 +206,7 @@ void Player::placeShip(Ship &someShip)
 
         m_privateBoard->setBoard(symbol, row, col);
     }
-
+    cout << "Ship " << someShip.getSize() << " was placed!\n";
     m_shipCounter++;
 }
 
