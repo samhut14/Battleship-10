@@ -63,13 +63,13 @@ void Game::setupPlayer(Player *somePlayer)
     for (int i = 0; i < numShips; i++)
     {
 
-        cout << "\nWhere would you like to place Ship " << i + 1 << "?:\n";
         int startRow = -1, startCol = -1, endRow = -1, endCol = -1;
         char temp;
 
         while (true)
         {
             startRow = -1, startCol = -1, endRow = -1, endCol = -1;
+            cout << "\nWhere would you like to place Ship " << i + 1 << "? (1x" << i + 1 << "):\n";
 
             somePlayer->printSetup();
 

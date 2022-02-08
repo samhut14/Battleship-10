@@ -214,7 +214,7 @@ void Player::placeShip(Ship &someShip)
 void Player::printSetup()
 {
     cout << "Here is your current board:\n\n";
-    cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n\n";
+    cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n";
     for (int i = 0; i < 10; i++)
     {
         cout << i + 1 << "\t";
@@ -278,10 +278,10 @@ void Player::view()
 
     // Firstly, we need to print the player's view of their oponent's Board
     // Then, tell the user what board we are printing out
-    std::cout << " Opponent's Board:\n\n";
+    std::cout << "Opponent's Board:\n\n";
 
     // Next, print the columns of the board into one line
-    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n\n";
+    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n";
 
     // Next, for loop 10 times for each row of the board
     for (int i = 0; i < 10; i++)
@@ -305,10 +305,10 @@ void Player::view()
 
     // Next, we print the player's view of their board
     // Tell the user that we are printing out their board
-    std::cout << " Your Board:\n\n";
+    std::cout << "Your Board:\n\n";
 
     // Next, print the cloumns of the board into one line
-    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n\n";
+    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n";
     // Next, for loop 10 times for each row of the board
     for (int i = 0; i < 10; i++)
     {
