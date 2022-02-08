@@ -253,7 +253,7 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player1->getPrivateBoard()->at(i, j) == "X")
+                if (player1->getPublicBoard()->at(i, j) == "X")
                 {
                     temp++;
                 }
@@ -271,7 +271,7 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player2->getPrivateBoard()->at(i, j) == "X")
+                if (player2->getPublicBoard()->at(i, j) == "X")
                 {
                     temp++;
                 }
