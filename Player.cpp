@@ -25,6 +25,9 @@ Player::Player()
 
     // Set m_ships to be nullptr
     m_ships = nullptr;
+
+    m_publicBoard = nullptr;
+    m_privateBoard = nullptr;
 }
 
 Player::Player(int size)
@@ -278,19 +281,19 @@ void Player::view()
     std::cout << " Opponent's Board:\n\n";
 
     // Next, print the columns of the board into one line
-    std::cout << "     A   B   C   D   E   F   G   H   I   J\n";
+    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n\n";
 
     // Next, for loop 10 times for each row of the board
     for (int i = 0; i < 10; i++)
     {
         // Print the row number of the board
-        std::cout << " " << (i + 1) << "   ";
+        std::cout << i + 1 << "\t";
 
         // Goes throug each string of the row
         for (int j = 0; j < 10; j++)
         {
             // Print the string at row i and column j
-            std::cout << m_publicBoard->at(i, j) << "   ";
+            std::cout << m_publicBoard->at(i, j) << "\t";
         }
 
         // Print a new line to end the row
@@ -305,18 +308,18 @@ void Player::view()
     std::cout << " Your Board:\n\n";
 
     // Next, print the cloumns of the board into one line
-    std::cout << "     A   B   C   D   E   F   G   H   I   J\n";
+    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n\n";
     // Next, for loop 10 times for each row of the board
     for (int i = 0; i < 10; i++)
     {
         // Print the row number of the board
-        std::cout << " " << (i + 1) << "  ";
+        std::cout << i + 1 << "\t";
 
         // Goes through each string of the row
         for (int j = 0; j < 10; j++)
         {
             // Print the string at row i and column j
-            std::cout << m_privateBoard->at(i, j) << "   ";
+            std::cout << m_privateBoard->at(i, j) << "\t";
         }
 
         // Print a new line to end the row
