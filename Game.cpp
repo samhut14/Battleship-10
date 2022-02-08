@@ -59,10 +59,8 @@ void Game::setup()
 
 void Game::setupPlayer(Player *somePlayer)
 {
-    // CASE FOR SIZE 1 ??
     for (int i = 0; i < numShips; i++)
     {
-
         int startRow = -1, startCol = -1, endRow = -1, endCol = -1;
         char temp;
 
@@ -96,6 +94,12 @@ void Game::setupPlayer(Player *somePlayer)
 
             if (somePlayer->startValid(startRow, startCol))
             {
+                if (i == 0)
+                {
+                    somePlayer->pathValid(startRow, startCol, startRow, startCol, 1);
+                    break;
+                }
+
                 cout << "Enter ending row: ";
                 while (endRow < 1 || endRow > 10)
                 {
