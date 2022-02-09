@@ -5,6 +5,7 @@ Ship::Ship(int size, string *locationArr)
 {
     m_size = size;
     m_life = size;
+    m_alive = true;
     // posArr = locationArr;
     posArr = new string[m_size];
     for (int i = 0; i < m_size; i++)
