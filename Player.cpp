@@ -335,6 +335,14 @@ void Player::view()
     std::cout << "\n";
 
     // TODO: Change Board Functions if needed
+    cout << "Ships' info:\n";
+    for (int i = 0; i < m_numberOfShips; i++)
+    {
+        cout << "\nShip " << i + 1 << ":\n";
+        cout << "Life: " << m_ships[i]->getLife();
+        cout << "\nSize: " << m_ships[i]->getSize();
+        cout << "\nGet alive: " << m_ships[i]->getAlive() << endl;
+    }
 }
 
 // Get the visible board
