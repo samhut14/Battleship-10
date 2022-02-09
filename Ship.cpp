@@ -1,4 +1,5 @@
 #include "Ship.h"
+#include <iostream>
 using namespace std;
 Ship::Ship(int size, string *locationArr)
 {
@@ -10,6 +11,8 @@ Ship::Ship(int size, string *locationArr)
     {
         posArr[i] = locationArr[i];
     }
+    cout << "\nA ship was constructed:\n";
+    cout << "Size: " << m_size << " Life: " << m_life << "\n\n";
 }
 Ship::Ship()
 {
