@@ -188,14 +188,14 @@ void Game::turn(int currentPlayer)
         {
             while (!(row >= 0 && row < 10))
             {
-                std::cout << "Please select which row you would like to attack:";
+                std::cout << "Please select which row you would like to attack: ";
                 row = getInt();
                 row -= 1;
             }
 
             while (!(col >= 0 && col < 10))
             {
-                std::cout << "Please select which column you would like to attack:";
+                std::cout << "Please select which column you would like to attack: ";
                 std::cin >> temp;
                 col = (int(temp) - 65);
             }
@@ -213,14 +213,14 @@ void Game::turn(int currentPlayer)
         {
             while (!(row >= 0 && row < 10))
             {
-                std::cout << "Please select which row you would like to attack:";
+                std::cout << "Please select which row you would like to attack: ";
                 std::cin >> row;
                 row--;
             }
 
             while (!(col >= 0 && col < 10))
             {
-                std::cout << "Please select which column you would like to attack:";
+                std::cout << "Please select which column you would like to attack: ";
                 std::cin >> temp;
                 col = (int(temp) - 65);
             }
@@ -233,7 +233,7 @@ void Game::turn(int currentPlayer)
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
 {
-    if (attackingPlayer->getPrivateBoard()->at(row, col) == "*")
+    if (attackingPlayer->getPublicBoard()->at(row, col) == "*")
     {
         return (true);
     }
