@@ -4,6 +4,12 @@
 #include <string>
 using namespace std;
 
+Game::Game()
+{
+    player1 = nullptr;
+    player2 = nullptr;
+}
+
 Game::~Game()
 {
     delete player1;
@@ -53,17 +59,15 @@ void Game::setup()
 
 void Game::setupPlayer(Player *somePlayer)
 {
-    // CASE FOR SIZE 1 ??
     for (int i = 0; i < numShips; i++)
     {
-
-        cout << "\nWhere would you like to place Ship " << i + 1 << "?:\n";
         int startRow = -1, startCol = -1, endRow = -1, endCol = -1;
         char temp;
 
         while (true)
         {
             startRow = -1, startCol = -1, endRow = -1, endCol = -1;
+            cout << "\nWhere would you like to place Ship " << i + 1 << "? (1x" << i + 1 << "):\n";
 
             somePlayer->printSetup();
 
@@ -90,6 +94,12 @@ void Game::setupPlayer(Player *somePlayer)
 
             if (somePlayer->startValid(startRow, startCol))
             {
+                if (i == 0)
+                {
+                    somePlayer->pathValid(startRow, startCol, startRow, startCol, 1);
+                    break;
+                }
+
                 cout << "Enter ending row: ";
                 while (endRow < 1 || endRow > 10)
                 {
@@ -158,10 +168,16 @@ void Game::play()
     {
         switch (currentPlayer)
         {
-            case 1: {currentPlayer = 2;
-                    break; }     
-            case 2: {currentPlayer = 1;
-                    break;}
+        case 1:
+        {
+            currentPlayer = 2;
+            break;
+        }
+        case 2:
+        {
+            currentPlayer = 1;
+            break;
+        }
         }
 
         turn(currentPlayer);
@@ -181,7 +197,7 @@ void Game::turn(int currentPlayer)
 
     if (currentPlayer == 1)
     {
-        std::cout <<"Player 1's turn\n";
+        std::cout << "Player 1's turn\n";
         player1->view();
 
         do
@@ -206,7 +222,7 @@ void Game::turn(int currentPlayer)
     }
     else
     {
-        std::cout <<"Player 2's turn\n";
+        std::cout << "Player 2's turn\n";
         player2->view();
 
         do
@@ -297,11 +313,14 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
     {
         isHit = true;
         // stores the id of ship to be passed into mark functions
-        int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1]-48;
-        string* posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
-        if (posArr) {
+        int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1] - 48;
+        string *posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
+        if (posArr)
+        {
             attackingPlayer->markPrivateSunk(posArr, hitship);
-        } else {
+        }
+        else
+        {
             attackingPlayer->markPublic("H", row, col);
         }
     }

@@ -13,6 +13,7 @@ private:
     Player *player2;
 
 public:
+    Game();
     ~Game();
     void setup();
     void setupPlayer(Player *somePlayer);
