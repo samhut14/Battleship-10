@@ -46,7 +46,12 @@ Player::~Player()
 {
     // If m_ships is not set to nullptr
     if (m_ships != nullptr)
+    {
+        for (int i = 0; i < m_numberOfShips; i++)
+            delete m_ships[i];
+
         delete[] m_ships;
+    }
 }
 
 // Setup functions:
