@@ -8,6 +8,7 @@ Game::Game()
 {
     player1 = nullptr;
     player2 = nullptr;
+    totalXs = 0;
 }
 
 Game::~Game()
