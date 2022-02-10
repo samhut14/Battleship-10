@@ -154,12 +154,7 @@ void Player::sinkShip(int hitship)
     // access the position array of the ship that got hit
     string *arr = m_ships[hitship - 1]->getPositionArr();
     // mark each palce ship is positioned with an X
-    for (int i = 0; i < m_ships[hitship - 1]->getSize(); i++)
-    {
-        cout << arr[i] << endl;
-        cout << m_ships[i]->getSize() << "";
-    }
-    // CODE ONLY WORKS WHEN I PRENT THIS OUT????? probably has to do with pointers maybe idk
+    
     for (int i = 0; i < m_ships[hitship - 1]->getSize(); i++)
     {
         // cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
