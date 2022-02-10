@@ -13,10 +13,7 @@ private:
 
 public:
     Ship(int Size, string *locationArr);
-    Ship()
-    {
-        // Intentionally left blank
-    }
+    Ship();
     ~Ship();
     void setAlive(bool a);
     int getSize();
@@ -24,7 +21,7 @@ public:
     bool getAlive();
     bool loseLife();
     int getColumn(int index);
-    int getRow(int index);  
-    string* getPositionArr();
+    int getRow(int index);
+    string *getPositionArr();
 };
 #endif

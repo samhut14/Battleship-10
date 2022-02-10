@@ -25,12 +25,15 @@ Player::Player()
 
     // Set m_ships to be nullptr
     m_ships = nullptr;
+
+    m_publicBoard = nullptr;
+    m_privateBoard = nullptr;
 }
 
 Player::Player(int size)
 {
     m_numberOfShips = size;
-    m_ships = new Ship[m_numberOfShips];
+    m_ships = new Ship *[m_numberOfShips];
 
     m_publicBoard = new Board();
     m_privateBoard = new Board();
@@ -43,7 +46,12 @@ Player::~Player()
 {
     // If m_ships is not set to nullptr
     if (m_ships != nullptr)
+    {
+        for (int i = 0; i < m_numberOfShips; i++)
+            delete m_ships[i];
+
         delete[] m_ships;
+    }
 }
 
 // Setup functions:
@@ -90,17 +98,16 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
         else
             return false;
     }
-    // FOLLOWING IS TEMP:
+
     else if ((startRow == endRow) && (startCol == endCol) && (size == 1))
     {
         arr[0] = to_string(startRow);
         arr[0].push_back(startCol + 65);
 
-        m_ships[m_shipCounter] = Ship(size, arr);
+        m_ships[m_shipCounter] = new Ship(size, arr);
         placeShip(m_ships[m_shipCounter]);
         return true;
     }
-    // END OF TEMP
 
     return false;
 
@@ -117,7 +124,7 @@ traverseCol:
             startCol += temp;
         }
     }
-    m_ships[m_shipCounter] = Ship(size, arr);
+    m_ships[m_shipCounter] = new Ship(size, arr);
     placeShip(m_ships[m_shipCounter]);
     return true;
 
@@ -134,7 +141,7 @@ traverseRow:
             startRow += temp;
         }
     }
-    m_ships[m_shipCounter] = Ship(size, arr);
+    m_ships[m_shipCounter] = new Ship(size, arr);
     placeShip(m_ships[m_shipCounter]);
     return true;
 }
@@ -143,34 +150,42 @@ traverseRow:
 void Player::sinkShip(int hitship)
 {
     // access the position array of the ship that got hit
-    string *arr = m_ships[hitship - 1].getPositionArr();
+    string *arr = m_ships[hitship - 1]->getPositionArr();
     // mark each palce ship is positioned with an X
-    for (int i = 0; i < m_ships[hitship - 1].getSize(); i++)
+    for (int i = 0; i < m_ships[hitship - 1]->getSize(); i++)
     {
-
+        cout << arr[i] << endl;
+        cout << m_ships[i]->getSize() << "";
+    }
+    // CODE ONLY WORKS WHEN I PRENT THIS OUT????? probably has to do with pointers maybe idk
+    for (int i = 0; i < m_ships[hitship - 1]->getSize(); i++)
+    {
+        // cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
         m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
 
     }
     std::cout << "Ship " << hitship << " was sunk! \n";
 }
 
-void Player::markPrivateSunk(string* arr, int size) {
+void Player::markPrivateSunk(string *arr, int size)
+{
     for (int i = 0; i < size; i++)
     {
+        // cout << arr[i].at(0) - 48 << arr[i].at(1) - 65 << endl;
         m_publicBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
 }
 
-string* Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
+string *Player::markPrivate(string strike, int row, int col, int hitship, bool isHit)
 {
 
     if (isHit)
     {
         // checks if ship is sunk
-        if (m_ships[hitship - 1].loseLife())
+        if (m_ships[hitship - 1]->loseLife())
         {
             sinkShip(hitship);
-            return m_ships[hitship - 1].getPositionArr();
+            return m_ships[hitship - 1]->getPositionArr();
         }
         else
         {
@@ -186,25 +201,25 @@ string* Player::markPrivate(string strike, int row, int col, int hitship, bool i
     return {};
 }
 
-void Player::placeShip(Ship &someShip)
+void Player::placeShip(Ship *someShip)
 {
     int row, col;
-    string symbol = "S" + to_string(someShip.getSize());
-    for (int i = 0; i < someShip.getSize(); i++)
+    string symbol = "S" + to_string(someShip->getSize());
+    for (int i = 0; i < someShip->getSize(); i++)
     {
-        row = someShip.getRow(i);
-        col = someShip.getColumn(i);
+        row = someShip->getRow(i);
+        col = someShip->getColumn(i);
 
         m_privateBoard->setBoard(symbol, row, col);
     }
-
+    cout << "Ship " << someShip->getSize() << " was placed!\n";
     m_shipCounter++;
 }
 
 void Player::printSetup()
 {
     cout << "Here is your current board:\n\n";
-    cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n\n";
+    cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n";
     for (int i = 0; i < 10; i++)
     {
         cout << i + 1 << "\t";
@@ -235,16 +250,16 @@ void Player::shipHealthBar()
         // Next, check if the ship is stil alive
         // TODO: Get functions for returing life and alive status
         // If the ship is still alive
-        if (m_ships[i].getAlive() == true)
+        if (m_ships[i]->getAlive() == true)
         {
             // Print the ships life
-            std::cout << m_ships[i].getLife() << "     ";
+            std::cout << m_ships[i]->getLife() << "     ";
         }
         // Otherwise, if the ship is not alived
         else
         {
             // Display that the ship is not alive anymore
-            std::cout << "Sunked     ";
+            std::cout << "Sunk     ";
         }
     }
 
@@ -268,22 +283,22 @@ void Player::view()
 
     // Firstly, we need to print the player's view of their oponent's Board
     // Then, tell the user what board we are printing out
-    std::cout << " Opponent's Board:\n\n";
+    std::cout << "Opponent's Board:\n\n";
 
     // Next, print the columns of the board into one line
-    std::cout << "     A   B   C   D   E   F   G   H   I   J\n";
+    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n";
 
     // Next, for loop 10 times for each row of the board
     for (int i = 0; i < 10; i++)
     {
         // Print the row number of the board
-        std::cout << " " << (i + 1) << "   ";
+        std::cout << i + 1 << "\t";
 
         // Goes throug each string of the row
         for (int j = 0; j < 10; j++)
         {
             // Print the string at row i and column j
-            std::cout << m_publicBoard->at(i, j) << "   ";
+            std::cout << m_publicBoard->at(i, j) << "\t";
         }
 
         // Print a new line to end the row
@@ -295,21 +310,21 @@ void Player::view()
 
     // Next, we print the player's view of their board
     // Tell the user that we are printing out their board
-    std::cout << " Your Board:\n\n";
+    std::cout << "Your Board:\n\n";
 
     // Next, print the cloumns of the board into one line
-    std::cout << "     A   B   C   D   E   F   G   H   I   J\n";
+    std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n";
     // Next, for loop 10 times for each row of the board
     for (int i = 0; i < 10; i++)
     {
         // Print the row number of the board
-        std::cout << " " << (i + 1) << "  ";
+        std::cout << i + 1 << "\t";
 
         // Goes through each string of the row
-         for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 10; j++)
         {
             // Print the string at row i and column j
-            std::cout << m_privateBoard->at(i, j) << "   ";
+            std::cout << m_privateBoard->at(i, j) << "\t";
         }
 
         // Print a new line to end the row
@@ -326,6 +341,14 @@ void Player::view()
     std::cout << "\n";
 
     // TODO: Change Board Functions if needed
+    cout << "Ships' info:\n";
+    for (int i = 0; i < m_numberOfShips; i++)
+    {
+        cout << "\nShip " << i + 1 << ":\n";
+        cout << "Life: " << m_ships[i]->getLife();
+        cout << "\nSize: " << m_ships[i]->getSize();
+        cout << "\nGet alive: " << m_ships[i]->getAlive() << endl;
+    }
 }
 
 // Get the visible board
@@ -362,9 +385,8 @@ int Player::getNumberOfShips()
 }
 
 // Get the Player's Ships
-Ship *Player::getShips()
+Ship **Player::getShips()
 {
     // Return m_ships
     return m_ships;
 }
-

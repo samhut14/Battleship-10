@@ -34,7 +34,7 @@ private:
 
 	// An array of Ship of size m_numberOfShips
 	// Represents the Ships that the Player has
-	Ship *m_ships;
+	Ship **m_ships;
 
 	// Represents the number of ships that the player
 	// currently has starting at m_numberOfShips
@@ -116,7 +116,7 @@ public:
 	 * @error Throws an runtime error if m_Ships is not set up
 	 * @return Ship* m_Ships, the pointer to the array of ships
 	 */
-	Ship *getShips();
+	Ship **getShips();
 
 	// Setters
 	// Notes: Use these functions if we construct
@@ -156,7 +156,7 @@ public:
 	 *        between 1 and 5
 	 * @return None
 	 */
-	void setShips(Ship *ships);
+	void setShips(Ship **ships);
 
 	/**
 	 * @pre Player is constructed.
@@ -180,7 +180,7 @@ public:
 	// Set Up
 	bool startValid(int row, int col);
 	bool pathValid(int startRow, int startCol, int endRow, int endCol, int size);
-	void placeShip(Ship &someShip);
+	void placeShip(Ship *someShip);
 	void printSetup();
 
 	// Game Play
@@ -233,8 +233,8 @@ public:
 	 *		 is not a valid character
 	 * @return None
 	 */
-	string* markPrivate(string strike, int row, int col, int hitship, bool isHit);
+	string *markPrivate(string strike, int row, int col, int hitship, bool isHit);
 
-	void markPrivateSunk(string* posArr, int size);
+	void markPrivateSunk(string *posArr, int size);
 };
 #endif
