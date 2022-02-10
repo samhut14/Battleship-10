@@ -203,6 +203,9 @@ void Game::turn(int currentPlayer)
 
         do
         {
+            int row = -1;
+            int col = -1;
+            
             while (!(row >= 0 && row < 10))
             {
                 row = -1;
@@ -230,6 +233,9 @@ void Game::turn(int currentPlayer)
 
         do
         {   
+            int row = -1;
+            int col = -1;
+            
             while (!(row >= 0 && row < 10))
             {
                 row = -1;
