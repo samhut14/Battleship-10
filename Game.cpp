@@ -214,9 +214,9 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer) {
     currentPlayer->view();
         do
         {
-            row = -1;
-            col = -1;
-
+            int row = -1;
+            int col = -1;
+            
             while (!(row >= 0 && row < 10))
             {
                 row = -1;
@@ -235,6 +235,7 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer) {
             }
         } while (!validAttack(currentPlayer, row, col));
 
+
         attack(currentPlayer, otherPlayer, row, col);
         currentPlayer->view();
 }
@@ -247,6 +248,7 @@ bool Game::validAttack(Player *attackingPlayer, int row, int col)
     }
     else
     {
+        std::cout<<"Invalid attack location. Enter a new attack coordinate.";
         return (false);
     }
 }
