@@ -209,6 +209,7 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer) {
     int row = -1;
     int col = -1;
     char temp = '\0';
+    string tempString = "";
 
     currentPlayer->view();
         do
@@ -218,6 +219,7 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer) {
 
             while (!(row >= 0 && row < 10))
             {
+                row = -1;
                 std::cout << "Please select which row you would like to attack: ";
                 row = getInt();
                 row -= 1;
@@ -225,9 +227,11 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer) {
 
             while (!(col >= 0 && col < 10))
             {
+                col = -1;
                 std::cout << "Please select which column you would like to attack: ";
-                std::cin >> temp;
-                col = (int(temp) - 65);
+                std::getline(std::cin, tempString);
+                
+                col = (int(tempString[0]) - 65);
             }
         } while (!validAttack(currentPlayer, row, col));
 
