@@ -203,11 +203,9 @@ void Game::turn(int currentPlayer)
 
         do
         {
-            row = -1;
-            col = -1;
-
             while (!(row >= 0 && row < 10))
             {
+                row = -1;
                 std::cout << "Please select which row you would like to attack: ";
                 row = getInt();
                 row -= 1;
@@ -215,6 +213,7 @@ void Game::turn(int currentPlayer)
 
             while (!(col >= 0 && col < 10))
             {
+                col = -1;
                 std::cout << "Please select which column you would like to attack: ";
                 std::cin >> temp;
                 col = (int(temp) - 65);
@@ -230,12 +229,10 @@ void Game::turn(int currentPlayer)
         player2->view();
 
         do
-        {
-            row = -1;
-            col = -1;
-            
+        {   
             while (!(row >= 0 && row < 10))
             {
+                row = -1;
                 std::cout << "Please select which row you would like to attack: ";
                 std::cin >> row;
                 row--;
@@ -243,6 +240,7 @@ void Game::turn(int currentPlayer)
 
             while (!(col >= 0 && col < 10))
             {
+                col = -1;
                 std::cout << "Please select which column you would like to attack: ";
                 std::cin >> temp;
                 col = (int(temp) - 65);
