@@ -156,6 +156,7 @@ void Game::clear()
 
 void Game::play()
 {
+    totalXs = 0;
     currentPlayer = 2;
     setup();
 
@@ -186,7 +187,7 @@ void Game::play()
             clear();
         }
     }
-    std::cout << "Player " << currentPlayer << " won!";
+    std::cout << "Player " << currentPlayer << " won!\n";
 }
 
 void Game::turn(int currentPlayer)
@@ -202,6 +203,9 @@ void Game::turn(int currentPlayer)
 
         do
         {
+            row = -1;
+            col = -1;
+
             while (!(row >= 0 && row < 10))
             {
                 std::cout << "Please select which row you would like to attack: ";
