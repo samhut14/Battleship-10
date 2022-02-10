@@ -54,7 +54,6 @@ void Game::setup()
 
     cout << "Player 2's turn to set up:\n";
     setupPlayer(player2);
-
     clear();
 }
 
@@ -149,7 +148,7 @@ void Game::clear()
         }
     }
 
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 50; i++)
     {
         std::cout << '\n';
     }
@@ -193,6 +192,7 @@ void Game::play()
 
 void Game::turn(int currentPlayer)
 {
+    
 
     if (currentPlayer == 1)
     {
@@ -206,39 +206,37 @@ void Game::turn(int currentPlayer)
     }
 }
 
-void Game::takeTurn(Player *currentPlayer, Player *otherPlayer) {
+void Game::takeTurn(Player* currentPlayer, Player* otherPlayer)
+{
     int row = -1;
     int col = -1;
     char temp = '\0';
-    string tempString = "";
 
     currentPlayer->view();
-        do
-        {
-            int row = -1;
-            int col = -1;
+
+    do
+    {
+        row = -1;
+        col = -1;
             
-            while (!(row >= 0 && row < 10))
-            {
-                row = -1;
-                std::cout << "Please select which row you would like to attack: ";
-                row = getInt();
-                row -= 1;
-            }
+        while (!(row >= 0 && row < 10))
+        {
+            row = -1;
+            std::cout << "Select attack row: ";
+            row = getInt();
+            row -= 1;
+        }
+        while (!(col >= 0 && col < 10))
+        {
+            col = -1;
+            std::cout << "Select attack column: ";
+            std::cin >> temp;
+            col = (int(temp) - 65);
+        }
+    } while (!validAttack(currentPlayer, row, col));
 
-            while (!(col >= 0 && col < 10))
-            {
-                col = -1;
-                std::cout << "Please select which column you would like to attack: ";
-                std::getline(std::cin, tempString);
-                
-                col = (int(tempString[0]) - 65);
-            }
-        } while (!validAttack(currentPlayer, row, col));
-
-
-        attack(currentPlayer, otherPlayer, row, col);
-        currentPlayer->view();
+    attack(currentPlayer, otherPlayer, row, col);
+    currentPlayer->view();
 }
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
