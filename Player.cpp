@@ -52,6 +52,8 @@ Player::~Player()
 
         delete[] m_ships;
     }
+    delete m_publicBoard;
+    delete m_privateBoard;
 }
 
 // Setup functions:
