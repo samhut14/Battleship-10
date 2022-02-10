@@ -20,6 +20,7 @@ public:
     int getInt();
     void clear();
     void turn(int currentPlayer);
+    void takeTurn(Player* currentPlayer, Player* otherPlayer);
     void attack(Player *attackingPlayer, Player *defendingPlayer, int row, int col);
     bool validAttack(Player *attackingPlayer, int row, int col);
     bool gameover();
