@@ -157,6 +157,7 @@ void Game::clear()
 
 void Game::play()
 {
+    totalXs = 0;
     currentPlayer = 2;
     setup();
 
@@ -187,7 +188,7 @@ void Game::play()
             clear();
         }
     }
-    std::cout << "Player " << currentPlayer << " won!";
+    std::cout << "Player " << currentPlayer << " won!\n";
 }
 
 void Game::turn(int currentPlayer)
@@ -203,6 +204,9 @@ void Game::turn(int currentPlayer)
 
         do
         {
+            row = -1;
+            col = -1;
+
             while (!(row >= 0 && row < 10))
             {
                 std::cout << "Please select which row you would like to attack: ";
@@ -228,6 +232,9 @@ void Game::turn(int currentPlayer)
 
         do
         {
+            row = -1;
+            col = -1;
+            
             while (!(row >= 0 && row < 10))
             {
                 std::cout << "Please select which row you would like to attack: ";
@@ -256,6 +263,7 @@ bool Game::validAttack(Player *attackingPlayer, int row, int col)
     }
     else
     {
+        std::cout<<"Invalid attack location. Enter a new attack coordinate.";
         return (false);
     }
 }
