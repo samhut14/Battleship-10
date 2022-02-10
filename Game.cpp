@@ -8,6 +8,7 @@ Game::Game()
 {
     player1 = nullptr;
     player2 = nullptr;
+    totalXs = 0;
 }
 
 Game::~Game()
@@ -53,7 +54,6 @@ void Game::setup()
 
     cout << "Player 2's turn to set up:\n";
     setupPlayer(player2);
-
     clear();
 }
 
