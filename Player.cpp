@@ -247,21 +247,8 @@ void Player::shipHealthBar()
     {
         // Print out the Ship with size 1x(i+1
         std::cout << "1x" << (i + 1) << ": ";
-
-        // Next, check if the ship is stil alive
-        // TODO: Get functions for returing life and alive status
-        // If the ship is still alive
-        if (m_ships[i]->getAlive() == true)
-        {
             // Print the ships life
-            std::cout << m_ships[i]->getLife() << "     ";
-        }
-        // Otherwise, if the ship is not alived
-        else
-        {
-            // Display that the ship is not alive anymore
-            std::cout << "Sunk     ";
-        }
+        std::cout << m_ships[i]->getLife() << "     ";
     }
 
     // Add the end of the loop, print a new line
@@ -342,14 +329,6 @@ void Player::view()
     std::cout << "\n";
 
     // TODO: Change Board Functions if needed
-    cout << "Ships' info:\n";
-    for (int i = 0; i < m_numberOfShips; i++)
-    {
-        cout << "\nShip " << i + 1 << ":\n";
-        cout << "Life: " << m_ships[i]->getLife();
-        cout << "\nSize: " << m_ships[i]->getSize();
-        cout << "\nGet alive: " << m_ships[i]->getAlive() << endl;
-    }
 }
 
 // Get the visible board
