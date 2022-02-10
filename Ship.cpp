@@ -12,8 +12,6 @@ Ship::Ship(int size, string *locationArr)
     {
         posArr[i] = locationArr[i];
     }
-    cout << "\nA ship was constructed:\n";
-    cout << "Size: " << m_size << " Life: " << m_life << "\n\n";
 }
 Ship::Ship()
 {
