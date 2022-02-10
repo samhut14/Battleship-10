@@ -148,7 +148,7 @@ void Game::clear()
         }
     }
 
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 50; i++)
     {
         std::cout << '\n';
     }
@@ -192,70 +192,51 @@ void Game::play()
 
 void Game::turn(int currentPlayer)
 {
-    int row = -1;
-    int col = -1;
-    char temp = '\0';
+    
 
     if (currentPlayer == 1)
     {
         std::cout << "Player 1's turn\n";
-        player1->view();
-
-        do
-        {
-            int row = -1;
-            int col = -1;
-            
-            while (!(row >= 0 && row < 10))
-            {
-                row = -1;
-                std::cout << "Please select which row you would like to attack: ";
-                row = getInt();
-                row -= 1;
-            }
-
-            while (!(col >= 0 && col < 10))
-            {
-                col = -1;
-                std::cout << "Please select which column you would like to attack: ";
-                std::cin >> temp;
-                col = (int(temp) - 65);
-            }
-        } while (!validAttack(player1, row, col));
-
-        attack(player1, player2, row, col);
-        player1->view();
+        takeTurn(player1, player2);
     }
     else
     {
         std::cout << "Player 2's turn\n";
-        player2->view();
-
-        do
-        {   
-            int row = -1;
-            int col = -1;
-            
-            while (!(row >= 0 && row < 10))
-            {
-                row = -1;
-                std::cout << "Please select which row you would like to attack: ";
-                std::cin >> row;
-                row--;
-            }
-
-            while (!(col >= 0 && col < 10))
-            {
-                col = -1;
-                std::cout << "Please select which column you would like to attack: ";
-                std::cin >> temp;
-                col = (int(temp) - 65);
-            }
-        } while (!validAttack(player2, row, col));
-
-        attack(player2, player1, row, col);
-        player2->view();
+        takeTurn(player2, player1);
     }
+}
+
+void Game::takeTurn(Player* currentPlayer, Player* otherPlayer)
+{
+    int row = -1;
+    int col = -1;
+    char temp = '\0';
+
+    currentPlayer->view();
+
+    do
+    {
+        row = -1;
+        col = -1;
+            
+        while (!(row >= 0 && row < 10))
+        {
+            row = -1;
+            std::cout << "Select attack row: ";
+            row = getInt();
+            row -= 1;
+        }
+        while (!(col >= 0 && col < 10))
+        {
+            col = -1;
+            std::cout << "Select attack column: ";
+            std::cin >> temp;
+            col = (int(temp) - 65);
+        }
+    } while (!validAttack(currentPlayer, row, col));
+
+    attack(currentPlayer, otherPlayer, row, col);
+    currentPlayer->view();
 }
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
