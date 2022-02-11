@@ -33,9 +33,9 @@ int Game::getInt()
 
 char Game::getChar()
 {
-    string temp = "foo";
+    string temp = "";
     getline(cin, temp);
-    while (temp == "" || temp.length() > 1)
+    while (temp.length() != 1)
     {
         cout << "Please enter a single character: ";
         getline(cin, temp);
@@ -152,8 +152,8 @@ void Game::clear()
 
     while (turnOver)
     {
-        std::cout << "\nYour turn has now concluded. Please pass the computer to your opponent. Once that is done, type c for complete. ";
-        std::cin >> temp;
+        std::cout << "\nYour turn has now concluded. Please pass the computer to your opponent. Once that is done, enter c for complete: ";
+        temp = getChar();
 
         if (temp == 'c')
         {
