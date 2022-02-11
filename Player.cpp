@@ -161,7 +161,7 @@ void Player::sinkShip(int hitship)
         // cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
         m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
-    std::cout << "Ship " << hitship << " was sunk! \n";
+    std::cout << "\nShip " << hitship << " was sunk! \n";
 }
 
 void Player::markPrivateSunk(string *arr, int size)
