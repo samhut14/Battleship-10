@@ -30,6 +30,19 @@ int Game::getInt()
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     return n;
 }
+
+char Game::getChar()
+{
+    string temp = "foo";
+    getline(cin, temp);
+    while (temp == "" || temp.length() > 1)
+    {
+        cout << "Please enter a single character: ";
+        getline(cin, temp);
+    }
+    return temp.at(0);
+}
+
 void Game::setup()
 {
     cout << "\nWelcome to Battleship!\nBelow are the symbols you will see on the boards and what they mean:\n";
@@ -83,7 +96,7 @@ void Game::setupPlayer(Player *somePlayer)
             cout << "Enter starting column: ";
             while (startCol < 0 || startCol > 9)
             {
-                cin >> temp;
+                temp = getChar();
                 startCol = temp - 65;
 
                 if (startCol < 0 || startCol > 9)
@@ -112,7 +125,7 @@ void Game::setupPlayer(Player *somePlayer)
                 cout << "Enter ending column: ";
                 while (endCol < 0 || endCol > 9)
                 {
-                    cin >> temp;
+                    temp = getChar();
                     endCol = temp - 65;
 
                     if (endCol < 0 || endCol > 9)
@@ -192,7 +205,6 @@ void Game::play()
 
 void Game::turn(int currentPlayer)
 {
-    
 
     if (currentPlayer == 1)
     {
@@ -206,7 +218,7 @@ void Game::turn(int currentPlayer)
     }
 }
 
-void Game::takeTurn(Player* currentPlayer, Player* otherPlayer)
+void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
 {
     int row = -1;
     int col = -1;
@@ -218,7 +230,7 @@ void Game::takeTurn(Player* currentPlayer, Player* otherPlayer)
     {
         row = -1;
         col = -1;
-            
+
         while (!(row >= 0 && row < 10))
         {
             row = -1;
@@ -230,7 +242,7 @@ void Game::takeTurn(Player* currentPlayer, Player* otherPlayer)
         {
             col = -1;
             std::cout << "Select attack column: ";
-            std::cin >> temp;
+            temp = getChar();
             col = (int(temp) - 65);
         }
     } while (!validAttack(currentPlayer, row, col));
@@ -247,7 +259,7 @@ bool Game::validAttack(Player *attackingPlayer, int row, int col)
     }
     else
     {
-        std::cout<<"Invalid attack location. Enter a new attack coordinate.";
+        std::cout << "Invalid attack location. Enter a new attack coordinate.";
         return (false);
     }
 }
