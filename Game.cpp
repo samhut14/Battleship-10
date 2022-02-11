@@ -72,11 +72,43 @@ void Game::setup()
 
 void Game::setupPlayer(Player *somePlayer)
 {
-    for (int i = 0; i < numShips; i++)
-    {
-        int startRow = -1, startCol = -1, endRow = -1, endCol = -1;
-        char temp;
+    int startRow = -1, startCol = -1, endRow = -1, endCol = -1;
+    char temp;
 
+    while (true)
+    {
+        startRow = -1, startCol = -1, endRow = -1, endCol = -1;
+        cout << "\nWhere would you like to place Ship 1? (1x1):\n";
+
+        somePlayer->printSetup();
+
+        cout << "Enter row: ";
+        while (startRow < 1 || startRow > 10)
+        {
+            startRow = getInt();
+            if (startRow < 1 || startRow > 10)
+                cout << "Invalid choice.\nEnter row: ";
+        }
+        startRow--;
+
+        cout << "Enter column: ";
+        while (startCol < 0 || startCol > 9)
+        {
+            temp = getChar();
+            startCol = temp - 65;
+
+            if (startCol < 0 || startCol > 9)
+                cout << "Invalid choice.\nEnter column: ";
+        }
+
+        if (!somePlayer->pathValid(startRow, startCol, startRow, startCol, 1))
+            cout << "Invalid column. Start over.\n\n";
+        else
+            break;
+    }
+
+    for (int i = 1; i < numShips; i++)
+    {
         while (true)
         {
             startRow = -1, startCol = -1, endRow = -1, endCol = -1;
@@ -102,8 +134,6 @@ void Game::setupPlayer(Player *somePlayer)
                 if (startCol < 0 || startCol > 9)
                     cout << "Invalid choice.\nEnter starting column: ";
             }
-
-            // Starting position is valid
 
             if (somePlayer->startValid(startRow, startCol))
             {
@@ -142,6 +172,7 @@ void Game::setupPlayer(Player *somePlayer)
                 cout << "Invalid starting position. Start over.\n\n";
         }
     }
+
     somePlayer->printSetup();
 }
 
