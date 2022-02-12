@@ -35,10 +35,12 @@ int Ship::getColumn(int index)
 {
     return (posArr[index].at(1) - 65);
 }
+
 int Ship::getRow(int index)
 {
     return (posArr[index].at(0) - 48);
 }
+
 string *Ship::getPositionArr()
 {
     return posArr;
