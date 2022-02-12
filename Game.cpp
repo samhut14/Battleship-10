@@ -180,34 +180,13 @@ void Game::clear()
 {
     char temp = '\0';
 
-    /*
-        ORIGINAL:
-    bool turnOver = true;
-
-    while (turnOver)
-    {
-        std::cout << "\nYour turn has now concluded. Please pass the computer to your opponent. Once that is done, enter c for complete: ";
-        temp = getChar();
-
-        if (temp == 'c')
-        {
-            turnOver = false;
-        }
-    }
-
-    for (int i = 0; i < 50; i++)
-    {
-        std::cout << '\n';
-    }
-        END OF ORIGINAL
-    */
-    while (temp != 'c')
+    while (temp != 'c') 
     {
         cout << "Your turn has concluded. Please enter c to clear the screen for your opponent: ";
-        temp = getChar();
+        temp = getChar(); //returns a valid character to be used
     }
 
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 50; i++) //clears the screen
         cout << '\n';
 
     cout << "The screen is now ready for your opponent. Please pass the computer to them.\n\n";
@@ -216,39 +195,39 @@ void Game::clear()
     while (temp != 'c')
     {
         cout << "Enter c to confirm the start of your turn: ";
-        temp = getChar();
+        temp = getChar(); //returns a valid character to be checked against
     }
 }
 
 void Game::play()
 {
-    totalXs = 0;
     currentPlayer = 2;
-    setup();
+    setup(); 
 
-    for (int i = 1; i <= numShips; i++)
+    for (int i = 1; i <= numShips; i++) //tallies the total number of Xs needed to declare gameover
     {
         totalXs += i;
     }
 
     while (!gameover())
     {
-        switch (currentPlayer)
+        switch (currentPlayer) //alternates the current player during each iteration
         {
-        case 1:
-        {
-            currentPlayer = 2;
-            break;
-        }
-        case 2:
-        {
-            currentPlayer = 1;
-            break;
-        }
+            case 1:
+            {
+                currentPlayer = 2;
+                break;
+             }
+            case 2:
+            {
+                currentPlayer = 1;
+                break;
+            }
         }
 
         turn(currentPlayer);
-        if (!gameover())
+
+        if (!gameover()) //only calls clear if gameover doesn't occur
         {
             clear();
         }
@@ -256,7 +235,7 @@ void Game::play()
     std::cout << "Player " << currentPlayer << " won!\n";
 }
 
-void Game::turn(int currentPlayer)
+void Game::turn(int currentPlayer) //passes control over to the takeTurn function
 {
 
     if (currentPlayer == 1)
@@ -277,40 +256,40 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
     int col = -1;
     char temp = '\0';
 
-    currentPlayer->view();
+    currentPlayer->view(); //prints the boards and ship health
 
-    do
+    do //stuck in a loop until the player produces a valid attack location
     {
         row = -1;
         col = -1;
 
-        while (!(row >= 0 && row < 10))
+        while (!(row >= 0 && row < 10)) //Gets an attack row and only accepts it if it's within board
         {
             row = -1;
             std::cout << "Select attack row: ";
             row = getInt();
             row -= 1;
         }
-        while (!(col >= 0 && col < 10))
+        while (!(col >= 0 && col < 10)) //Gets an attack col and escapes the loop if the coordinate is inside the board region
         {
             col = -1;
             std::cout << "Select attack column: ";
             temp = getChar();
             col = (int(temp) - 65);
         }
-    } while (!validAttack(currentPlayer, row, col));
+    } while (!validAttack(currentPlayer, row, col)); //checks to see if the attack location is a spot that the player has already fired on
 
-    attack(currentPlayer, otherPlayer, row, col);
-    currentPlayer->view();
+    attack(currentPlayer, otherPlayer, row, col); //actually figures out if it's a hit or miss and marks the boards
+    currentPlayer->view(); //Prints the board again showing the attack
 }
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
 {
-    if (attackingPlayer->getPublicBoard()->at(row, col) == "*")
+    if (attackingPlayer->getPublicBoard()->at(row, col) == "*") //checks the board that they are firing on to see if they have already attacked it
     {
         return (true);
     }
-    else
+    else 
     {
         std::cout << "Invalid attack location. Enter a new attack coordinate.";
         return (false);
@@ -327,14 +306,14 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player1->getPublicBoard()->at(i, j) == "X")
+                if (player1->getPublicBoard()->at(i, j) == "X") //goes through player 1's firing board to see how many times sunk spots they have
                 {
                     temp++;
                 }
             }
         }
 
-        if (temp == totalXs)
+        if (temp == totalXs) // if the number of sunk spots on the firing board matches the total number of possible sunk spots, the game is over
         {
             return (true);
         }
