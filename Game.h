@@ -46,8 +46,8 @@ public:
 
     /*
 	 * @pre none
-	 * @post Confirms the attacking player is done with their turn and clears the screen. 
-     *      Double checks with the next person if they are ready for their turn.
+	 * @post Confirms the current player is done with their turn and clears the screen. 
+     	 * 	Double checks with the next person if they are ready for their turn.
 	 * @param none
 	 * @return None
 	 */
@@ -64,7 +64,7 @@ public:
     /*
 	 * @pre none
 	 * @post Actually goes through a player's turn where they see their board and ships lives, attack, and 
-     *      see whether their attack missed or hit
+     	 * 	see whether their attack missed or hit
 	 * @param Two player objects- the one taking their turn and the other player
 	 * @return None
 	 */
@@ -82,7 +82,7 @@ public:
     /*
 	 * @pre none
 	 * @post Goes through the currentPlayer's firing board tallying the number of sunk spots. 
-     *      If they sunk all their opponent's ships, it's the end of the game.
+     	 * 	If they sunk all their opponent's ships, it's the end of the game.
 	 * @param none
 	 * @return a bool representing whether the game is over or not
 	 */
