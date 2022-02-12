@@ -178,8 +178,11 @@ void Game::setupPlayer(Player *somePlayer)
 
 void Game::clear()
 {
-    bool turnOver = true;
     char temp = '\0';
+
+    /*
+        ORIGINAL:
+    bool turnOver = true;
 
     while (turnOver)
     {
@@ -195,6 +198,25 @@ void Game::clear()
     for (int i = 0; i < 50; i++)
     {
         std::cout << '\n';
+    }
+        END OF ORIGINAL
+    */
+    while (temp != 'c')
+    {
+        cout << "Your turn has concluded. Please enter c to clear the screen for your opponent: ";
+        temp = getChar();
+    }
+
+    for (int i = 0; i < 50; i++)
+        cout << '\n';
+
+    cout << "The screen is now ready for your opponent. Please pass the computer to them.\n\n";
+    temp = '\0';
+
+    while (temp != 'c')
+    {
+        cout << "Enter c to confirm the start of your turn: ";
+        temp = getChar();
     }
 }
 
