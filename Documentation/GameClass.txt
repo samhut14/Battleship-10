@@ -1,1 +1,38 @@
-Text
+Game Class:
+
+Constructor and Deconstructor
+    The constructor creates two heap allocated player objects (Player 1 and player 2) and sets totalXs to zero.
+    The deconstructor deletes the player objects.
+
+void play()
+    In main.cpp, a game object is created and calls the play function. 
+    The play function is responible for running the battleship. The players first 
+    setup their boards (calling on setup()) and then enters a while loop that goes through
+    a player's turn. This will continue until all ships are sunk and then prints out the current
+    player as the winner of the game. The screen will clear off after each turn assuming the game isn't over.
+    After setup, the total number of sunk spots are calculated to be used for the gameover function
+    that acts as the checker. 
+
+void turn(int currentPlayer)
+    It will print out whose turn it is, and then it will pass over control to takeTurn function.
+
+void takeTurn(Player *currentPlayer, Player *otherPlayer)
+    The takeTurn function actually goes through a player's turn. First, it will show the player's boards and ship health.
+    Then asks them for an attack location and will continue to do so until a valid coordinate is given.
+    The attack will then occur, marking the boards. The player view is reprinted with the updated attack, and the turn is over. 
+
+void clear()
+    It will confirm that the player is done with their turn. Afterwards, it will clear the screen. 
+    It then asks if the next player is ready for their turn. 
+
+bool gameover()
+    Based on the current player, it will go through their public board(their view of their opponent's board)
+    and count the number of Xs which represent the sunk boats. If that number equals the same as the totalXs, 
+    it will return true ending the game. Otherwise, the game keeps going.
+    
+bool validAttack(Player *attackingPlayer, int row, int col)
+    The function takes in an attack coordinate from turn that is within the grid.
+    The function using the player's public board (their view of their opponent's board) will see 
+    if that location is water or *. If that is the case, the attack is valid and returns turn. 
+    If they have already fired at that location (M,H, or X), then it will return false, and the player
+    will have to enter a new coordinate.
