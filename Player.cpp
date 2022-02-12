@@ -154,14 +154,15 @@ void Player::sinkShip(int hitship)
     // access the position array of the ship that got hit
     string *arr = m_ships[hitship - 1]->getPositionArr();
     // mark each palce ship is positioned with an X
-    
+
+    // CODE ONLY WORKS WHEN I PRENT THIS OUT????? probably has to do with pointers maybe idk
     for (int i = 0; i < m_ships[hitship - 1]->getSize(); i++)
     {
         // cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
         m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
 
     }
-    std::cout << "Ship " << hitship << " was sunk! \n";
+    std::cout << "\nShip " << hitship << " was sunk! \n";
 }
 
 void Player::markPrivateSunk(string *arr, int size)
@@ -187,7 +188,7 @@ string *Player::markPrivate(string strike, int row, int col, int hitship, bool i
         else
         {
             m_privateBoard->setBoard(strike, row, col);
-            std::cout << "Ship " << hitship << " was hit \n";
+            std::cout << "\nShip " << hitship << " was hit \n";
         }
     }
     else
@@ -209,7 +210,7 @@ void Player::placeShip(Ship *someShip)
 
         m_privateBoard->setBoard(symbol, row, col);
     }
-    cout << "Ship " << someShip->getSize() << " was placed!\n";
+    cout << "\nShip " << someShip->getSize() << " was placed!\n";
     m_shipCounter++;
 }
 
@@ -225,6 +226,7 @@ void Player::printSetup()
 
         cout << endl;
     }
+    cout << endl;
 }
 
 // Print the healthbar for each ship
@@ -243,7 +245,7 @@ void Player::shipHealthBar()
     {
         // Print out the Ship with size 1x(i+1
         std::cout << "1x" << (i + 1) << ": ";
-            // Print the ships life
+        // Print the ships life
         std::cout << m_ships[i]->getLife() << "     ";
     }
 
