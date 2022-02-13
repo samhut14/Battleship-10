@@ -37,11 +37,44 @@ public:
 	 * @return None
 	 */
 	~Game();
-
+	/*
+	 * @pre none
+	 * @post the number of ships is obtained, and the boards are completely set up
+	 * @param none
+	 * @return none
+	 */
 	void setup();
+
+	/*
+	 * @pre none
+	 * @post the current player's Board is completely set up
+	 * @param Player *currentPlayer is the Player taking the turn for setting up
+	 * @return none
+	 */
 	void setupPlayer(Player *currentPlayer);
+
+	/*
+	 * @pre none
+	 * @post an appropriate integer is obtained from the user
+	 * @param none
+	 * @return the integer they correctly inputted
+	 */
 	int getInt();
+
+	/*
+	 * @pre none
+	 * @post the whole string is checked if it's all digits or not
+	 * @param string str is the string to check
+	 * @return true if it's all integers, false otherwise
+	 */
 	bool isDigit(string str);
+
+	/*
+	 * @pre none
+	 * @post an appropriate character is obtained from the user
+	 * @param none
+	 * @return the character they correctly inputted
+	 */
 	char getChar();
 
 	/*
