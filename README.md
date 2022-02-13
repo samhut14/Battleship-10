@@ -1,6 +1,7 @@
 # Battleship-10
 <h2> Installing the game </h2>
 <ol>
+  <li> Clone the directory using git clone https://github.com/samhut14/Battleship-10.git
   <li> Make sure g++ or GNU Make is installed so that you can run the makefile and build the C++ code</li>
   <li> Once installed, in the main directory run make in the terminal </li>
 </ol>
