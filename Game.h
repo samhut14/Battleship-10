@@ -41,6 +41,7 @@ public:
 	void setup();
 	void setupPlayer(Player *currentPlayer);
 	int getInt();
+	bool isDigit(string str);
 	char getChar();
 
 	/*
