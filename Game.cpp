@@ -194,7 +194,7 @@ void Game::clear()
         temp = getChar(); // returns a valid character to be used
     }
 
-    for (int i = 0; i < 50; i++) // clears the screen
+    for (int i = 0; i < 100; i++) // clears the screen
         cout << '\n';
 
     cout << "The screen is now ready for your opponent. Please pass the computer to them.\n\n";
