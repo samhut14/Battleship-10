@@ -194,7 +194,7 @@ string *Player::markPrivate(string strike, int row, int col, int hitship, bool i
     else
     {
         m_privateBoard->setBoard(strike, row, col);
-        std::cout << "Your attack missed! \n";
+        std::cout << "\nYour attack missed! \n";
     }
     return {};
 }
@@ -346,20 +346,6 @@ Board *Player::getPrivateBoard()
 void Player::markPublic(string strike, int row, int col)
 {
     m_publicBoard->setBoard(strike, row, col);
-}
-
-// Get the ship counter
-int Player::getShipCounter()
-{
-    // Return m_shipCounter
-    return m_shipCounter;
-}
-
-// Get the number of ships
-int Player::getNumberOfShips()
-{
-    // Return m_numberOfShips
-    return m_numberOfShips;
 }
 
 // Get the Player's Ships

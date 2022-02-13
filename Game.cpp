@@ -70,17 +70,17 @@ void Game::setup()
     clear();
 }
 
-void Game::setupPlayer(Player *somePlayer)
+void Game::setupPlayer(Player *currentPlayer)
 {
     int startRow = -1, startCol = -1, endRow = -1, endCol = -1;
     char temp;
 
     while (true)
     {
-        startRow = -1, startCol = -1, endRow = -1, endCol = -1;
-        cout << "\nWhere would you like to place Ship 1? (1x1):\n";
+        startRow = -1, startCol = -1;
 
-        somePlayer->printSetup();
+        cout << "\nWhere would you like to place Ship 1? (1x1):\n";
+        currentPlayer->printSetup();
 
         cout << "Enter row: ";
         while (startRow < 1 || startRow > 10)
@@ -101,9 +101,7 @@ void Game::setupPlayer(Player *somePlayer)
                 cout << "Invalid choice.\nEnter column: ";
         }
 
-        if (!somePlayer->pathValid(startRow, startCol, startRow, startCol, 1))
-            cout << "Invalid column. Start over.\n\n";
-        else
+        if (currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1))
             break;
     }
 
@@ -113,8 +111,9 @@ void Game::setupPlayer(Player *somePlayer)
         {
             startRow = -1, startCol = -1, endRow = -1, endCol = -1;
             cout << "\nWhere would you like to place Ship " << i + 1 << "? (1x" << i + 1 << "):\n";
+            cout << "NOTE: you can only place it horizontally or vertically.\n\n";
 
-            somePlayer->printSetup();
+            currentPlayer->printSetup();
 
             cout << "Enter starting row: ";
             while (startRow < 1 || startRow > 10)
@@ -135,11 +134,11 @@ void Game::setupPlayer(Player *somePlayer)
                     cout << "Invalid choice.\nEnter starting column: ";
             }
 
-            if (somePlayer->startValid(startRow, startCol))
+            if (currentPlayer->startValid(startRow, startCol))
             {
                 if (i == 0)
                 {
-                    somePlayer->pathValid(startRow, startCol, startRow, startCol, 1);
+                    currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1);
                     break;
                 }
 
@@ -162,31 +161,31 @@ void Game::setupPlayer(Player *somePlayer)
                         cout << "Invalid choice.\nEnter ending column: ";
                 }
 
-                if (!somePlayer->pathValid(startRow, startCol, endRow, endCol, i + 1))
-                    cout << "Invalid ending position. Start over.\n\n";
+                if (!currentPlayer->pathValid(startRow, startCol, endRow, endCol, i + 1))
+                    cout << "\nInvalid ending position. Start over.\n\n";
                 else
                     break;
             }
 
             else
-                cout << "Invalid starting position. Start over.\n\n";
+                cout << "\nInvalid starting position. Start over.\n\n";
         }
     }
 
-    somePlayer->printSetup();
+    currentPlayer->printSetup();
 }
 
 void Game::clear()
 {
     char temp = '\0';
 
-    while (temp != 'c') 
+    while (temp != 'c')
     {
         cout << "Your turn has concluded. Please enter c to clear the screen for your opponent: ";
-        temp = getChar(); //returns a valid character to be used
+        temp = getChar(); // returns a valid character to be used
     }
 
-    for (int i = 0; i < 50; i++) //clears the screen
+    for (int i = 0; i < 50; i++) // clears the screen
         cout << '\n';
 
     cout << "The screen is now ready for your opponent. Please pass the computer to them.\n\n";
@@ -195,39 +194,39 @@ void Game::clear()
     while (temp != 'c')
     {
         cout << "Enter c to confirm the start of your turn: ";
-        temp = getChar(); //returns a valid character to be checked against
+        temp = getChar(); // returns a valid character to be checked against
     }
 }
 
 void Game::play()
 {
     currentPlayer = 2;
-    setup(); 
+    setup();
 
-    for (int i = 1; i <= numShips; i++) //tallies the total number of Xs needed to declare gameover
+    for (int i = 1; i <= numShips; i++) // tallies the total number of Xs needed to declare gameover
     {
         totalXs += i;
     }
 
     while (!gameover())
     {
-        switch (currentPlayer) //alternates the current player during each iteration
+        switch (currentPlayer) // alternates the current player during each iteration
         {
-            case 1:
-            {
-                currentPlayer = 2;
-                break;
-             }
-            case 2:
-            {
-                currentPlayer = 1;
-                break;
-            }
+        case 1:
+        {
+            currentPlayer = 2;
+            break;
+        }
+        case 2:
+        {
+            currentPlayer = 1;
+            break;
+        }
         }
 
         turn(currentPlayer);
 
-        if (!gameover()) //only calls clear if gameover doesn't occur
+        if (!gameover()) // only calls clear if gameover doesn't occur
         {
             clear();
         }
@@ -235,7 +234,7 @@ void Game::play()
     std::cout << "Player " << currentPlayer << " won!\n";
 }
 
-void Game::turn(int currentPlayer) //passes control over to the takeTurn function
+void Game::turn(int currentPlayer) // passes control over to the takeTurn function
 {
 
     if (currentPlayer == 1)
@@ -256,42 +255,42 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
     int col = -1;
     char temp = '\0';
 
-    currentPlayer->view(); //prints the boards and ship health
+    currentPlayer->view(); // prints the boards and ship health
 
-    do //stuck in a loop until the player produces a valid attack location
+    do // stuck in a loop until the player produces a valid attack location
     {
         row = -1;
         col = -1;
 
-        while (!(row >= 0 && row < 10)) //Gets an attack row and only accepts it if it's within board
+        while (!(row >= 0 && row < 10)) // Gets an attack row and only accepts it if it's within board
         {
             row = -1;
             std::cout << "Select attack row: ";
             row = getInt();
             row -= 1;
         }
-        while (!(col >= 0 && col < 10)) //Gets an attack col and escapes the loop if the coordinate is inside the board region
+        while (!(col >= 0 && col < 10)) // Gets an attack col and escapes the loop if the coordinate is inside the board region
         {
             col = -1;
             std::cout << "Select attack column: ";
             temp = getChar();
             col = (int(temp) - 65);
         }
-    } while (!validAttack(currentPlayer, row, col)); //checks to see if the attack location is a spot that the player has already fired on
+    } while (!validAttack(currentPlayer, row, col)); // checks to see if the attack location is a spot that the player has already fired on
 
-    attack(currentPlayer, otherPlayer, row, col); //actually figures out if it's a hit or miss and marks the boards
-    currentPlayer->view(); //Prints the board again showing the attack
+    attack(currentPlayer, otherPlayer, row, col); // actually figures out if it's a hit or miss and marks the boards
+    currentPlayer->view();                        // Prints the board again showing the attack
 }
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
 {
-    if (attackingPlayer->getPublicBoard()->at(row, col) == "*") //checks the board that they are firing on to see if they have already attacked it
+    if (attackingPlayer->getPublicBoard()->at(row, col) == "*") // checks the board that they are firing on to see if they have already attacked it
     {
         return (true);
     }
-    else 
+    else
     {
-        std::cout << "Invalid attack location. Enter a new attack coordinate.";
+        std::cout << "Invalid attack location. Enter a new attack coordinate.\n";
         return (false);
     }
 }
@@ -306,7 +305,7 @@ bool Game::gameover()
         {
             for (int j = 0; j < 10; j++)
             {
-                if (player1->getPublicBoard()->at(i, j) == "X") //goes through player 1's firing board to see how many times sunk spots they have
+                if (player1->getPublicBoard()->at(i, j) == "X") // goes through player 1's firing board to see how many times sunk spots they have
                 {
                     temp++;
                 }
