@@ -1,8 +1,7 @@
 Board Class
 
 Board::Board()
-This will take no parameters. It will intialize the 2d string board array to a size of 10 X 10 and create board of that
-size with all *'s
+This will take no parameters. It will intialize the 2d string board array to a size of 10 X 10 and create board with *
 
 Board::~Board()
 Deletes the 2d board array of strings off of the heap
@@ -14,4 +13,4 @@ string Board::at(int row, int col)
 returns a string at the specific row and column in the board. 
 
 void Board::setBoard(string mark, int row, int col)
-marks the board with a string at the speicfic row and column. 
+marks the board with a string at that row and column. 
