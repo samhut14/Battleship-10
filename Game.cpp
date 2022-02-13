@@ -148,12 +148,6 @@ void Game::setupPlayer(Player *currentPlayer)
 
             if (currentPlayer->startValid(startRow, startCol))
             {
-                if (i == 0)
-                {
-                    currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1);
-                    break;
-                }
-
                 cout << "Enter ending row: ";
                 while (endRow < 1 || endRow > 10)
                 {
@@ -363,7 +357,7 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
         // stores the id of ship to be passed into mark functions, the id of the ship is the index+1 in the ship array
         int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1] - 48;
         string *posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
-        //if posArr returned an array, then that means ship was sunk, so mark it for the attacking player
+        // if posArr returned an array, then that means ship was sunk, so mark it for the attacking player
         if (posArr)
         {
             attackingPlayer->markPublicSunk(posArr, hitship);
