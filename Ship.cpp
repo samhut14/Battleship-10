@@ -15,16 +15,16 @@ Ship::Ship(int size, string *locationArr)
         posArr[i] = locationArr[i];
     }
 }
-/*
-sets the postion array to null pointer.
-*/
+
+//sets the postion array to null pointer.
+
 Ship::Ship()
 {
     posArr = nullptr;
 }
-/*
-delets the position array
-*/
+
+//deletes the position array
+
 Ship::~Ship()
 {
     delete[] posArr;
