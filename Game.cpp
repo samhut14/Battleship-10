@@ -77,9 +77,9 @@ void Game::setupPlayer(Player *currentPlayer)
 
     while (true)
     {
-        startRow = -1, startCol = -1, endRow = -1, endCol = -1;
-        cout << "\nWhere would you like to place Ship 1? (1x1):\n";
+        startRow = -1, startCol = -1;
 
+        cout << "\nWhere would you like to place Ship 1? (1x1):\n";
         currentPlayer->printSetup();
 
         cout << "Enter row: ";
@@ -101,9 +101,7 @@ void Game::setupPlayer(Player *currentPlayer)
                 cout << "Invalid choice.\nEnter column: ";
         }
 
-        if (!currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1))
-            cout << "Invalid column. Start over.\n\n";
-        else
+        if (currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1))
             break;
     }
 
@@ -113,6 +111,7 @@ void Game::setupPlayer(Player *currentPlayer)
         {
             startRow = -1, startCol = -1, endRow = -1, endCol = -1;
             cout << "\nWhere would you like to place Ship " << i + 1 << "? (1x" << i + 1 << "):\n";
+            cout << "NOTE: you can only place it horizontally or vertically.\n\n";
 
             currentPlayer->printSetup();
 
@@ -163,13 +162,13 @@ void Game::setupPlayer(Player *currentPlayer)
                 }
 
                 if (!currentPlayer->pathValid(startRow, startCol, endRow, endCol, i + 1))
-                    cout << "Invalid ending position. Start over.\n\n";
+                    cout << "\nInvalid ending position. Start over.\n\n";
                 else
                     break;
             }
 
             else
-                cout << "Invalid starting position. Start over.\n\n";
+                cout << "\nInvalid starting position. Start over.\n\n";
         }
     }
 
