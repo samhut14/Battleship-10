@@ -90,7 +90,7 @@ public:
 	bool startValid(int row, int col);
 	bool pathValid(int startRow, int startCol, int endRow, int endCol, int size);
 	void placeShip(Ship *someShip);
-	void printSetup();
+	void printPrivateBoard();
 
 	// Game Play
 	/**
