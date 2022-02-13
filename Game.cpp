@@ -92,7 +92,7 @@ void Game::setupPlayer(Player *currentPlayer)
         startRow = -1, startCol = -1;
 
         cout << "\nWhere would you like to place Ship 1? (1x1):\n";
-        currentPlayer->printSetup();
+        currentPlayer->printPrivateBoard();
 
         cout << "Enter row: ";
         while (startRow < 1 || startRow > 10)
@@ -125,7 +125,7 @@ void Game::setupPlayer(Player *currentPlayer)
             cout << "\nWhere would you like to place Ship " << i + 1 << "? (1x" << i + 1 << "):\n";
             cout << "NOTE: you can only place it horizontally or vertically.\n\n";
 
-            currentPlayer->printSetup();
+            currentPlayer->printPrivateBoard();
 
             cout << "Enter starting row: ";
             while (startRow < 1 || startRow > 10)
@@ -178,7 +178,7 @@ void Game::setupPlayer(Player *currentPlayer)
         }
     }
 
-    currentPlayer->printSetup();
+    currentPlayer->printPrivateBoard();
 }
 
 void Game::clear()
