@@ -88,8 +88,6 @@ public:
 	Board *getPrivateBoard();
 
 	/**
-<<<<<<< HEAD
-=======
 	 * @pre Player is constructed. number of ships is set up
 	 * @post Gets the number of ships
 	 * @param None
@@ -108,7 +106,6 @@ public:
 	int getShipCounter();
 
 	/**
->>>>>>> documentation
 	 * @pre Player is constructed. m_Ships is constructed
 	 * @post Returns the player's ships
 	 * @param None
