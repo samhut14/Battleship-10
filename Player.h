@@ -144,6 +144,6 @@ public:
 	 */
 	string *markPrivate(string strike, int row, int col, int hitship, bool isHit);
 
-	void markPrivateSunk(string *posArr, int size);
+	void markPublicSunk(string *posArr, int size);
 };
 #endif

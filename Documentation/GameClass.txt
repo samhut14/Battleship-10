@@ -36,3 +36,10 @@ bool validAttack(Player *attackingPlayer, int row, int col)
     if that location is water or *. If that is the case, the attack is valid and returns turn. 
     If they have already fired at that location (M,H, or X), then it will return false, and the player
     will have to enter a new coordinate.
+
+void attack(Player *attackingPlayer, Player *defendingPlayer, int row, int col)
+    This function takes in two players, one person who is the attacking, and the other who is defending. 
+    It looks at the private board of the defending player and if there is a ship at that row and column, 
+    it will either call 2 mark functions to mark a "H" or an "M" at that row and column if its a hit or miss
+    respectively. If a ship is sunk, it will instead call the one markPrivate function, then markPublicSunk
+    to mark all of the ship's location as an X indicating it has been sunk.

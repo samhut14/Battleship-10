@@ -360,19 +360,21 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
     if (defendingPlayer->getPrivateBoard()->at(row, col)[0] == 'S')
     {
         isHit = true;
-        // stores the id of ship to be passed into mark functions
+        // stores the id of ship to be passed into mark functions, the id of the ship is the index+1 in the ship array
         int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1] - 48;
         string *posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
+        //if posArr returned an array, then that means ship was sunk, so mark it for the attacking player
         if (posArr)
         {
-            attackingPlayer->markPrivateSunk(posArr, hitship);
+            attackingPlayer->markPublicSunk(posArr, hitship);
         }
+        // if it was not sunk, then only mark as a hit
         else
         {
             attackingPlayer->markPublic("H", row, col);
         }
     }
-    else
+    else // if it was a miss, mark both player's boards as a miss, the hitship is 0 because no ship was hit
     {
         defendingPlayer->markPrivate("M", row, col, 0, isHit);
         attackingPlayer->markPublic("M", row, col);

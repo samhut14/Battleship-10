@@ -1,1 +1,20 @@
-Text
+Player class:
+
+string *markPrivate(string strike, int row, int col, int hitship, bool isHit);
+    This function checks if the attack location was a hit or not. If it was a hit, it will mark an "H", and if it was
+    a miss, it will mark it as a miss "M". If it was sunk, it will run the sinkShip function passing in the id of the ship (hitship),
+    which marks the entire ship as an X indicating it has been sunk. Then, it returns the position array of this ship so that it can 
+    be marked on the other players board.
+
+void markPublic(string strike, int row, int col);
+    This function will mark the public board with either an "H" or "M" at row and col depending on
+    if there was a ship at that location.
+
+void markPublicSunk(string *posArr, int size);
+    This function goes through the entire position array of the ship which stores a number and a capital letter. 
+    It converts the number and letter into an integer value and marks the player's public board with an X at that location.
+
+void sinkShip(int hitShip);
+    This function goes through the entire position array of the ship that has been hit and converts the number and letter combination
+    into integers like markPublicSunk, and sets all locations with an X.
+
