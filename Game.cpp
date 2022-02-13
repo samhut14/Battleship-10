@@ -25,6 +25,7 @@ bool Game::isDigit(string str)
     for (int i = 0; i < str.length(); i++)
     {
         if (!isdigit(str.at(i))) // If at any character, the string is not a digit, return false
+                                 // NOTE: this is the built-in function that takes a char parameter, not a full string
             return false;
     }
 
