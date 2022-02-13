@@ -1,13 +1,3 @@
-/** -----------------------------------------------------------------------------
- *
- * @file  Player.cpp
- * @authors Amith Panuganti
- * Assignment:   EECS-448 Project #1
- * @brief This file impliment the methods of Player
- * @date 2/4/22
- *
- ---------------------------------------------------------------------------- **/
-
 #include "Player.h"
 #include <iostream>
 #include <string>
