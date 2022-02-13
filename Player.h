@@ -87,9 +87,38 @@ public:
 
 	// Main Functions
 	// Set Up
+
+	/*
+	 * @pre row and col are not out of bounds
+	 * @post checks if the position on the Private Board is valid to place a Ship
+	 * @param int row and col represent the index at which to check
+	 * @return false if invalid, true otherwise
+	 */
 	bool startValid(int row, int col);
+
+	/*
+	 * @pre starting and ending row and col are not out of bounds
+	 * @post the path from the starting to the ending position is checked,
+	 * if valid, a new Ship object is created in the array
+	 * @param int startRow, startCol, endRow, endCol represent the indeces to check; int size is the size of the wanted Ship
+	 * @return false if invalid, true otherwise
+	 */
 	bool pathValid(int startRow, int startCol, int endRow, int endCol, int size);
+
+	/*
+	 * @pre the parameter Ship was created in the correct array position
+	 * @post the Ship is placed on the Private Board, and the Ship counter is incremented
+	 * @param Ship *someShip is the Ship to place
+	 * @return none
+	 */
 	void placeShip(Ship *someShip);
+
+	/*
+	 * @pre none
+	 * @post the Private Board is printed appropriately
+	 * @param none
+	 * @return none
+	 */
 	void printPrivateBoard();
 
 	// Game Play
