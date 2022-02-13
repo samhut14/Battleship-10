@@ -43,3 +43,18 @@ void attack(Player *attackingPlayer, Player *defendingPlayer, int row, int col)
     it will either call 2 mark functions to mark a "H" or an "M" at that row and column if its a hit or miss
     respectively. If a ship is sunk, it will instead call the one markPrivate function, then markPublicSunk
     to mark all of the ship's location as an X indicating it has been sunk.
+
+void setup()
+    Welcomes the players, displays the legend and sets up both players' boards.
+
+void setupPlayer(Player *currentPlayer)
+    Sets up the Player parameter's board
+
+int getInt();
+    Traps the user in a loop as long as they don't input an integer, then returns that integer.
+
+bool isDigit(string str)
+    Checks if the string parameter is all digits or not.
+
+char getChar()
+    Traps the user in a loop as long as they don't input a single character, then returns that character.
