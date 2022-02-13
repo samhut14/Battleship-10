@@ -193,7 +193,7 @@ string *Player::markPrivate(string strike, int row, int col, int hitship, bool i
     else
     {
         m_privateBoard->setBoard(strike, row, col);
-        std::cout << "Your attack missed! \n";
+        std::cout << "\nYour attack missed! \n";
     }
     return {};
 }
