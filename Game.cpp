@@ -274,6 +274,11 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
             std::cout << "Select attack row: ";
             row = getInt();
             row -= 1;
+            
+            if(row < 0 || row > 9)
+            {
+                std::cout<<"Invalid row choice. Please try again.\n";
+            }
         }
         while (!(col >= 0 && col < 10)) // Gets an attack col and escapes the loop if the coordinate is inside the board region
         {
@@ -281,6 +286,11 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
             std::cout << "Select attack column: ";
             temp = getChar();
             col = (int(temp) - 65);
+            
+            if(col < 0 || col > 9)
+            {
+                std::cout<<"Invalid column choice. Please try again.\n";
+            }
         }
     } while (!validAttack(currentPlayer, row, col)); // checks to see if the attack location is a spot that the player has already fired on
 
