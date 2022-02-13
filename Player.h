@@ -6,7 +6,7 @@
  * @brief This file contains the methods and variables of the Player class
  *        The Player plays Battleship by setting up their board, attacking the
  *        other's player board, getting attacked, and either winning or losing
- * @date 2/12/22
+ * @date 2/13/22
  *
  ---------------------------------------------------------------------------- **/
 #ifndef PLAYER_H
@@ -19,11 +19,11 @@
 class Player
 {
 private:
-	// Represents the player's visible board
+	// Represents the player's public/visible board
 	// This the board the player used to place their ships
 	Board *m_publicBoard;
 
-	// Represent the player's invisible board
+	// Represent the player's private/invisible board
 	// This board represent the player's view of their opponent board
 	// The players uses this board to attach the opponent
 	Board *m_privateBoard;
@@ -35,8 +35,8 @@ private:
 	// Represents the Ships that the Player has
 	Ship **m_ships;
 
-	// Represents the number of ships that the player
-	// currently has starting at m_numberOfShips
+	// Represents the number of ships that are still alive
+	// Starts at m_numberOfShips
 	int m_shipCounter;
 
 public:
@@ -73,23 +73,21 @@ public:
 	// Getters
 	/**
 	 * @pre Player is constructed
-	 * @post Return the player's visible board
+	 * @post Return the player's public board
 	 * @param None
-	 * @return Board m_publicBoard, the player's visible board
+	 * @return Board m_publicBoard, the player's public board
 	 */
 	Board *getPublicBoard();
 
 	/**
 	 * @pre Player is constructed
-	 * @post Return the player's invisible board
+	 * @post Return the player's private board
 	 * @param None
-	 * @return Board m_privateBoard, the player's invisiblbe board
+	 * @return Board m_privateBoard, the player's private board
 	 */
 	Board *getPrivateBoard();
 
 	/**
-<<<<<<< HEAD
-=======
 	 * @pre Player is constructed. number of ships is set up
 	 * @post Gets the number of ships
 	 * @param None
@@ -108,7 +106,6 @@ public:
 	int getShipCounter();
 
 	/**
->>>>>>> documentation
 	 * @pre Player is constructed. m_Ships is constructed
 	 * @post Returns the player's ships
 	 * @param None
@@ -126,8 +123,8 @@ public:
 	// Game Play
 	/**
 	 * @pre Player is constructed. Can only be displayed during a player's turn
-	 * @post Display's the player view of the game. This includes the player;s
-	 *       visible board, invisible board, their ships, and all their hits and misses
+	 * @post Display's the player view of the game. This includes the player's
+	 *       public board, private board, their ships, and all their hits and misses
 	 * @param None
 	 * @return None
 	 */
