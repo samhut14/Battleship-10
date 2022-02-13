@@ -38,9 +38,9 @@ Player::~Player()
     if (m_ships != nullptr)
     {
         for (int i = 0; i < m_numberOfShips; i++)
-            delete m_ships[i];
+            delete m_ships[i]; // Delete each heap allocated Ship object
 
-        delete[] m_ships;
+        delete[] m_ships; // Delete the array that was containing the Ship objects
     }
     delete m_publicBoard;
     delete m_privateBoard;
@@ -50,32 +50,35 @@ Player::~Player()
 
 bool Player::startValid(int row, int col)
 {
-    if (row < 0 || row > 9 || col < 0 || col > 9)
+    if (row < 0 || row > 9 || col < 0 || col > 9) // If out of bounds
         return false;
 
-    return (m_privateBoard->at(row, col) == "*");
+    return (m_privateBoard->at(row, col) == "*"); // Otherwise, true if the board is * at that position
 }
 
 bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int size)
 {
-    int temp;
-    string arr[5];
+    int temp;      // Controls whether we will traverse in the positive or negative direction
+    string arr[5]; // To fill with the correct elements for the Ship's position array
+                   // Always stack allocated with size 5 (maximum size for the position array) to avoid heap allocations
 
-    if ((startRow == endRow) && (startCol != endCol))
+    if ((startRow == endRow) && (startCol != endCol)) // If the start and end row are the same, but the columns aren't
     {
-        if (abs(endCol - startCol) == size - 1)
+        if (abs(endCol - startCol) == size - 1) // If the distance between the end and start column is exactly Ship's size - 1
+                                                // Eg. size 3 takes up 3 spots, and the distance from the last to the first spot is 2
         {
-            if (startCol > endCol)
-                temp = -1;
-            else
+            if (startCol > endCol) // If the starting column is greater than the ending column,
+                temp = -1;         // We traverse the negative direction
+            else                   // Otherwise traverse the positive direction
                 temp = 1;
 
-            goto traverseCol;
+            goto traverseCol; // Go to where we traverse the columns, keeping the row constant (because each ship is necessarily 1 x size)
         }
         else
-            return false;
+            return false; // If the distance between the end and start column is NOT size - 1
     }
 
+    // Same logic applies here, but to equal columns and unequal rows:
     else if ((startRow != endRow) && (startCol == endCol))
     {
         if (abs(endRow - startRow) == size - 1)
@@ -91,36 +94,36 @@ bool Player::pathValid(int startRow, int startCol, int endRow, int endCol, int s
             return false;
     }
 
-    else if ((startRow == endRow) && (startCol == endCol) && (size == 1))
+    else if ((startRow == endRow) && (startCol == endCol) && (size == 1)) // If we are to place Ship 1 (size 1 x 1)
     {
-        arr[0] = to_string(startRow);
-        arr[0].push_back(startCol + 65);
+        arr[0] = to_string(startRow);    // Set the first element in the dummy array equal to the string conversion of the row
+        arr[0].push_back(startCol + 65); // Append said element with the correct column letter (in the ASCII table, capital A is index 65, B is index 66 and so on)
 
-        m_ships[m_shipCounter] = new Ship(size, arr);
-        placeShip(m_ships[m_shipCounter]);
+        m_ships[m_shipCounter] = new Ship(size, arr); // Create a new Ship objdect at the correct position in the array
+        placeShip(m_ships[m_shipCounter]);            // Place that Ship on the Private Baord
         return true;
     }
 
-    return false;
+    return false; // If none of the previous conditions check, the path is necessarily invalid
 
-traverseCol:
+traverseCol: // Traverse the columns, keeping the row constant
     for (int i = 0; i <= size - 1; i++)
     {
-        if (m_privateBoard->at(startRow, startCol) != "*")
+        if (m_privateBoard->at(startRow, startCol) != "*") // Whenever the position is not *, the path is invalid
             return false;
-        else
+        else // If the position is *, potentially allowing a Ship placement,
         {
-            arr[i] = to_string(startRow);
-            arr[i].push_back(startCol + 65);
+            arr[i] = to_string(startRow);    // Set the i'th element in the dummy array equal to the string conversion of the starting row
+            arr[i].push_back(startCol + 65); // Append said element with the correct column letter (in the ASCII table, capital A is index 65, B is index 66 and so on)
 
-            startCol += temp;
+            startCol += temp; // Either increment or decrement the column, based on whether we are going in the positive or negative direction
         }
     }
     m_ships[m_shipCounter] = new Ship(size, arr);
     placeShip(m_ships[m_shipCounter]);
     return true;
 
-traverseRow:
+traverseRow: // Traverse the rows, keeping the column constant
     for (int i = 0; i <= size - 1; i++)
     {
         if (m_privateBoard->at(startRow, startCol) != "*")
@@ -192,13 +195,13 @@ string *Player::markPrivate(string strike, int row, int col, int hitship, bool i
 void Player::placeShip(Ship *someShip)
 {
     int row, col;
-    string symbol = "S" + to_string(someShip->getSize());
+    string symbol = "S" + to_string(someShip->getSize()); // Sets symbol equal to S followed by the Ship's size
     for (int i = 0; i < someShip->getSize(); i++)
     {
-        row = someShip->getRow(i);
-        col = someShip->getColumn(i);
+        row = someShip->getRow(i);    // Obtain the Ship's row in the position array at index i
+        col = someShip->getColumn(i); // Obtain the Ship's column in the position array at index i
 
-        m_privateBoard->setBoard(symbol, row, col);
+        m_privateBoard->setBoard(symbol, row, col); // Set the element in the Private Board at this index equal to symbol
     }
     cout << "\nShip " << someShip->getSize() << " was placed!\n";
     m_shipCounter++;
