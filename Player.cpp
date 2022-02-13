@@ -153,26 +153,19 @@ void Player::sinkShip(int hitship)
 {
     // access the position array of the ship that got hit
     string *arr = m_ships[hitship - 1]->getPositionArr();
-    // mark each palce ship is positioned with an X
-<<<<<<< HEAD
-    
-=======
-
-    // CODE ONLY WORKS WHEN I PRENT THIS OUT????? probably has to do with pointers maybe idk
->>>>>>> b4de9b967e410b888c176e623bceb60160ca4052
+    // mark each place the ship that got hit is positioned with an X
     for (int i = 0; i < m_ships[hitship - 1]->getSize(); i++)
     {
-        // cout << arr[i].at(0) - 48 <<  arr[i].at(1) - 65 << endl;
         m_privateBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
     std::cout << "\nShip " << hitship << " was sunk! \n";
 }
 
-void Player::markPrivateSunk(string *arr, int size)
+void Player::markPublicSunk(string *arr, int size)
 {
     for (int i = 0; i < size; i++)
     {
-        // cout << arr[i].at(0) - 48 << arr[i].at(1) - 65 << endl;
+        //ark each place where ship was sunk with an x
         m_publicBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
 }
@@ -186,19 +179,23 @@ string *Player::markPrivate(string strike, int row, int col, int hitship, bool i
         if (m_ships[hitship - 1]->loseLife())
         {
             sinkShip(hitship);
+            // returns the array with all the positions of the ship to mark for other player
             return m_ships[hitship - 1]->getPositionArr();
         }
         else
         {
+            //put an H on the board at row col
             m_privateBoard->setBoard(strike, row, col);
             std::cout << "\nShip " << hitship << " was hit \n";
         }
     }
     else
     {
+        // puts an M on the board at row col
         m_privateBoard->setBoard(strike, row, col);
         std::cout << "\nYour attack missed! \n";
     }
+    // if wasn't sunk it will return an empty arr so nothing will get marked
     return {};
 }
 
@@ -348,6 +345,7 @@ Board *Player::getPrivateBoard()
 
 void Player::markPublic(string strike, int row, int col)
 {
+    //Either marks as an H or M at row col depending on if there is a ship or not
     m_publicBoard->setBoard(strike, row, col);
 }
 

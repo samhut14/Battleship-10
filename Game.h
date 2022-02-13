@@ -22,20 +22,6 @@ private:
 	Player *player2;
 
 public:
-<<<<<<< HEAD
-    Game();
-    ~Game();
-    void setup();
-    void setupPlayer(Player *somePlayer);
-    int getInt();
-    void clear();
-    void turn(int currentPlayer);
-    void takeTurn(Player *currentPlayer, Player *otherPlayer);
-    void attack(Player *attackingPlayer, Player *defendingPlayer, int row, int col);
-    bool validAttack(Player *attackingPlayer, int row, int col);
-    bool gameover();
-    void play();
-=======
 	/*
 	 * @pre none
 	 * @post Initializes both the players and sets totalXs to zero.
@@ -109,6 +95,5 @@ public:
 	 * @return None
 	 */
 	void play();
->>>>>>> b4de9b967e410b888c176e623bceb60160ca4052
 };
 #endif

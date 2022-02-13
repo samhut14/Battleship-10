@@ -261,40 +261,6 @@ void Game::turn(int currentPlayer) // passes control over to the takeTurn functi
     }
 }
 
-<<<<<<< HEAD
-void Game::takeTurn(Player *currentPlayer, Player *otherPlayer) {
-    int row = -1;
-    int col = -1;
-    char temp = '\0';
-    string tempString = "";
-
-    currentPlayer->view();
-        do
-        {
-            row = -1;
-            col = -1;
-
-            while (!(row >= 0 && row < 10))
-            {
-                row = -1;
-                std::cout << "Please select which row you would like to attack: ";
-                row = getInt();
-                row -= 1;
-            }
-
-            while (!(col >= 0 && col < 10))
-            {
-                col = -1;
-                std::cout << "Please select which column you would like to attack: ";
-                std::getline(std::cin, tempString);
-                
-                col = (int(tempString[0]) - 65);
-            }
-        } while (!validAttack(currentPlayer, row, col));
-
-        attack(currentPlayer, otherPlayer, row, col);
-        currentPlayer->view();
-=======
 void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
 {
     int row = -1;
@@ -326,7 +292,6 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
 
     attack(currentPlayer, otherPlayer, row, col); // actually figures out if it's a hit or miss and marks the boards
     currentPlayer->view();                        // Prints the board again showing the attack
->>>>>>> b4de9b967e410b888c176e623bceb60160ca4052
 }
 
 bool Game::validAttack(Player *attackingPlayer, int row, int col)
@@ -395,19 +360,21 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
     if (defendingPlayer->getPrivateBoard()->at(row, col)[0] == 'S')
     {
         isHit = true;
-        // stores the id of ship to be passed into mark functions
+        // stores the id of ship to be passed into mark functions, the id of the ship is the index+1 in the ship array
         int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1] - 48;
         string *posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
+        //if posArr returned an array, then that means ship was sunk, so mark it for the attacking player
         if (posArr)
         {
-            attackingPlayer->markPrivateSunk(posArr, hitship);
+            attackingPlayer->markPublicSunk(posArr, hitship);
         }
+        // if it was not sunk, then only mark as a hit
         else
         {
             attackingPlayer->markPublic("H", row, col);
         }
     }
-    else
+    else // if it was a miss, mark both player's boards as a miss, the hitship is 0 because no ship was hit
     {
         defendingPlayer->markPrivate("M", row, col, 0, isHit);
         attackingPlayer->markPublic("M", row, col);
