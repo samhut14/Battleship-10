@@ -48,7 +48,7 @@ void setup()
     Welcomes the players, displays the legend and sets up both players' boards.
 
 void setupPlayer(Player *currentPlayer)
-    Sets up the Player parameter's board
+    Sets up the Player parameter's board.
 
 int getInt();
     Traps the user in a loop as long as they don't input an integer, then returns that integer.
