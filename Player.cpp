@@ -165,7 +165,7 @@ void Player::markPublicSunk(string *arr, int size)
 {
     for (int i = 0; i < size; i++)
     {
-        //ark each place where ship was sunk with an x
+        // ark each place where ship was sunk with an x
         m_publicBoard->setBoard("X", arr[i].at(0) - 48, arr[i].at(1) - 65);
     }
 }
@@ -184,7 +184,7 @@ string *Player::markPrivate(string strike, int row, int col, int hitship, bool i
         }
         else
         {
-            //put an H on the board at row col
+            // put an H on the board at row col
             m_privateBoard->setBoard(strike, row, col);
             std::cout << "\nShip " << hitship << " was hit \n";
         }
@@ -214,7 +214,7 @@ void Player::placeShip(Ship *someShip)
     m_shipCounter++;
 }
 
-void Player::printSetup()
+void Player::printPrivateBoard()
 {
     cout << "Here is your current board:\n\n";
     cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n";
@@ -345,7 +345,7 @@ Board *Player::getPrivateBoard()
 
 void Player::markPublic(string strike, int row, int col)
 {
-    //Either marks as an H or M at row col depending on if there is a ship or not
+    // Either marks as an H or M at row col depending on if there is a ship or not
     m_publicBoard->setBoard(strike, row, col);
 }
 
