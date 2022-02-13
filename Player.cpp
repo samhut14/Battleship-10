@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /** -----------------------------------------------------------------------------
  *
  * @file  Player.cpp
@@ -9,8 +8,6 @@
  *
  ---------------------------------------------------------------------------- **/
 
-=======
->>>>>>> 93a502b6a0f9d1d6e0ac6d27c39f7dc84d977843
 #include "Player.h"
 #include <iostream>
 #include <string>
@@ -53,17 +50,9 @@ Player::~Player()
     {
         //For each m_ship* in m_ships, starting at index 0
         for (int i = 0; i < m_numberOfShips; i++)
-<<<<<<< HEAD
-            //Delete m_ships[i]
-            delete m_ships[i];
-
-        //Delete m_ships after the end of the loop
-        delete[] m_ships;
-=======
             delete m_ships[i]; // Delete each heap allocated Ship object
 
         delete[] m_ships; // Delete the array that was containing the Ship objects
->>>>>>> 93a502b6a0f9d1d6e0ac6d27c39f7dc84d977843
     }
 
     //Delete beoth m_publicBoard and m_privateBoard
