@@ -1,5 +1,26 @@
 Player class:
 
+Memeber Variables:
+
+Board *m_publicBoard;
+    The Player's Public Board. The Board contains the placements of the Player's Ships
+
+Board *m_privateBoard;
+    The Player's Private Board. This represent the Player's view of their opponent's board.
+    The Player can use this board to attack their opponent
+
+int m_numberOfShips;
+    The total number of ships that belongs to the Player. 
+
+int m_shipCounter;
+    The number of ships that the Player currently has and are still alive.
+
+Ship **m_ships;
+    An array of Ship which represents the ships that belongs to the Player. 
+    The size of the array depends on m_numberOfShips
+
+Functions:
+
 Default constructor:
     Initializes the number of ships and ship counter to 0, and all the pointers to nullptr.
 
@@ -41,3 +62,25 @@ void sinkShip(int hitShip);
     This function goes through the entire position array of the ship that has been hit and converts the number and letter combination
     into integers like markPublicSunk, and sets all locations with an X.
 
+void shipHealthBar();
+    This function prints the health of each of the Player's ships. A ship's health begins at their size and ends
+    at 0, which shows that the ship is sunked. shipHealthBar is used in view.
+
+void view();
+    This function prints the Player's view of the game during their turn. It includes the Player's private board,
+    public board, and the current health of each of the Player's ships. 
+
+Board *getPublicBoard();
+    This function returns the pointer to the Player's public board
+
+Board *getPrivateBoard();
+    This function returns the pointer to the Player's private board
+
+int getNumberOfShips();
+    This function returns the number of the ships that the Player has.
+
+int getShipCounter();
+    This function returns the number of ships that are still alive. 
+
+Ship **getShips();
+    This function returns the pointer to the array of Ships 
