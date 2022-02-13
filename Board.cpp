@@ -2,6 +2,9 @@
 #include <string>
 #include <iostream>
 using namespace std;
+/*
+ *  intializes the 2d array and creates the 10 x 10 board with all *'s
+*/
 Board::Board()
 {
     Boardarr = new string *[10];
@@ -17,7 +20,9 @@ Board::Board()
         }
     }
 }
-
+/*
+ *  deletes the 2d array
+*/
 Board::~Board()
 {
 
