@@ -16,19 +16,31 @@ Game::~Game()
     delete player1;
     delete player2;
 }
+
+bool Game::isDigit(string str)
+{
+    if (str.length() == 0)
+        return false;
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (!isdigit(str.at(i)))
+            return false;
+    }
+
+    return true;
+}
+
 int Game::getInt()
 {
-    int n = 0;
-    cin >> n;
-    while (cin.fail())
+    string temp = "";
+    getline(cin, temp);
+    while (!isDigit(temp))
     {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter an integer: ";
-        cin >> n;
+        getline(cin, temp);
     }
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return n;
+    return stoi(temp);
 }
 
 char Game::getChar()
