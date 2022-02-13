@@ -3,7 +3,7 @@
 using namespace std;
 /*
 sets the private variable m_size and m_life equal to the parameter size.
-then the it inializes the postion array and sets it equal to the parameter location array.
+Then, it initializes the position array and sets it equal to the parameter location array.
 */
 Ship::Ship(int size, string *locationArr)
 {
@@ -16,7 +16,7 @@ Ship::Ship(int size, string *locationArr)
     }
 }
 
-//sets the postion array to null pointer.
+//sets the position array to null pointer.
 
 Ship::Ship()
 {
