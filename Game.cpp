@@ -19,40 +19,41 @@ Game::~Game()
 
 bool Game::isDigit(string str)
 {
-    if (str.length() == 0)
+    if (str.length() == 0) // If the string is an empty line
         return false;
 
     for (int i = 0; i < str.length(); i++)
     {
-        if (!isdigit(str.at(i)))
+        if (!isdigit(str.at(i))) // If at any character, the string is not a digit, return false
+                                 // NOTE: this is the built-in function that takes a char parameter, not a full string
             return false;
     }
 
-    return true;
+    return true; // Otherwise, return true
 }
 
 int Game::getInt()
 {
     string temp = "";
-    getline(cin, temp);
+    getline(cin, temp); // To be able to obtain the full input (not ignore white space)
     while (!isDigit(temp))
     {
         cout << "Please enter an integer: ";
         getline(cin, temp);
     }
-    return stoi(temp);
+    return stoi(temp); // Return the string to int conversion of temp
 }
 
 char Game::getChar()
 {
     string temp = "";
-    getline(cin, temp);
+    getline(cin, temp); // To be able to obtain the full input (not ignore white space)
     while (temp.length() != 1)
     {
         cout << "Please enter a single character: ";
         getline(cin, temp);
     }
-    return temp.at(0);
+    return temp.at(0); // Return the first character of temp
 }
 
 void Game::setup()
@@ -63,13 +64,14 @@ void Game::setup()
 
     cout << "How many ships would you like to have this game? (1-5): ";
     numShips = 0;
-    while (numShips < 1 || numShips > 5)
+    while (numShips < 1 || numShips > 5) // As long as the number of ships is invalid
     {
         numShips = getInt();
         if (numShips < 1 || numShips > 5)
             cout << "Invalid choice.\nEnter number of ships: ";
     }
 
+    // Construct both players with the correct Ship number
     player1 = new Player(numShips);
     player2 = new Player(numShips);
 
@@ -84,39 +86,40 @@ void Game::setup()
 
 void Game::setupPlayer(Player *currentPlayer)
 {
-    int startRow = -1, startCol = -1, endRow = -1, endCol = -1;
-    char temp;
+    int startRow = -1, startCol = -1, endRow = -1, endCol = -1; // Initialized to bad values
+    char temp;                                                  // The char which will be used to determine the column's value
 
     while (true)
     {
-        startRow = -1, startCol = -1;
+        startRow = -1, startCol = -1; // Reset the row and col to bad values
 
         cout << "\nWhere would you like to place Ship 1? (1x1):\n";
-        currentPlayer->printSetup();
+        currentPlayer->printPrivateBoard();
 
         cout << "Enter row: ";
-        while (startRow < 1 || startRow > 10)
+        while (startRow < 1 || startRow > 10) // As long as the row NUMBER (on the actual board) is out of bounds
         {
             startRow = getInt();
             if (startRow < 1 || startRow > 10)
                 cout << "Invalid choice.\nEnter row: ";
         }
-        startRow--;
+        startRow--; // Decrement it so that the row INDEX is obtained
 
         cout << "Enter column: ";
-        while (startCol < 0 || startCol > 9)
+        while (startCol < 0 || startCol > 9) // As long as the column is out of bounds
         {
             temp = getChar();
-            startCol = temp - 65;
+            startCol = temp - 65; // the column is temp - 65, because in the ASCII table, A is index 65, B is 66 and so on
 
             if (startCol < 0 || startCol > 9)
                 cout << "Invalid choice.\nEnter column: ";
         }
 
-        if (currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1))
+        if (currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1)) // Place the first Ship
             break;
     }
 
+    // If there is more than one Ship:
     for (int i = 1; i < numShips; i++)
     {
         while (true)
@@ -125,7 +128,7 @@ void Game::setupPlayer(Player *currentPlayer)
             cout << "\nWhere would you like to place Ship " << i + 1 << "? (1x" << i + 1 << "):\n";
             cout << "NOTE: you can only place it horizontally or vertically.\n\n";
 
-            currentPlayer->printSetup();
+            currentPlayer->printPrivateBoard();
 
             cout << "Enter starting row: ";
             while (startRow < 1 || startRow > 10)
@@ -148,12 +151,6 @@ void Game::setupPlayer(Player *currentPlayer)
 
             if (currentPlayer->startValid(startRow, startCol))
             {
-                if (i == 0)
-                {
-                    currentPlayer->pathValid(startRow, startCol, startRow, startCol, 1);
-                    break;
-                }
-
                 cout << "Enter ending row: ";
                 while (endRow < 1 || endRow > 10)
                 {
@@ -173,7 +170,7 @@ void Game::setupPlayer(Player *currentPlayer)
                         cout << "Invalid choice.\nEnter ending column: ";
                 }
 
-                if (!currentPlayer->pathValid(startRow, startCol, endRow, endCol, i + 1))
+                if (!currentPlayer->pathValid(startRow, startCol, endRow, endCol, i + 1)) // The Ship's size is i + 1
                     cout << "\nInvalid ending position. Start over.\n\n";
                 else
                     break;
@@ -184,7 +181,7 @@ void Game::setupPlayer(Player *currentPlayer)
         }
     }
 
-    currentPlayer->printSetup();
+    currentPlayer->printPrivateBoard();
 }
 
 void Game::clear()
@@ -280,6 +277,11 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
             std::cout << "Select attack row: ";
             row = getInt();
             row -= 1;
+
+            if (row < 0 || row > 9)
+            {
+                std::cout << "Invalid row choice. Please try again.\n";
+            }
         }
         while (!(col >= 0 && col < 10)) // Gets an attack col and escapes the loop if the coordinate is inside the board region
         {
@@ -287,6 +289,11 @@ void Game::takeTurn(Player *currentPlayer, Player *otherPlayer)
             std::cout << "Select attack column: ";
             temp = getChar();
             col = (int(temp) - 65);
+
+            if (col < 0 || col > 9)
+            {
+                std::cout << "Invalid column choice. Please try again.\n";
+            }
         }
     } while (!validAttack(currentPlayer, row, col)); // checks to see if the attack location is a spot that the player has already fired on
 
@@ -363,7 +370,7 @@ void Game::attack(Player *attackingPlayer, Player *defendingPlayer, int row, int
         // stores the id of ship to be passed into mark functions, the id of the ship is the index+1 in the ship array
         int hitship = defendingPlayer->getPrivateBoard()->at(row, col)[1] - 48;
         string *posArr = defendingPlayer->markPrivate("H", row, col, hitship, isHit);
-        //if posArr returned an array, then that means ship was sunk, so mark it for the attacking player
+        // if posArr returned an array, then that means ship was sunk, so mark it for the attacking player
         if (posArr)
         {
             attackingPlayer->markPublicSunk(posArr, hitship);

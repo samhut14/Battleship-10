@@ -1,6 +1,10 @@
 #include "Ship.h"
 #include <iostream>
 using namespace std;
+/*
+sets the private variable m_size and m_life equal to the parameter size.
+then the it inializes the postion array and sets it equal to the parameter location array.
+*/
 Ship::Ship(int size, string *locationArr)
 {
     m_size = size;
@@ -11,11 +15,16 @@ Ship::Ship(int size, string *locationArr)
         posArr[i] = locationArr[i];
     }
 }
+/*
+sets the postion array to null pointer.
+*/
 Ship::Ship()
 {
     posArr = nullptr;
 }
-
+/*
+delets the position array
+*/
 Ship::~Ship()
 {
     delete[] posArr;
