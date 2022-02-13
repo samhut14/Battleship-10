@@ -3,7 +3,7 @@
 <ol>
   <li> Clone the directory using git clone https://github.com/samhut14/Battleship-10.git
   <li> Make sure g++ or GNU Make is installed so that you can run the makefile and build the C++ code</li>
-  <li> Once installed, in the main directory run make in the terminal </li>
+  <li> Once installed, in the main directory run make in the terminal. This will create the executable file Battleship which can be run </li>
 </ol>
 <h2> Flow of the Game </h2>
   
