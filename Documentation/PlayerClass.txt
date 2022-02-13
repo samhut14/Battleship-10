@@ -1,5 +1,28 @@
 Player class:
 
+Default constructor:
+    Initializes the number of ships and ship counter to 0, and all the pointers to nullptr.
+
+Constructor with int size parameter:
+    Initializes the number of ships to the size, the Ship array to an array of Ship pointers of the given size,
+    creates new instances of the public and private board, and initializes the Ship counter to 0.
+
+Deconstructor:
+    Deletes every Ship object in the array, then the whole array and the two boards.
+
+bool startValid(int row, int col);
+    Checks if the given row and column are valid for the first position of a Ship.
+
+bool pathValid(int startRow, int startCol, int endRow, int endCol, int size);
+    Checks if the path from the starting row and column to the ending row and column is valid to place a Ship of the size parameter.
+    If it is valid, a new Ship object is created at the correct position in the array, and placeShip() is called.
+
+void placeShip(Ship *someShip);
+    Places the Ship parameter on the player's private board, and increments the Ship counter.
+
+void printPrivateBoard();
+    Prints the player's private board appropriately.
+
 string *markPrivate(string strike, int row, int col, int hitship, bool isHit);
     This function checks if the attack location was a hit or not. If it was a hit, it will mark an "H", and if it was
     a miss, it will mark it as a miss "M". If it was sunk, it will run the sinkShip function passing in the id of the ship (hitship),
