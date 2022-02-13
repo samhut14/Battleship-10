@@ -4,7 +4,7 @@
  * @authors Amith Panuganti, Jasem Ali, Ahmni Pang-Johnson
  * Assignment:   EECS-448 Project #1
  * @brief This file impliment the methods of Player
- * @date 2/12/22
+ * @date 2/13/22
  *
  ---------------------------------------------------------------------------- **/
 
@@ -330,14 +330,14 @@ void Player::view()
     std::cout << "\n";
 }
 
-// Get the visible board
+// Get the public board
 Board *Player::getPublicBoard()
 {
     // Return m_publicBoard
     return m_publicBoard;
 }
 
-// Get the invisible board
+// Get the private board
 Board *Player::getPrivateBoard()
 {
     // Return m_privateBoard
