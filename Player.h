@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+=======
+/** -----------------------------------------------------------------------------
+ *
+ * @file  Player.h
+ * @authors Amith Panuganti, Jasem Ali, Ahmni Pang-Johnson
+ * Assignment:   EECS-448 Project #1
+ * @brief This file contains the methods and variables of the Player class
+ *        The Player plays Battleship by setting up their board, attacking the
+ *        other's player board, getting attacked, and either winning or losing
+ * @date 2/12/22
+ *
+ ---------------------------------------------------------------------------- **/
+>>>>>>> documentation
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Board.h"
@@ -77,11 +91,31 @@ public:
 	Board *getPrivateBoard();
 
 	/**
+<<<<<<< HEAD
+=======
+	 * @pre Player is constructed. number of ships is set up
+	 * @post Gets the number of ships
+	 * @param None
+	 * @return int m_numberOfShips, the number of ships
+	 *         the player has.
+	 */
+	int getNumberOfShips();
+
+	/**
+	 * @pre Player is constructed. Ship counter is set up
+	 * @post Returns shipCounter, the number of ships that the
+	 *       player currently has.
+	 * @param None
+	 * @return int m_shipCounter
+	 */
+	int getShipCounter();
+
+	/**
+>>>>>>> documentation
 	 * @pre Player is constructed. m_Ships is constructed
 	 * @post Returns the player's ships
 	 * @param None
-	 * @error Throws an runtime error if m_Ships is not set up
-	 * @return Ship* m_Ships, the pointer to the array of ships
+	 * @return Ship** m_Ships, the pointer to the array of ships
 	 */
 	Ship **getShips();
 
@@ -114,8 +148,6 @@ public:
 	 * @pre Player is constructed. Happens when a ship is attacked
 	 * @post Attacks one of the player's ships and check if the ship is sunked or not.
 	 * @param int hitShip, the ship that is hit
-	 * @error Thorws an runtime error if hitShip is greater than m_numberOfShips, less than 0,
-	 *	     or the ship is already sunked.
 	 * @return None
 	 */
 	void sinkShip(int hitShip);
@@ -127,15 +159,13 @@ public:
 	 *		visible board
 	 * @param char strike, the character that will mark the board, int row
 	 *		 the row of the the strike, and int col, the column of the strike
-	 * @error Throws an runtime error if the row and col are not valid or if strike
-	 *		 is not a valid character
 	 * @return None
 	 */
 	void markPublic(string strike, int row, int col);
 
 	/**
 	 * @pre Player is constructed. Can only be used if the player is attacking
-	 * @post Marks the player visible board
+	 * @post Marks the player invisible board
 	 * @param std::string strike, the character that will mark the board, int row
 	 *		 the row of the the strike, and int col, the column of the strike
 	 * @error Throws an runtime error if the row and col are not valid or if strike
