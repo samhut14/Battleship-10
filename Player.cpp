@@ -1,10 +1,10 @@
 /** -----------------------------------------------------------------------------
  *
  * @file  Player.cpp
- * @authors Amith Panuganti
+ * @authors Amith Panuganti, Jasem Ali, Ahmni Pang-Johnson
  * Assignment:   EECS-448 Project #1
  * @brief This file impliment the methods of Player
- * @date 2/4/22
+ * @date 2/12/22
  *
  ---------------------------------------------------------------------------- **/
 
@@ -26,6 +26,7 @@ Player::Player()
     // Set m_ships to be nullptr
     m_ships = nullptr;
 
+    //Set both m_publicBoard and m_privateBoard to be nullptr
     m_publicBoard = nullptr;
     m_privateBoard = nullptr;
 }
@@ -47,11 +48,16 @@ Player::~Player()
     // If m_ships is not set to nullptr
     if (m_ships != nullptr)
     {
+        //For each m_ship* in m_ships, starting at index 0
         for (int i = 0; i < m_numberOfShips; i++)
+            //Delete m_ships[i]
             delete m_ships[i];
 
+        //Delete m_ships after the end of the loop
         delete[] m_ships;
     }
+
+    //Delete beoth m_publicBoard and m_privateBoard
     delete m_publicBoard;
     delete m_privateBoard;
 }
@@ -234,7 +240,7 @@ void Player::shipHealthBar()
 {
     // Example dislay
     //  Ships Health:
-    //  1x1: 5     1x2: Sunked     1x3: 4
+    //  1x1: 5     1x2: 0     1x3: 4
 
     // Firstly, tell the user that we are printing their ships helath
     std::cout << " Ships Health:\n ";
@@ -243,7 +249,7 @@ void Player::shipHealthBar()
     // Loop for each ship the player hass
     for (int i = 0; i < m_numberOfShips; i++)
     {
-        // Print out the Ship with size 1x(i+1
+        // Print out the Ship with size 1x(i+1)
         std::cout << "1x" << (i + 1) << ": ";
         // Print the ships life
         std::cout << m_ships[i]->getLife() << "     ";
@@ -251,10 +257,6 @@ void Player::shipHealthBar()
 
     // Add the end of the loop, print a new line
     std::cout << "\n";
-
-    // TODO: Add all functions that will get status the
-    // The amount health a ship has
-    // Add any more style changes if needed
 }
 
 // Print the player's view during gameplay
@@ -262,7 +264,7 @@ void Player::view()
 {
     // Example view
     //      A   B   C   D
-    //  1  S1  S2   X   X
+    //  1   S1  S2  X   X
     //  2   *   *   *   *
     //  3   *   *   *   *
     //  4   *   *   *   *
@@ -280,7 +282,7 @@ void Player::view()
         // Print the row number of the board
         std::cout << i + 1 << "\t";
 
-        // Goes throug each string of the row
+        // Goes through each string of the row
         for (int j = 0; j < 10; j++)
         {
             // Print the string at row i and column j
@@ -325,8 +327,6 @@ void Player::view()
 
     // Print a new line
     std::cout << "\n";
-
-    // TODO: Change Board Functions if needed
 }
 
 // Get the visible board
