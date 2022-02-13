@@ -347,20 +347,6 @@ void Player::markPublic(string strike, int row, int col)
     m_publicBoard->setBoard(strike, row, col);
 }
 
-// Get the ship counter
-int Player::getShipCounter()
-{
-    // Return m_shipCounter
-    return m_shipCounter;
-}
-
-// Get the number of ships
-int Player::getNumberOfShips()
-{
-    // Return m_numberOfShips
-    return m_numberOfShips;
-}
-
 // Get the Player's Ships
 Ship **Player::getShips()
 {
